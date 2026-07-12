@@ -1,0 +1,26 @@
+\begin{tabular}{@{}l|rrr|rrr@{}}
+\toprule
+& \multicolumn{3}{c|}{Return ($R^2$ / RMSE / DirAcc)} & \multicolumn{3}{c}{Direction (Acc / F1 / MCC)} \\
+Model & \multicolumn{3}{c|}{} & \multicolumn{3}{c}{} \\
+\midrule
+\multicolumn{7}{@{}l}{\emph{Baselines}}\\
+~~persistence/zero & -0.001 & 0.021 & -- & -- & -- & -- \\
+~~hist.\ mean / majority & -0.001 & 0.021 & -- & 0.513 & 0.678 & 0.000 \\
+\midrule
+Ridge (price) & -0.009 & 0.022 & 0.504 & 0.513 & 0.638 & 0.014 \\
+Ridge (+sent) & -0.010 & 0.022 & 0.504 & 0.512 & 0.638 & 0.011 \\
+\addlinespace
+RandomForest (price) & -0.013 & 0.022 & 0.512 & 0.503 & 0.530 & 0.004 \\
+RandomForest (+sent) & -0.012 & 0.022 & 0.512 & 0.501 & 0.527 & 0.001 \\
+\addlinespace
+XGBoost (price) & -0.015 & 0.022 & 0.509 & 0.510 & 0.622 & 0.006 \\
+XGBoost (+sent) & -0.014 & 0.022 & 0.509 & 0.509 & 0.621 & 0.004 \\
+\addlinespace
+LightGBM (price) & -0.018 & 0.022 & 0.505 & 0.509 & 0.615 & 0.004 \\
+LightGBM (+sent) & -0.016 & 0.022 & 0.508 & 0.508 & 0.613 & 0.003 \\
+\addlinespace
+SVR (price) & -0.511 & 0.025 & 0.489 & 0.510 & 0.606 & 0.011 \\
+SVR (+sent) & -0.542 & 0.026 & 0.490 & 0.508 & 0.597 & 0.009 \\
+\addlinespace
+\bottomrule
+\end{tabular}

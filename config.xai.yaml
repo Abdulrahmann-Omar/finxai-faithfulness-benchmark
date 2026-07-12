@@ -1,0 +1,95 @@
+# FinXAI benchmark configuration (single source of truth for the XAI paper).
+# Switch `profile` to control cost:
+#   reviewer -> small + fast, for the first green end-to-end run on Modal
+#   full     -> the paper (15 ML/DL models + GNN, ~26 XAI methods, 60 stocks)
+# _common.py should read this file and select the active profile block.
+
+profile: full
+
+# ---- shared across profiles ----
+seed: 42
+finbert_model: "ProsusAI/finbert"
+
+# forecasting test-bed
+horizons: [1, 5]                 # volatility forecast horizons (trading days)
+vol_estimator: garman_klass      # parkinson | garman_klass (range-based, low-noise)
+embargo_days: 10                 # >= max horizon; prevents overlapping-target leakage
+lookback: 20                     # sequence length for DL models
+return_clip: 0.5                 # mask |daily log-return| > this as a data error
+min_news_days: 150               # drop tickers with fewer news-days than this (coverage floor)
+
+# synthetic ground-truth features (the faithfulness spine, section 8/P10)
+ground_truth:
+  noise_feature: true            # true importance = 0 (a faithful method must NOT rank it high)
+  signal_feature: true           # planted feature with KNOWN predictive value (controlled, LINEAR leak)
+  signal_strength: 0.15          # target-correlation of the planted linear feature
+  nonlinear_signal_feature: true # planted feature via a sign x magnitude INTERACTION (not additive-linear)
+  nonlinear_signal_strength: 0.15  # strength parameter (realized correlation measured empirically, see feature_manifest.json)
+  redundant_copy: true           # duplicate of a real feature (tests credit-splitting under collinearity)
+  # R3 revision (M5): broaden the ground-truth grid per reviewer request -- a
+  # weaker planted signal near the noise floor, and a PARTIALLY (not exactly)
+  # collinear redundant feature, so faithfulness is reported across a
+  # weak/strong x linear/nonlinear x exact/partial-collinearity grid, not one
+  # point per condition ("floor, not ceiling" framing).
+  weak_signal_feature: true      # same construction as signal_feature, much weaker leak
+  weak_signal_strength: 0.05     # near the noise floor -- tests recovery sensitivity
+  partial_redundant_feature: true  # correlated-but-not-identical copy (tests partial, not just exact, collinearity)
+  partial_redundant_corr: 0.8    # target correlation with the source feature (vol_z20)
+
+# inference
+cluster_unit: symbol             # cluster all bootstrap/CIs by stock, never stock-day
+mdes_report: true                # report minimum-detectable-effect-size + effective N
+
+# ---- profile-specific blocks ----
+profiles:
+
+  reviewer:                      # ~minutes on Modal; proves the pipeline before scaling
+    price_source: fnspid         # reuse the already-cached FNSPID prices (no yfinance pull)
+    tickers: [AAPL, MSFT, JPM, XOM, JNJ, WMT]   # 6 diverse, full-2018-2023-coverage tickers
+    start_date: "2018-01-01"
+    end_date: "2023-12-31"
+    test_years: [2022, 2023]     # 2 walk-forward folds
+    models: [linear, random_forest, xgboost, ebm, gru, cnn1d]                 # 6 cheap + representative
+    xai_methods: [treeshap, kernelshap, lime, permutation, block_permutation, # ~7 model-agnostic/native
+                  ale, integrated_gradients]
+    n_bootstrap: 1000
+    finbert_batch: 256
+
+  full:                          # the paper
+    # price_source was originally yfinance (for 2015-2024 coverage), but
+    # yfinance is blocked from Modal's containers (empty HTTP responses even
+    # with a browser-impersonating curl_cffi session -- Yahoo blocks
+    # datacenter IPs; modal/s1_data.py::download_yfinance is implemented and
+    # kept for a future environment where this isn't blocked, but is NOT on
+    # the active path). Falls back to the same proven FNSPID price zip the
+    # reviewer profile uses, which caps the window at 2023-12-28 (dropping
+    # the 2024 stress-test fold) (2026-07-11).
+    price_source: fnspid
+    universe_size: 57            # see note below -- 3 short of the original 60 target
+    # Chosen from 81 sector-diverse candidates (modal/s1_data.py::FULL_CANDIDATES,
+    # all 11 GICS sectors) by the INTERSECTION of two real-data criteria:
+    # (a) >=150 news-days in nasdaq_exteral_data.csv (modal/s1_data.py::inspect_universe)
+    # and (b) full 2015-2023 price coverage in FNSPID's full_history.zip (no
+    # truncation/gap; many candidates' price history stops ~2020-04..07 or is
+    # entirely absent). Only 58/81 candidates satisfy (b); intersecting with
+    # (a) drops LIN (3 news-days) to 57. Selection is by data availability,
+    # not outcome (same principle as the reviewer profile's 12/6-ticker
+    # choice): stopped at 57 rather than padding to exactly 60 with weaker
+    # candidates. Full per-candidate scan: results/metrics/universe_selection.json,
+    # results/metrics/fnspid_price_coverage.json.
+    tickers: [CMCSA, T, DIS, NKE, LOW, BKNG, KO, PEP, COST, COP, EOG, CVX, MS,
+              WFC, USB, MRK, ABBV, ABT, GE, CAT, DE, NEM, APD, ECL, AMT, CCI,
+              PLD, QCOM, ORCL, TXN, NEE, DUK, D, CRM, ADBE, GS, AMD, CL, UPS,
+              INTC, C, WMT, AXP, XOM, LLY, JNJ, LMT, BA, AEP, TGT, PFE, PSX,
+              AAPL, MSFT, JPM, IBM, AMZN]
+    start_date: "2015-01-01"
+    end_date: "2023-12-31"       # FNSPID news+price coverage ends 2023-12-28; see price_source note
+    test_years: [2020, 2021, 2022, 2023]   # 4 folds incl. stress regimes (2024 dropped, see above)
+    models: [linear, decision_tree, random_forest, xgboost, lightgbm, catboost,
+             svm, knn, ebm, mlp, gru, lstm, cnn1d, tcn, transformer, gnn]      # 15 + GNN
+    xai_methods: [treeshap, kernelshap, lime, permutation, block_permutation, ale,
+                  integrated_gradients, anchors, counterfactual, cem, rise, gam_global,
+                  muse, brcg, cav_tcav, ebm_intrinsic, lrp, guided_backprop, deconvnet,
+                  gradcam, gradcam_pp, score_cam, gnnexplainer, sae, acdc, actionable_recourse]
+    n_bootstrap: 5000
+    finbert_batch: 256

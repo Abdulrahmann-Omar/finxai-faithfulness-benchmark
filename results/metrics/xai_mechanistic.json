@@ -1,0 +1,1398 @@
+{
+  "sae": {
+    "method": "sparse autoencoder on last-token transformer representation (x[:, -1], before the prediction head)",
+    "n_examples": 512,
+    "input_dim": 64,
+    "hidden_dim": 256,
+    "l1_coefficient": 0.001,
+    "epochs": 400,
+    "final_loss_mse_plus_l1": 0.007142567075788975,
+    "final_reconstruction_mse": 0.006759050767868757,
+    "correlation_threshold": 0.3,
+    "n_interpretable_latents": 253,
+    "interpretable_latents": [
+      {
+        "latent_id": 183,
+        "correlated_feature": "logvol",
+        "correlation": 0.7609
+      },
+      {
+        "latent_id": 6,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.7196
+      },
+      {
+        "latent_id": 138,
+        "correlated_feature": "rsi14",
+        "correlation": -0.7117
+      },
+      {
+        "latent_id": 60,
+        "correlated_feature": "logvol",
+        "correlation": 0.7057
+      },
+      {
+        "latent_id": 23,
+        "correlated_feature": "logvol",
+        "correlation": 0.6918
+      },
+      {
+        "latent_id": 162,
+        "correlated_feature": "logvol",
+        "correlation": -0.6883
+      },
+      {
+        "latent_id": 174,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.6878
+      },
+      {
+        "latent_id": 125,
+        "correlated_feature": "logvol",
+        "correlation": 0.6829
+      },
+      {
+        "latent_id": 16,
+        "correlated_feature": "rsi14",
+        "correlation": -0.678
+      },
+      {
+        "latent_id": 17,
+        "correlated_feature": "ma_gap20",
+        "correlation": 0.6674
+      },
+      {
+        "latent_id": 0,
+        "correlated_feature": "rsi14",
+        "correlation": 0.6672
+      },
+      {
+        "latent_id": 59,
+        "correlated_feature": "news_roll5",
+        "correlation": 0.6672
+      },
+      {
+        "latent_id": 12,
+        "correlated_feature": "logvol",
+        "correlation": -0.6658
+      },
+      {
+        "latent_id": 110,
+        "correlated_feature": "logvol",
+        "correlation": 0.6546
+      },
+      {
+        "latent_id": 91,
+        "correlated_feature": "fb_score",
+        "correlation": 0.6544
+      },
+      {
+        "latent_id": 38,
+        "correlated_feature": "logvol",
+        "correlation": -0.6493
+      },
+      {
+        "latent_id": 45,
+        "correlated_feature": "logvol",
+        "correlation": -0.6441
+      },
+      {
+        "latent_id": 28,
+        "correlated_feature": "rsi14",
+        "correlation": -0.644
+      },
+      {
+        "latent_id": 155,
+        "correlated_feature": "ret_lag3",
+        "correlation": 0.6429
+      },
+      {
+        "latent_id": 100,
+        "correlated_feature": "logvol",
+        "correlation": -0.6395
+      },
+      {
+        "latent_id": 140,
+        "correlated_feature": "logvol",
+        "correlation": -0.6365
+      },
+      {
+        "latent_id": 81,
+        "correlated_feature": "logvol",
+        "correlation": 0.6358
+      },
+      {
+        "latent_id": 167,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.6358
+      },
+      {
+        "latent_id": 209,
+        "correlated_feature": "ret_lag5",
+        "correlation": -0.6325
+      },
+      {
+        "latent_id": 144,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.6301
+      },
+      {
+        "latent_id": 134,
+        "correlated_feature": "rsi14",
+        "correlation": -0.627
+      },
+      {
+        "latent_id": 67,
+        "correlated_feature": "rsi14",
+        "correlation": 0.626
+      },
+      {
+        "latent_id": 109,
+        "correlated_feature": "news_roll5",
+        "correlation": 0.621
+      },
+      {
+        "latent_id": 98,
+        "correlated_feature": "rsi14",
+        "correlation": 0.6204
+      },
+      {
+        "latent_id": 235,
+        "correlated_feature": "co_ret",
+        "correlation": 0.6196
+      },
+      {
+        "latent_id": 46,
+        "correlated_feature": "logvol",
+        "correlation": -0.6192
+      },
+      {
+        "latent_id": 173,
+        "correlated_feature": "ret_lag3",
+        "correlation": -0.619
+      },
+      {
+        "latent_id": 50,
+        "correlated_feature": "fb_roll3",
+        "correlation": 0.6178
+      },
+      {
+        "latent_id": 15,
+        "correlated_feature": "logvol",
+        "correlation": -0.6164
+      },
+      {
+        "latent_id": 200,
+        "correlated_feature": "rsi14",
+        "correlation": -0.6063
+      },
+      {
+        "latent_id": 145,
+        "correlated_feature": "logvol",
+        "correlation": -0.6057
+      },
+      {
+        "latent_id": 18,
+        "correlated_feature": "logvol",
+        "correlation": -0.6053
+      },
+      {
+        "latent_id": 136,
+        "correlated_feature": "logvol",
+        "correlation": 0.6049
+      },
+      {
+        "latent_id": 201,
+        "correlated_feature": "logvol",
+        "correlation": -0.603
+      },
+      {
+        "latent_id": 149,
+        "correlated_feature": "logvol",
+        "correlation": -0.6011
+      },
+      {
+        "latent_id": 240,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5985
+      },
+      {
+        "latent_id": 53,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5956
+      },
+      {
+        "latent_id": 223,
+        "correlated_feature": "ret_lag2",
+        "correlation": -0.5949
+      },
+      {
+        "latent_id": 178,
+        "correlated_feature": "logvol",
+        "correlation": -0.5943
+      },
+      {
+        "latent_id": 14,
+        "correlated_feature": "logvol",
+        "correlation": -0.5931
+      },
+      {
+        "latent_id": 86,
+        "correlated_feature": "logvol",
+        "correlation": 0.5928
+      },
+      {
+        "latent_id": 77,
+        "correlated_feature": "ret_lag5",
+        "correlation": -0.5899
+      },
+      {
+        "latent_id": 208,
+        "correlated_feature": "logvol",
+        "correlation": -0.5893
+      },
+      {
+        "latent_id": 27,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5877
+      },
+      {
+        "latent_id": 224,
+        "correlated_feature": "news_roll5",
+        "correlation": 0.5842
+      },
+      {
+        "latent_id": 154,
+        "correlated_feature": "news_roll5",
+        "correlation": -0.5746
+      },
+      {
+        "latent_id": 127,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.5743
+      },
+      {
+        "latent_id": 153,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.5718
+      },
+      {
+        "latent_id": 197,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5718
+      },
+      {
+        "latent_id": 94,
+        "correlated_feature": "ma_gap20",
+        "correlation": 0.5703
+      },
+      {
+        "latent_id": 227,
+        "correlated_feature": "vol_roll5",
+        "correlation": 0.5685
+      },
+      {
+        "latent_id": 239,
+        "correlated_feature": "logvol",
+        "correlation": 0.5668
+      },
+      {
+        "latent_id": 103,
+        "correlated_feature": "ret_lag1",
+        "correlation": -0.5661
+      },
+      {
+        "latent_id": 34,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.5659
+      },
+      {
+        "latent_id": 191,
+        "correlated_feature": "logvol",
+        "correlation": 0.5647
+      },
+      {
+        "latent_id": 217,
+        "correlated_feature": "logvol",
+        "correlation": 0.561
+      },
+      {
+        "latent_id": 188,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.5599
+      },
+      {
+        "latent_id": 44,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.5598
+      },
+      {
+        "latent_id": 255,
+        "correlated_feature": "logvol",
+        "correlation": 0.557
+      },
+      {
+        "latent_id": 19,
+        "correlated_feature": "news_roll5",
+        "correlation": 0.5548
+      },
+      {
+        "latent_id": 132,
+        "correlated_feature": "ret_lag5",
+        "correlation": -0.5547
+      },
+      {
+        "latent_id": 187,
+        "correlated_feature": "fb_neg",
+        "correlation": 0.5507
+      },
+      {
+        "latent_id": 73,
+        "correlated_feature": "news_roll5",
+        "correlation": 0.5486
+      },
+      {
+        "latent_id": 233,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.5481
+      },
+      {
+        "latent_id": 220,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5475
+      },
+      {
+        "latent_id": 241,
+        "correlated_feature": "fb_neg",
+        "correlation": 0.5474
+      },
+      {
+        "latent_id": 95,
+        "correlated_feature": "lm_score",
+        "correlation": 0.5454
+      },
+      {
+        "latent_id": 151,
+        "correlated_feature": "rsi14",
+        "correlation": 0.5433
+      },
+      {
+        "latent_id": 254,
+        "correlated_feature": "ret_lag5",
+        "correlation": 0.541
+      },
+      {
+        "latent_id": 84,
+        "correlated_feature": "hl_range",
+        "correlation": 0.5403
+      },
+      {
+        "latent_id": 194,
+        "correlated_feature": "vol_roll20",
+        "correlation": 0.5401
+      },
+      {
+        "latent_id": 160,
+        "correlated_feature": "news_roll5",
+        "correlation": -0.54
+      },
+      {
+        "latent_id": 72,
+        "correlated_feature": "has_news",
+        "correlation": -0.539
+      },
+      {
+        "latent_id": 156,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5389
+      },
+      {
+        "latent_id": 69,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.5381
+      },
+      {
+        "latent_id": 196,
+        "correlated_feature": "ma_gap20",
+        "correlation": 0.5346
+      },
+      {
+        "latent_id": 101,
+        "correlated_feature": "logvol",
+        "correlation": -0.5321
+      },
+      {
+        "latent_id": 150,
+        "correlated_feature": "fb_roll3",
+        "correlation": 0.5303
+      },
+      {
+        "latent_id": 37,
+        "correlated_feature": "vol_z20",
+        "correlation": -0.5271
+      },
+      {
+        "latent_id": 61,
+        "correlated_feature": "rsi14",
+        "correlation": 0.527
+      },
+      {
+        "latent_id": 115,
+        "correlated_feature": "ret_lag5",
+        "correlation": -0.5268
+      },
+      {
+        "latent_id": 147,
+        "correlated_feature": "logvol",
+        "correlation": -0.5218
+      },
+      {
+        "latent_id": 85,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.5214
+      },
+      {
+        "latent_id": 112,
+        "correlated_feature": "fb_neg",
+        "correlation": 0.5204
+      },
+      {
+        "latent_id": 47,
+        "correlated_feature": "fb_score",
+        "correlation": 0.5197
+      },
+      {
+        "latent_id": 74,
+        "correlated_feature": "fb_roll5",
+        "correlation": -0.5185
+      },
+      {
+        "latent_id": 165,
+        "correlated_feature": "logvol",
+        "correlation": -0.518
+      },
+      {
+        "latent_id": 129,
+        "correlated_feature": "fb_roll5",
+        "correlation": -0.5176
+      },
+      {
+        "latent_id": 57,
+        "correlated_feature": "logvol",
+        "correlation": 0.5174
+      },
+      {
+        "latent_id": 11,
+        "correlated_feature": "news_roll5",
+        "correlation": -0.5164
+      },
+      {
+        "latent_id": 99,
+        "correlated_feature": "vol_roll5",
+        "correlation": 0.5164
+      },
+      {
+        "latent_id": 1,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.5151
+      },
+      {
+        "latent_id": 159,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5137
+      },
+      {
+        "latent_id": 221,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5136
+      },
+      {
+        "latent_id": 189,
+        "correlated_feature": "fb_chg",
+        "correlation": -0.5128
+      },
+      {
+        "latent_id": 40,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5125
+      },
+      {
+        "latent_id": 79,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5119
+      },
+      {
+        "latent_id": 137,
+        "correlated_feature": "news_roll5",
+        "correlation": -0.5109
+      },
+      {
+        "latent_id": 229,
+        "correlated_feature": "logvol",
+        "correlation": -0.5109
+      },
+      {
+        "latent_id": 119,
+        "correlated_feature": "news_roll5",
+        "correlation": -0.5108
+      },
+      {
+        "latent_id": 204,
+        "correlated_feature": "rsi14",
+        "correlation": 0.5107
+      },
+      {
+        "latent_id": 9,
+        "correlated_feature": "rsi14",
+        "correlation": -0.5077
+      },
+      {
+        "latent_id": 2,
+        "correlated_feature": "rsi14",
+        "correlation": -0.507
+      },
+      {
+        "latent_id": 65,
+        "correlated_feature": "logvol",
+        "correlation": 0.5057
+      },
+      {
+        "latent_id": 152,
+        "correlated_feature": "ret_lag5",
+        "correlation": -0.5036
+      },
+      {
+        "latent_id": 123,
+        "correlated_feature": "fb_neg",
+        "correlation": 0.5027
+      },
+      {
+        "latent_id": 216,
+        "correlated_feature": "fb_neg",
+        "correlation": 0.5016
+      },
+      {
+        "latent_id": 97,
+        "correlated_feature": "logvol",
+        "correlation": -0.5
+      },
+      {
+        "latent_id": 190,
+        "correlated_feature": "rsi14",
+        "correlation": -0.4996
+      },
+      {
+        "latent_id": 10,
+        "correlated_feature": "fb_chg",
+        "correlation": -0.4976
+      },
+      {
+        "latent_id": 92,
+        "correlated_feature": "logvol",
+        "correlation": -0.4971
+      },
+      {
+        "latent_id": 83,
+        "correlated_feature": "fb_neg",
+        "correlation": 0.4968
+      },
+      {
+        "latent_id": 222,
+        "correlated_feature": "logvol",
+        "correlation": -0.4947
+      },
+      {
+        "latent_id": 66,
+        "correlated_feature": "fb_score",
+        "correlation": 0.4942
+      },
+      {
+        "latent_id": 22,
+        "correlated_feature": "logvol",
+        "correlation": 0.4939
+      },
+      {
+        "latent_id": 244,
+        "correlated_feature": "logvol",
+        "correlation": -0.4927
+      },
+      {
+        "latent_id": 225,
+        "correlated_feature": "logvol",
+        "correlation": -0.4922
+      },
+      {
+        "latent_id": 205,
+        "correlated_feature": "fb_score",
+        "correlation": 0.492
+      },
+      {
+        "latent_id": 89,
+        "correlated_feature": "co_ret",
+        "correlation": -0.4905
+      },
+      {
+        "latent_id": 253,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.4881
+      },
+      {
+        "latent_id": 104,
+        "correlated_feature": "co_ret",
+        "correlation": 0.488
+      },
+      {
+        "latent_id": 185,
+        "correlated_feature": "logvol",
+        "correlation": -0.4838
+      },
+      {
+        "latent_id": 82,
+        "correlated_feature": "logvol",
+        "correlation": -0.4815
+      },
+      {
+        "latent_id": 135,
+        "correlated_feature": "fb_neg",
+        "correlation": 0.4797
+      },
+      {
+        "latent_id": 128,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.479
+      },
+      {
+        "latent_id": 246,
+        "correlated_feature": "news_roll5",
+        "correlation": 0.4743
+      },
+      {
+        "latent_id": 234,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.4731
+      },
+      {
+        "latent_id": 122,
+        "correlated_feature": "logvol",
+        "correlation": 0.4729
+      },
+      {
+        "latent_id": 63,
+        "correlated_feature": "rsi14",
+        "correlation": -0.4703
+      },
+      {
+        "latent_id": 228,
+        "correlated_feature": "fb_roll5",
+        "correlation": -0.4702
+      },
+      {
+        "latent_id": 148,
+        "correlated_feature": "ret_lag1",
+        "correlation": -0.469
+      },
+      {
+        "latent_id": 163,
+        "correlated_feature": "news_roll5",
+        "correlation": 0.469
+      },
+      {
+        "latent_id": 236,
+        "correlated_feature": "fb_score",
+        "correlation": -0.469
+      },
+      {
+        "latent_id": 30,
+        "correlated_feature": "fb_roll3",
+        "correlation": 0.4685
+      },
+      {
+        "latent_id": 124,
+        "correlated_feature": "news_roll5",
+        "correlation": -0.4685
+      },
+      {
+        "latent_id": 3,
+        "correlated_feature": "logvol",
+        "correlation": -0.4679
+      },
+      {
+        "latent_id": 218,
+        "correlated_feature": "vol_roll5",
+        "correlation": 0.4667
+      },
+      {
+        "latent_id": 5,
+        "correlated_feature": "hl_range",
+        "correlation": 0.4653
+      },
+      {
+        "latent_id": 202,
+        "correlated_feature": "rsi14",
+        "correlation": -0.4651
+      },
+      {
+        "latent_id": 243,
+        "correlated_feature": "logvol",
+        "correlation": -0.4647
+      },
+      {
+        "latent_id": 142,
+        "correlated_feature": "fb_pos",
+        "correlation": 0.4637
+      },
+      {
+        "latent_id": 33,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.4635
+      },
+      {
+        "latent_id": 58,
+        "correlated_feature": "news_roll5",
+        "correlation": 0.4634
+      },
+      {
+        "latent_id": 182,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.463
+      },
+      {
+        "latent_id": 105,
+        "correlated_feature": "co_ret",
+        "correlation": -0.4618
+      },
+      {
+        "latent_id": 88,
+        "correlated_feature": "fb_roll3",
+        "correlation": 0.4612
+      },
+      {
+        "latent_id": 192,
+        "correlated_feature": "rsi14",
+        "correlation": -0.4608
+      },
+      {
+        "latent_id": 168,
+        "correlated_feature": "logvol",
+        "correlation": -0.4601
+      },
+      {
+        "latent_id": 176,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.4596
+      },
+      {
+        "latent_id": 48,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.4549
+      },
+      {
+        "latent_id": 26,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.4548
+      },
+      {
+        "latent_id": 111,
+        "correlated_feature": "fb_neg",
+        "correlation": 0.4546
+      },
+      {
+        "latent_id": 133,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.4538
+      },
+      {
+        "latent_id": 250,
+        "correlated_feature": "vol_roll20",
+        "correlation": 0.4528
+      },
+      {
+        "latent_id": 181,
+        "correlated_feature": "ret_lag5",
+        "correlation": -0.4512
+      },
+      {
+        "latent_id": 39,
+        "correlated_feature": "logvol",
+        "correlation": -0.4488
+      },
+      {
+        "latent_id": 219,
+        "correlated_feature": "vol_roll20",
+        "correlation": 0.4483
+      },
+      {
+        "latent_id": 169,
+        "correlated_feature": "fb_chg",
+        "correlation": -0.448
+      },
+      {
+        "latent_id": 54,
+        "correlated_feature": "has_news",
+        "correlation": -0.4476
+      },
+      {
+        "latent_id": 35,
+        "correlated_feature": "fb_roll5",
+        "correlation": 0.4459
+      },
+      {
+        "latent_id": 161,
+        "correlated_feature": "hl_range",
+        "correlation": 0.4456
+      },
+      {
+        "latent_id": 43,
+        "correlated_feature": "rsi14",
+        "correlation": -0.4449
+      },
+      {
+        "latent_id": 42,
+        "correlated_feature": "ma_gap20",
+        "correlation": 0.4441
+      },
+      {
+        "latent_id": 93,
+        "correlated_feature": "ret_lag5",
+        "correlation": 0.444
+      },
+      {
+        "latent_id": 226,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.444
+      },
+      {
+        "latent_id": 212,
+        "correlated_feature": "co_ret",
+        "correlation": -0.4435
+      },
+      {
+        "latent_id": 180,
+        "correlated_feature": "rsi14",
+        "correlation": -0.4428
+      },
+      {
+        "latent_id": 146,
+        "correlated_feature": "vol_roll20",
+        "correlation": 0.442
+      },
+      {
+        "latent_id": 170,
+        "correlated_feature": "ret_lag2",
+        "correlation": 0.442
+      },
+      {
+        "latent_id": 117,
+        "correlated_feature": "co_ret",
+        "correlation": 0.4412
+      },
+      {
+        "latent_id": 245,
+        "correlated_feature": "ret_lag2",
+        "correlation": 0.4406
+      },
+      {
+        "latent_id": 52,
+        "correlated_feature": "logvol",
+        "correlation": -0.439
+      },
+      {
+        "latent_id": 171,
+        "correlated_feature": "vol_roll20",
+        "correlation": 0.4379
+      },
+      {
+        "latent_id": 32,
+        "correlated_feature": "ret_lag5",
+        "correlation": -0.4348
+      },
+      {
+        "latent_id": 76,
+        "correlated_feature": "rsi14",
+        "correlation": -0.4336
+      },
+      {
+        "latent_id": 56,
+        "correlated_feature": "rsi14",
+        "correlation": 0.4334
+      },
+      {
+        "latent_id": 214,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.4334
+      },
+      {
+        "latent_id": 80,
+        "correlated_feature": "hl_range",
+        "correlation": 0.4321
+      },
+      {
+        "latent_id": 198,
+        "correlated_feature": "fb_neg",
+        "correlation": 0.4313
+      },
+      {
+        "latent_id": 118,
+        "correlated_feature": "lm_score",
+        "correlation": -0.4303
+      },
+      {
+        "latent_id": 108,
+        "correlated_feature": "logvol",
+        "correlation": -0.4302
+      },
+      {
+        "latent_id": 131,
+        "correlated_feature": "logvol",
+        "correlation": -0.4298
+      },
+      {
+        "latent_id": 62,
+        "correlated_feature": "logvol",
+        "correlation": 0.4289
+      },
+      {
+        "latent_id": 248,
+        "correlated_feature": "logvol",
+        "correlation": -0.4286
+      },
+      {
+        "latent_id": 116,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.4273
+      },
+      {
+        "latent_id": 184,
+        "correlated_feature": "hl_range",
+        "correlation": 0.4273
+      },
+      {
+        "latent_id": 203,
+        "correlated_feature": "news_roll5",
+        "correlation": -0.4268
+      },
+      {
+        "latent_id": 96,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.4264
+      },
+      {
+        "latent_id": 139,
+        "correlated_feature": "rsi14",
+        "correlation": 0.4253
+      },
+      {
+        "latent_id": 75,
+        "correlated_feature": "rsi14",
+        "correlation": 0.4252
+      },
+      {
+        "latent_id": 51,
+        "correlated_feature": "rsi14",
+        "correlation": -0.4243
+      },
+      {
+        "latent_id": 231,
+        "correlated_feature": "fb_score",
+        "correlation": 0.4239
+      },
+      {
+        "latent_id": 107,
+        "correlated_feature": "has_news",
+        "correlation": -0.4228
+      },
+      {
+        "latent_id": 8,
+        "correlated_feature": "vol_z20",
+        "correlation": -0.4227
+      },
+      {
+        "latent_id": 193,
+        "correlated_feature": "ret_lag2",
+        "correlation": -0.4196
+      },
+      {
+        "latent_id": 207,
+        "correlated_feature": "fb_pos",
+        "correlation": 0.4193
+      },
+      {
+        "latent_id": 166,
+        "correlated_feature": "ret_lag1",
+        "correlation": -0.4192
+      },
+      {
+        "latent_id": 29,
+        "correlated_feature": "fb_pos",
+        "correlation": 0.4186
+      },
+      {
+        "latent_id": 238,
+        "correlated_feature": "news_roll5",
+        "correlation": 0.4176
+      },
+      {
+        "latent_id": 64,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.4144
+      },
+      {
+        "latent_id": 7,
+        "correlated_feature": "logvol",
+        "correlation": -0.4118
+      },
+      {
+        "latent_id": 102,
+        "correlated_feature": "fb_chg",
+        "correlation": -0.4116
+      },
+      {
+        "latent_id": 186,
+        "correlated_feature": "lm_score",
+        "correlation": 0.4098
+      },
+      {
+        "latent_id": 230,
+        "correlated_feature": "hl_range",
+        "correlation": 0.409
+      },
+      {
+        "latent_id": 206,
+        "correlated_feature": "logvol",
+        "correlation": -0.4083
+      },
+      {
+        "latent_id": 210,
+        "correlated_feature": "logvol",
+        "correlation": -0.4061
+      },
+      {
+        "latent_id": 237,
+        "correlated_feature": "vol_z20",
+        "correlation": -0.4057
+      },
+      {
+        "latent_id": 232,
+        "correlated_feature": "co_ret",
+        "correlation": -0.4052
+      },
+      {
+        "latent_id": 90,
+        "correlated_feature": "ret_lag5",
+        "correlation": -0.4042
+      },
+      {
+        "latent_id": 172,
+        "correlated_feature": "ret_lag5",
+        "correlation": 0.4033
+      },
+      {
+        "latent_id": 68,
+        "correlated_feature": "co_ret",
+        "correlation": 0.4017
+      },
+      {
+        "latent_id": 31,
+        "correlated_feature": "ret_lag2",
+        "correlation": -0.4007
+      },
+      {
+        "latent_id": 55,
+        "correlated_feature": "logvol",
+        "correlation": -0.4002
+      },
+      {
+        "latent_id": 20,
+        "correlated_feature": "vol_roll5",
+        "correlation": 0.3972
+      },
+      {
+        "latent_id": 41,
+        "correlated_feature": "logvol",
+        "correlation": -0.3964
+      },
+      {
+        "latent_id": 141,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.3954
+      },
+      {
+        "latent_id": 157,
+        "correlated_feature": "has_news",
+        "correlation": -0.3922
+      },
+      {
+        "latent_id": 251,
+        "correlated_feature": "vol_roll5",
+        "correlation": 0.3919
+      },
+      {
+        "latent_id": 164,
+        "correlated_feature": "ret_lag3",
+        "correlation": -0.3907
+      },
+      {
+        "latent_id": 177,
+        "correlated_feature": "rsi14",
+        "correlation": -0.388
+      },
+      {
+        "latent_id": 36,
+        "correlated_feature": "hl_range",
+        "correlation": 0.3848
+      },
+      {
+        "latent_id": 4,
+        "correlated_feature": "logvol",
+        "correlation": -0.3832
+      },
+      {
+        "latent_id": 130,
+        "correlated_feature": "hl_range",
+        "correlation": 0.3829
+      },
+      {
+        "latent_id": 211,
+        "correlated_feature": "logvol",
+        "correlation": 0.3829
+      },
+      {
+        "latent_id": 25,
+        "correlated_feature": "ret_lag3",
+        "correlation": -0.3828
+      },
+      {
+        "latent_id": 175,
+        "correlated_feature": "hl_range",
+        "correlation": 0.3823
+      },
+      {
+        "latent_id": 143,
+        "correlated_feature": "rsi14",
+        "correlation": -0.381
+      },
+      {
+        "latent_id": 87,
+        "correlated_feature": "vol_z20",
+        "correlation": -0.3771
+      },
+      {
+        "latent_id": 158,
+        "correlated_feature": "ret_lag3",
+        "correlation": -0.3764
+      },
+      {
+        "latent_id": 247,
+        "correlated_feature": "fb_chg",
+        "correlation": -0.3721
+      },
+      {
+        "latent_id": 49,
+        "correlated_feature": "ret_lag2",
+        "correlation": 0.3653
+      },
+      {
+        "latent_id": 242,
+        "correlated_feature": "logvol",
+        "correlation": -0.3653
+      },
+      {
+        "latent_id": 21,
+        "correlated_feature": "hl_range",
+        "correlation": 0.3647
+      },
+      {
+        "latent_id": 106,
+        "correlated_feature": "ret_lag3",
+        "correlation": -0.3634
+      },
+      {
+        "latent_id": 126,
+        "correlated_feature": "hl_range",
+        "correlation": 0.3629
+      },
+      {
+        "latent_id": 249,
+        "correlated_feature": "fb_chg",
+        "correlation": -0.3625
+      },
+      {
+        "latent_id": 114,
+        "correlated_feature": "fb_roll5",
+        "correlation": 0.3621
+      },
+      {
+        "latent_id": 252,
+        "correlated_feature": "ret_lag2",
+        "correlation": 0.3617
+      },
+      {
+        "latent_id": 121,
+        "correlated_feature": "ma_gap20",
+        "correlation": -0.3597
+      },
+      {
+        "latent_id": 120,
+        "correlated_feature": "vol_roll20",
+        "correlation": 0.3588
+      },
+      {
+        "latent_id": 215,
+        "correlated_feature": "rsi14",
+        "correlation": 0.3555
+      },
+      {
+        "latent_id": 179,
+        "correlated_feature": "rsi14",
+        "correlation": -0.3521
+      },
+      {
+        "latent_id": 199,
+        "correlated_feature": "ret_lag3",
+        "correlation": -0.3489
+      },
+      {
+        "latent_id": 78,
+        "correlated_feature": "vol_roll20",
+        "correlation": 0.3445
+      },
+      {
+        "latent_id": 70,
+        "correlated_feature": "ret_lag3",
+        "correlation": -0.3434
+      },
+      {
+        "latent_id": 195,
+        "correlated_feature": "ret_lag2",
+        "correlation": 0.3344
+      },
+      {
+        "latent_id": 213,
+        "correlated_feature": "vol_roll20",
+        "correlation": -0.3198
+      },
+      {
+        "latent_id": 13,
+        "correlated_feature": "vol_z20",
+        "correlation": 0.3153
+      }
+    ],
+    "n_dead": 0,
+    "n_alive_uninterpretable": 3,
+    "verdict": "253/256 SAE latents (98.8%) have |correlation| > 0.3 with a named input feature; 0 latents are dead (activation std < 1e-6); 3 are alive but uninterpretable at this threshold. A minority of latents (253/256) track a named feature above the 0.3 threshold; interpret with caution given the small sample (N=512) and the model's near-zero real signal."
+  },
+  "acdc_ablation": {
+    "method": "ACDC-inspired ablation-based component importance -- NOT the full automated ACDC circuit-discovery algorithm. Manual exhaustive single-component ablation sweep over every attention head and every full encoder layer.",
+    "head_ablation": "zero-ablation: zero the out_proj weight columns for that head so it writes nothing into the residual stream",
+    "layer_ablation": "bypass/identity: the layer's output is replaced by its input",
+    "n_examples": 512,
+    "effect_metric": "mean absolute change in output logit vs the unablated model, averaged over the test examples",
+    "notable_z_threshold": 2.0,
+    "mean_effect_across_components": 0.07225800678133965,
+    "std_effect_across_components": 0.049277283717451804,
+    "ranked_components": [
+      {
+        "component": "layer0_full",
+        "type": "layer",
+        "layer": 0,
+        "head": null,
+        "mean_abs_output_change": 0.1632673144340515,
+        "std_output_change": 0.1417716145515442,
+        "z_score": 1.8468815808253158,
+        "rank": 1
+      },
+      {
+        "component": "layer1_full",
+        "type": "layer",
+        "layer": 1,
+        "head": null,
+        "mean_abs_output_change": 0.1630583554506302,
+        "std_output_change": 0.19614623486995697,
+        "z_score": 1.8426411079815768,
+        "rank": 2
+      },
+      {
+        "component": "layer1_head2",
+        "type": "head",
+        "layer": 1,
+        "head": 2,
+        "mean_abs_output_change": 0.09161156415939331,
+        "std_output_change": 0.06999291479587555,
+        "z_score": 0.39274805585127565,
+        "rank": 3
+      },
+      {
+        "component": "layer1_head3",
+        "type": "head",
+        "layer": 1,
+        "head": 3,
+        "mean_abs_output_change": 0.07053060829639435,
+        "std_output_change": 0.09915376454591751,
+        "z_score": -0.035054661186579884,
+        "rank": 4
+      },
+      {
+        "component": "layer1_head1",
+        "type": "head",
+        "layer": 1,
+        "head": 1,
+        "mean_abs_output_change": 0.056399062275886536,
+        "std_output_change": 0.07144013792276382,
+        "z_score": -0.321830736370616,
+        "rank": 5
+      },
+      {
+        "component": "layer0_head2",
+        "type": "head",
+        "layer": 0,
+        "head": 2,
+        "mean_abs_output_change": 0.0509842224419117,
+        "std_output_change": 0.038384418934583664,
+        "z_score": -0.43171584823905407,
+        "rank": 6
+      },
+      {
+        "component": "layer1_head0",
+        "type": "head",
+        "layer": 1,
+        "head": 0,
+        "mean_abs_output_change": 0.039465270936489105,
+        "std_output_change": 0.05629666522145271,
+        "z_score": -0.6654736903156728,
+        "rank": 7
+      },
+      {
+        "component": "layer0_head3",
+        "type": "head",
+        "layer": 0,
+        "head": 3,
+        "mean_abs_output_change": 0.03113916888833046,
+        "std_output_change": 0.04826304316520691,
+        "z_score": -0.8344379963786904,
+        "rank": 8
+      },
+      {
+        "component": "layer0_head1",
+        "type": "head",
+        "layer": 0,
+        "head": 1,
+        "mean_abs_output_change": 0.028707731515169144,
+        "std_output_change": 0.03864090144634247,
+        "z_score": -0.8837799484849277,
+        "rank": 9
+      },
+      {
+        "component": "layer0_head0",
+        "type": "head",
+        "layer": 0,
+        "head": 0,
+        "mean_abs_output_change": 0.027416769415140152,
+        "std_output_change": 0.03236708417534828,
+        "z_score": -0.9099778636826275,
+        "rank": 10
+      }
+    ],
+    "n_notable": 0,
+    "verdict": "No component exceeds the notable-effect threshold (z-score > 2.0); all 10 ablations produce a similarly small output change (mean=0.072258, std=0.049277). No component with outsized importance -- consistent with the model having no strong internal circuit to discover, itself a valid finding."
+  }
+}

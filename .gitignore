@@ -1,0 +1,19 @@
+# internal planning / prompts (never publish)
+_planning/
+
+# heavy, regenerable data (rebuild via `make build` on Modal)
+results/panel.parquet
+results/news_aligned.parquet
+results/artifacts/
+results/raw/
+
+# python / latex / jupyter cruft
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+.DS_Store

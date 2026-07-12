@@ -1,0 +1,107 @@
+{
+  "anchors": {
+    "n_instances": 25,
+    "target_precision": 0.95,
+    "min_coverage_stop": 0.02,
+    "n_bins_per_feature": 10,
+    "n_perturbations_per_candidate": 300,
+    "mean_precision": 0.9229333333333334,
+    "mean_coverage": 0.035279229420214504,
+    "mean_rule_len": 1.72,
+    "pct_reaching_target_precision": 0.68,
+    "examples": [
+      {
+        "rule_len": 1,
+        "precision": 0.98,
+        "coverage": 0.10000616886836516,
+        "features": [
+          "gt_signal_nl"
+        ]
+      },
+      {
+        "rule_len": 2,
+        "precision": 0.6566666666666666,
+        "coverage": 0.010495888889868075,
+        "features": [
+          "gt_signal",
+          "gt_signal_weak"
+        ]
+      },
+      {
+        "rule_len": 2,
+        "precision": 1.0,
+        "coverage": 0.010099318780679104,
+        "features": [
+          "gt_signal",
+          "gt_signal_nl"
+        ]
+      },
+      {
+        "rule_len": 2,
+        "precision": 0.7566666666666667,
+        "coverage": 0.010575202911705868,
+        "features": [
+          "gt_signal",
+          "vol_roll5"
+        ]
+      },
+      {
+        "rule_len": 2,
+        "precision": 0.9866666666666667,
+        "coverage": 0.009905440060631163,
+        "features": [
+          "gt_signal_nl",
+          "gt_signal"
+        ]
+      }
+    ]
+  },
+  "counterfactual": {
+    "n_instances": 30,
+    "max_features_changed_budget": 6,
+    "n_random_trials_per_k": 200,
+    "validity": 1.0,
+    "mean_sparsity_features_changed": 1.2666666666666666
+  },
+  "cem": {
+    "n_instances": 30,
+    "n_total_features": 28,
+    "pertinent_positive_mean_size": 0.13333333333333333,
+    "pertinent_positive_median_size": 0.0,
+    "pertinent_negative": {
+      "note": "pertinent negative = minimal-change counterfactual, see the 'counterfactual' key",
+      "validity": 1.0,
+      "mean_sparsity_features_changed": 1.2666666666666666
+    }
+  },
+  "rise": {
+    "n_instances": 40,
+    "n_masks_per_instance": 700,
+    "mask_keep_prob": 0.5,
+    "sentiment_attribution_share": 0.16859182930901798,
+    "top10": {
+      "gt_signal_nl": 0.0468,
+      "gt_signal": 0.03263,
+      "gt_signal_weak": 0.01311,
+      "co_ret": 0.00689,
+      "logvol": 0.00663,
+      "vol_roll20": 0.00631,
+      "ret_lag5": 0.00544,
+      "vol_roll5": 0.00489,
+      "ret_lag3": 0.00436,
+      "news_roll5": 0.00435
+    },
+    "faithfulness": {
+      "method": "rise",
+      "signal_rank": 2,
+      "noise_rank": 27,
+      "n_features": 28,
+      "ranks_signal_above_noise": true,
+      "signal_nl_rank": 1,
+      "ranks_nonlinear_signal_above_noise": true,
+      "redundant_copy_importance": 0.00184808149933815,
+      "source_feature_importance": 0.0031723037362098696,
+      "redundant_copy_credit_share": 0.36811547573129927
+    }
+  }
+}

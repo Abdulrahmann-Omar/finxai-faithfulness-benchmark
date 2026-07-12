@@ -1,0 +1,586 @@
+{
+  "target": 60,
+  "min_news_days_floor": 150,
+  "base_per_sector": 3,
+  "n_candidates": 81,
+  "n_qualifying": 76,
+  "n_disqualified": 5,
+  "disqualified": [
+    {
+      "ticker": "UNH",
+      "sector": "healthcare",
+      "news_days": 136
+    },
+    {
+      "ticker": "SCHW",
+      "sector": "financials",
+      "news_days": 17
+    },
+    {
+      "ticker": "LIN",
+      "sector": "materials",
+      "news_days": 3
+    },
+    {
+      "ticker": "HON",
+      "sector": "industrials",
+      "news_days": 0
+    },
+    {
+      "ticker": "META",
+      "sector": "communication_services",
+      "news_days": 0
+    }
+  ],
+  "chosen": [
+    "CMCSA",
+    "T",
+    "DIS",
+    "NKE",
+    "SBUX",
+    "HD",
+    "KO",
+    "PEP",
+    "COST",
+    "COP",
+    "SLB",
+    "EOG",
+    "MS",
+    "WFC",
+    "USB",
+    "MRK",
+    "ABBV",
+    "TMO",
+    "GE",
+    "CAT",
+    "MMM",
+    "NEM",
+    "DOW",
+    "APD",
+    "AMT",
+    "CCI",
+    "PLD",
+    "QCOM",
+    "ORCL",
+    "TXN",
+    "NEE",
+    "DUK",
+    "D",
+    "CRM",
+    "ADBE",
+    "DE",
+    "GS",
+    "CVX",
+    "AMD",
+    "SO",
+    "CL",
+    "ABT",
+    "NVDA",
+    "UPS",
+    "INTC",
+    "C",
+    "BLK",
+    "WMT",
+    "AXP",
+    "XOM",
+    "LLY",
+    "JNJ",
+    "VZ",
+    "BMY",
+    "LOW",
+    "LMT",
+    "BA",
+    "EQIX",
+    "SPG",
+    "AEP"
+  ],
+  "min_news_days_among_chosen": 1069,
+  "full_report": [
+    {
+      "ticker": "KO",
+      "sector": "consumer_staples",
+      "news_days": 3526,
+      "articles": 10521
+    },
+    {
+      "ticker": "MRK",
+      "sector": "healthcare",
+      "news_days": 3364,
+      "articles": 10774
+    },
+    {
+      "ticker": "CMCSA",
+      "sector": "communication_services",
+      "news_days": 3174,
+      "articles": 8820
+    },
+    {
+      "ticker": "MS",
+      "sector": "financials",
+      "news_days": 3030,
+      "articles": 9458
+    },
+    {
+      "ticker": "GE",
+      "sector": "industrials",
+      "news_days": 2956,
+      "articles": 8680
+    },
+    {
+      "ticker": "COP",
+      "sector": "energy",
+      "news_days": 2912,
+      "articles": 6929
+    },
+    {
+      "ticker": "PEP",
+      "sector": "consumer_staples",
+      "news_days": 2906,
+      "articles": 7113
+    },
+    {
+      "ticker": "QCOM",
+      "sector": "technology",
+      "news_days": 2899,
+      "articles": 8954
+    },
+    {
+      "ticker": "ORCL",
+      "sector": "technology",
+      "news_days": 2813,
+      "articles": 7998
+    },
+    {
+      "ticker": "WFC",
+      "sector": "financials",
+      "news_days": 2787,
+      "articles": 11301
+    },
+    {
+      "ticker": "COST",
+      "sector": "consumer_staples",
+      "news_days": 2768,
+      "articles": 6781
+    },
+    {
+      "ticker": "NKE",
+      "sector": "consumer_discretionary",
+      "news_days": 2736,
+      "articles": 7129
+    },
+    {
+      "ticker": "NEE",
+      "sector": "utilities",
+      "news_days": 2649,
+      "articles": 6710
+    },
+    {
+      "ticker": "CAT",
+      "sector": "industrials",
+      "news_days": 2632,
+      "articles": 7514
+    },
+    {
+      "ticker": "TXN",
+      "sector": "technology",
+      "news_days": 2613,
+      "articles": 7041
+    },
+    {
+      "ticker": "ABBV",
+      "sector": "healthcare",
+      "news_days": 2612,
+      "articles": 6451
+    },
+    {
+      "ticker": "SLB",
+      "sector": "energy",
+      "news_days": 2586,
+      "articles": 7394
+    },
+    {
+      "ticker": "DUK",
+      "sector": "utilities",
+      "news_days": 2580,
+      "articles": 5991
+    },
+    {
+      "ticker": "MMM",
+      "sector": "industrials",
+      "news_days": 2567,
+      "articles": 5946
+    },
+    {
+      "ticker": "SBUX",
+      "sector": "consumer_discretionary",
+      "news_days": 2530,
+      "articles": 7408
+    },
+    {
+      "ticker": "CRM",
+      "sector": "technology",
+      "news_days": 2509,
+      "articles": 7593
+    },
+    {
+      "ticker": "AMT",
+      "sector": "real_estate",
+      "news_days": 2494,
+      "articles": 7912
+    },
+    {
+      "ticker": "ADBE",
+      "sector": "technology",
+      "news_days": 2415,
+      "articles": 6570
+    },
+    {
+      "ticker": "D",
+      "sector": "utilities",
+      "news_days": 2361,
+      "articles": 5631
+    },
+    {
+      "ticker": "NEM",
+      "sector": "materials",
+      "news_days": 2351,
+      "articles": 4711
+    },
+    {
+      "ticker": "T",
+      "sector": "communication_services",
+      "news_days": 2339,
+      "articles": 9463
+    },
+    {
+      "ticker": "EOG",
+      "sector": "energy",
+      "news_days": 2297,
+      "articles": 5126
+    },
+    {
+      "ticker": "USB",
+      "sector": "financials",
+      "news_days": 2242,
+      "articles": 4756
+    },
+    {
+      "ticker": "DE",
+      "sector": "industrials",
+      "news_days": 2135,
+      "articles": 4961
+    },
+    {
+      "ticker": "GS",
+      "sector": "financials",
+      "news_days": 2135,
+      "articles": 8730
+    },
+    {
+      "ticker": "TMO",
+      "sector": "healthcare",
+      "news_days": 2130,
+      "articles": 4930
+    },
+    {
+      "ticker": "CVX",
+      "sector": "energy",
+      "news_days": 2103,
+      "articles": 8688
+    },
+    {
+      "ticker": "DOW",
+      "sector": "materials",
+      "news_days": 2093,
+      "articles": 4745
+    },
+    {
+      "ticker": "AMD",
+      "sector": "technology",
+      "news_days": 2048,
+      "articles": 9209
+    },
+    {
+      "ticker": "SO",
+      "sector": "utilities",
+      "news_days": 2048,
+      "articles": 4410
+    },
+    {
+      "ticker": "CL",
+      "sector": "consumer_staples",
+      "news_days": 2048,
+      "articles": 4142
+    },
+    {
+      "ticker": "ABT",
+      "sector": "healthcare",
+      "news_days": 2038,
+      "articles": 4055
+    },
+    {
+      "ticker": "NVDA",
+      "sector": "technology",
+      "news_days": 2008,
+      "articles": 11862
+    },
+    {
+      "ticker": "UPS",
+      "sector": "industrials",
+      "news_days": 1992,
+      "articles": 3828
+    },
+    {
+      "ticker": "INTC",
+      "sector": "technology",
+      "news_days": 1903,
+      "articles": 11157
+    },
+    {
+      "ticker": "C",
+      "sector": "financials",
+      "news_days": 1856,
+      "articles": 7250
+    },
+    {
+      "ticker": "BLK",
+      "sector": "financials",
+      "news_days": 1813,
+      "articles": 3989
+    },
+    {
+      "ticker": "CCI",
+      "sector": "real_estate",
+      "news_days": 1719,
+      "articles": 3208
+    },
+    {
+      "ticker": "WMT",
+      "sector": "consumer_staples",
+      "news_days": 1682,
+      "articles": 8686
+    },
+    {
+      "ticker": "HD",
+      "sector": "consumer_discretionary",
+      "news_days": 1576,
+      "articles": 4453
+    },
+    {
+      "ticker": "DIS",
+      "sector": "communication_services",
+      "news_days": 1576,
+      "articles": 9654
+    },
+    {
+      "ticker": "AXP",
+      "sector": "financials",
+      "news_days": 1574,
+      "articles": 3790
+    },
+    {
+      "ticker": "XOM",
+      "sector": "energy",
+      "news_days": 1498,
+      "articles": 7346
+    },
+    {
+      "ticker": "LLY",
+      "sector": "healthcare",
+      "news_days": 1393,
+      "articles": 3545
+    },
+    {
+      "ticker": "JNJ",
+      "sector": "healthcare",
+      "news_days": 1371,
+      "articles": 2928
+    },
+    {
+      "ticker": "VZ",
+      "sector": "communication_services",
+      "news_days": 1317,
+      "articles": 2972
+    },
+    {
+      "ticker": "BMY",
+      "sector": "healthcare",
+      "news_days": 1284,
+      "articles": 2528
+    },
+    {
+      "ticker": "LOW",
+      "sector": "consumer_discretionary",
+      "news_days": 1241,
+      "articles": 3244
+    },
+    {
+      "ticker": "APD",
+      "sector": "materials",
+      "news_days": 1230,
+      "articles": 1855
+    },
+    {
+      "ticker": "PLD",
+      "sector": "real_estate",
+      "news_days": 1229,
+      "articles": 1787
+    },
+    {
+      "ticker": "LMT",
+      "sector": "industrials",
+      "news_days": 1201,
+      "articles": 2242
+    },
+    {
+      "ticker": "BA",
+      "sector": "industrials",
+      "news_days": 1157,
+      "articles": 6075
+    },
+    {
+      "ticker": "EQIX",
+      "sector": "real_estate",
+      "news_days": 1105,
+      "articles": 1969
+    },
+    {
+      "ticker": "SPG",
+      "sector": "real_estate",
+      "news_days": 1090,
+      "articles": 2170
+    },
+    {
+      "ticker": "AEP",
+      "sector": "utilities",
+      "news_days": 1069,
+      "articles": 1637
+    },
+    {
+      "ticker": "BKNG",
+      "sector": "consumer_discretionary",
+      "news_days": 987,
+      "articles": 1900
+    },
+    {
+      "ticker": "MCD",
+      "sector": "consumer_discretionary",
+      "news_days": 946,
+      "articles": 2236
+    },
+    {
+      "ticker": "TGT",
+      "sector": "consumer_discretionary",
+      "news_days": 907,
+      "articles": 3155
+    },
+    {
+      "ticker": "BAC",
+      "sector": "financials",
+      "news_days": 902,
+      "articles": 1811
+    },
+    {
+      "ticker": "MO",
+      "sector": "consumer_staples",
+      "news_days": 826,
+      "articles": 1461
+    },
+    {
+      "ticker": "PFE",
+      "sector": "healthcare",
+      "news_days": 807,
+      "articles": 1821
+    },
+    {
+      "ticker": "ECL",
+      "sector": "materials",
+      "news_days": 734,
+      "articles": 961
+    },
+    {
+      "ticker": "PG",
+      "sector": "consumer_staples",
+      "news_days": 652,
+      "articles": 1312
+    },
+    {
+      "ticker": "PSX",
+      "sector": "energy",
+      "news_days": 642,
+      "articles": 1298
+    },
+    {
+      "ticker": "AAPL",
+      "sector": "technology",
+      "news_days": 639,
+      "articles": 9338
+    },
+    {
+      "ticker": "MSFT",
+      "sector": "technology",
+      "news_days": 594,
+      "articles": 8737
+    },
+    {
+      "ticker": "JPM",
+      "sector": "financials",
+      "news_days": 561,
+      "articles": 2883
+    },
+    {
+      "ticker": "CSCO",
+      "sector": "technology",
+      "news_days": 519,
+      "articles": 1518
+    },
+    {
+      "ticker": "IBM",
+      "sector": "technology",
+      "news_days": 491,
+      "articles": 1099
+    },
+    {
+      "ticker": "GOOGL",
+      "sector": "communication_services",
+      "news_days": 479,
+      "articles": 1754
+    },
+    {
+      "ticker": "AMZN",
+      "sector": "consumer_discretionary",
+      "news_days": 311,
+      "articles": 5060
+    },
+    {
+      "ticker": "UNH",
+      "sector": "healthcare",
+      "news_days": 136,
+      "articles": 400
+    },
+    {
+      "ticker": "SCHW",
+      "sector": "financials",
+      "news_days": 17,
+      "articles": 38
+    },
+    {
+      "ticker": "LIN",
+      "sector": "materials",
+      "news_days": 3,
+      "articles": 7
+    },
+    {
+      "ticker": "HON",
+      "sector": "industrials",
+      "news_days": 0,
+      "articles": 0
+    },
+    {
+      "ticker": "META",
+      "sector": "communication_services",
+      "news_days": 0,
+      "articles": 0
+    }
+  ]
+}

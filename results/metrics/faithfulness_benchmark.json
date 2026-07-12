@@ -1,0 +1,220 @@
+{
+  "universe_n_symbols": 57,
+  "cross_sectional_rho_bar": 0.38135134265767284,
+  "effective_n": 2.549688144891318,
+  "n_bootstrap": 5000,
+  "cluster_unit": "symbol",
+  "methods": [
+    {
+      "method": "treeshap",
+      "n_symbols_scored": 57,
+      "mean_signal_minus_noise_margin": 0.1459429716331917,
+      "ci95_clustered": [
+        0.14130502412455123,
+        0.15036737941728348
+      ],
+      "pct_symbols_signal_above_noise": 1.0,
+      "pct_symbols_ci95_clustered": [
+        1.0,
+        1.0
+      ],
+      "mdes_approx": 0.006502892197940656,
+      "nonlinear": {
+        "mean_signal_minus_noise_margin": 0.194427238483178,
+        "ci95_clustered": [
+          0.18966554620940435,
+          0.1990413767465374
+        ],
+        "pct_symbols_signal_above_noise": 1.0,
+        "mdes_approx": 0.006697173418185688,
+        "n_symbols_scored": 57
+      },
+      "weak": {
+        "mean_signal_minus_noise_margin": 0.05183056284461105,
+        "ci95_clustered": [
+          0.05023369655960746,
+          0.05350415751076581
+        ],
+        "pct_symbols_signal_above_noise": 1.0,
+        "pct_symbols_ci95_clustered": [
+          1.0,
+          1.0
+        ],
+        "mdes_approx": 0.0023642681983221453,
+        "n_symbols_scored": 57
+      },
+      "mean_redundant_copy_credit_share": 0.19415420755825225,
+      "n_symbols_credit_split": 57,
+      "mean_redundant_partial_credit_share": 0.44937825347109994,
+      "n_symbols_credit_split_partial": 57
+    },
+    {
+      "method": "kernelshap",
+      "n_symbols_scored": 57,
+      "mean_signal_minus_noise_margin": 0.03446261490139805,
+      "ci95_clustered": [
+        0.03309664099925643,
+        0.03592871665516517
+      ],
+      "pct_symbols_signal_above_noise": 1.0,
+      "pct_symbols_ci95_clustered": [
+        1.0,
+        1.0
+      ],
+      "mdes_approx": 0.002018264291889413,
+      "nonlinear": {
+        "mean_signal_minus_noise_margin": 0.04623237165575227,
+        "ci95_clustered": [
+          0.04488625274830296,
+          0.04762376201810926
+        ],
+        "pct_symbols_signal_above_noise": 1.0,
+        "mdes_approx": 0.0019893452586974775,
+        "n_symbols_scored": 57
+      },
+      "weak": {
+        "mean_signal_minus_noise_margin": 0.01218867114140001,
+        "ci95_clustered": [
+          0.011788491407686284,
+          0.01260184639232604
+        ],
+        "pct_symbols_signal_above_noise": 1.0,
+        "pct_symbols_ci95_clustered": [
+          1.0,
+          1.0
+        ],
+        "mdes_approx": 0.0005846308240689022,
+        "n_symbols_scored": 57
+      },
+      "mean_redundant_copy_credit_share": 0.20684920976180007,
+      "n_symbols_credit_split": 57,
+      "mean_redundant_partial_credit_share": 0.48425832353684023,
+      "n_symbols_credit_split_partial": 57
+    },
+    {
+      "method": "lime",
+      "n_symbols_scored": 57,
+      "mean_signal_minus_noise_margin": 0.057565203116728185,
+      "ci95_clustered": [
+        0.055010292726952174,
+        0.06009633378179478
+      ],
+      "pct_symbols_signal_above_noise": 1.0,
+      "pct_symbols_ci95_clustered": [
+        1.0,
+        1.0
+      ],
+      "mdes_approx": 0.0036903763890157055,
+      "nonlinear": {
+        "mean_signal_minus_noise_margin": 0.06743465646377723,
+        "ci95_clustered": [
+          0.06429891245103168,
+          0.0705244382523184
+        ],
+        "pct_symbols_signal_above_noise": 1.0,
+        "mdes_approx": 0.0044799490701210596,
+        "n_symbols_scored": 57
+      },
+      "weak": {
+        "mean_signal_minus_noise_margin": 0.016672253693303093,
+        "ci95_clustered": [
+          0.015689935144643494,
+          0.01762846459591822
+        ],
+        "pct_symbols_signal_above_noise": 1.0,
+        "pct_symbols_ci95_clustered": [
+          1.0,
+          1.0
+        ],
+        "mdes_approx": 0.0013907432807363205,
+        "n_symbols_scored": 57
+      },
+      "mean_redundant_copy_credit_share": 0.35907867654145637,
+      "n_symbols_credit_split": 57,
+      "mean_redundant_partial_credit_share": 0.3737376651423496,
+      "n_symbols_credit_split_partial": 57
+    },
+    {
+      "method": "permutation",
+      "n_symbols_scored": 57,
+      "mean_signal_minus_noise_margin": 0.0213638936049802,
+      "ci95_clustered": [
+        0.01578239954725524,
+        0.027235957838143754
+      ],
+      "pct_symbols_signal_above_noise": 0.7894736842105263,
+      "pct_symbols_ci95_clustered": [
+        0.6842105263157895,
+        0.8947368421052632
+      ],
+      "mdes_approx": 0.008457525020412924,
+      "nonlinear": {
+        "mean_signal_minus_noise_margin": 0.03723118279569894,
+        "ci95_clustered": [
+          0.030064551499717044,
+          0.04447509903791739
+        ],
+        "pct_symbols_signal_above_noise": 0.8947368421052632,
+        "mdes_approx": 0.010364307406497632,
+        "n_symbols_scored": 57
+      },
+      "weak": {
+        "mean_signal_minus_noise_margin": 0.0022778720996038475,
+        "ci95_clustered": [
+          -0.001047149122807021,
+          0.005461410582908883
+        ],
+        "pct_symbols_signal_above_noise": 0.5789473684210527,
+        "pct_symbols_ci95_clustered": [
+          0.45614035087719296,
+          0.7017543859649122
+        ],
+        "mdes_approx": 0.004774420089816416,
+        "n_symbols_scored": 57
+      },
+      "mean_redundant_copy_credit_share": 0.27745225357329634,
+      "n_symbols_credit_split": 19,
+      "mean_redundant_partial_credit_share": 0.12103237264527618,
+      "n_symbols_credit_split_partial": 19
+    }
+  ],
+  "paired_tests_permutation_vs_shap_lime": [
+    {
+      "method_a": "permutation",
+      "method_b": "treeshap",
+      "n_common_symbols": 57,
+      "mcnemar_table_perm_wrong_other_right__perm_right_other_wrong": [
+        12,
+        0
+      ],
+      "mcnemar_p": 0.00048828125,
+      "wilcoxon_signed_rank_p": 5.143753751233159e-11,
+      "interpretation": "permutation and treeshap differ significantly in per-stock signal-vs-noise recovery (p<0.05)"
+    },
+    {
+      "method_a": "permutation",
+      "method_b": "kernelshap",
+      "n_common_symbols": 57,
+      "mcnemar_table_perm_wrong_other_right__perm_right_other_wrong": [
+        12,
+        0
+      ],
+      "mcnemar_p": 0.00048828125,
+      "wilcoxon_signed_rank_p": 2.2474925419684834e-05,
+      "interpretation": "permutation and kernelshap differ significantly in per-stock signal-vs-noise recovery (p<0.05)"
+    },
+    {
+      "method_a": "permutation",
+      "method_b": "lime",
+      "n_common_symbols": 57,
+      "mcnemar_table_perm_wrong_other_right__perm_right_other_wrong": [
+        12,
+        0
+      ],
+      "mcnemar_p": 0.00048828125,
+      "wilcoxon_signed_rank_p": 7.965254238902933e-10,
+      "interpretation": "permutation and lime differ significantly in per-stock signal-vs-noise recovery (p<0.05)"
+    }
+  ],
+  "note": "KernelSHAP/LIME per-symbol samples are thin at the reviewer profile (6 tickers); CIs are correspondingly wide. This is expected and honestly reported, not hidden -- see effective_n and mdes_approx per method. paired_tests_permutation_vs_shap_lime (M2, R3 revision): McNemar + Wilcoxon signed-rank tests pairing each method's per-symbol signal-vs-noise outcome with permutation's, on the common scored symbols."
+}

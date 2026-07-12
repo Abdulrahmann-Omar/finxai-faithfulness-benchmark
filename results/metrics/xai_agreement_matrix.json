@@ -1,0 +1,73 @@
+{
+  "methods_in_matrix": [
+    "kernelshap",
+    "lime",
+    "permutation",
+    "treeshap"
+  ],
+  "excluded_no_shared_model_class": [
+    "ale",
+    "block_permutation",
+    "deconvnet",
+    "gnnexplainer",
+    "gradcam",
+    "gradcam_pp",
+    "guided_backprop",
+    "integrated_gradients",
+    "lrp",
+    "score_cam"
+  ],
+  "mean_spearman_rho": {
+    "kernelshap": {
+      "kernelshap": 1.0,
+      "lime": 0.7087027914614121,
+      "permutation": 0.22667829525166777,
+      "treeshap": 0.926655719759168
+    },
+    "lime": {
+      "kernelshap": 0.7087027914614121,
+      "lime": 1.0,
+      "permutation": 0.26580330569510047,
+      "treeshap": 0.8177339901477834
+    },
+    "permutation": {
+      "kernelshap": 0.22667829525166777,
+      "lime": 0.26580330569510047,
+      "permutation": 1.0,
+      "treeshap": 0.1018942367869492
+    },
+    "treeshap": {
+      "kernelshap": 0.926655719759168,
+      "lime": 0.8177339901477834,
+      "permutation": 0.1018942367869492,
+      "treeshap": 1.0
+    }
+  },
+  "n_common_models_per_pair": {
+    "kernelshap": {
+      "kernelshap": 0,
+      "lime": 5,
+      "permutation": 5,
+      "treeshap": 2
+    },
+    "lime": {
+      "kernelshap": 5,
+      "lime": 0,
+      "permutation": 5,
+      "treeshap": 2
+    },
+    "permutation": {
+      "kernelshap": 5,
+      "lime": 5,
+      "permutation": 0,
+      "treeshap": 2
+    },
+    "treeshap": {
+      "kernelshap": 2,
+      "lime": 2,
+      "permutation": 2,
+      "treeshap": 0
+    }
+  },
+  "note": "Each cell is the mean Spearman rank correlation between two methods' full per-feature importance vectors, averaged over every model where BOTH methods were run (the pairing/clustering unit here is the MODEL, not the stock -- a different axis of agreement than the stock-clustered faithfulness benchmark). Methods restricted to a 4-ground-truth-feature subset (block_permutation, ALE) or run on disjoint model classes (integrated_gradients and every neural/graph-only method) cannot enter a same-model rank correlation and are excluded from this matrix by construction; see excluded_no_shared_model_class."
+}

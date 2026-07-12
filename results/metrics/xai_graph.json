@@ -1,0 +1,120 @@
+{
+  "feature_importance": {
+    "method": "gnnexplainer",
+    "signal_rank": 1,
+    "noise_rank": 28,
+    "n_features": 28,
+    "ranks_signal_above_noise": true,
+    "signal_nl_rank": 2,
+    "ranks_nonlinear_signal_above_noise": true,
+    "redundant_copy_importance": 0.27479547534072607,
+    "source_feature_importance": 0.28089188492088984,
+    "redundant_copy_credit_share": 0.4945145327965588,
+    "test_accuracy": 0.5965619694397284,
+    "test_f1": 0.6265959536436849,
+    "test_mcc": 0.1896273078781506,
+    "top10": {
+      "gt_signal": 0.454295,
+      "gt_signal_nl": 0.441675,
+      "gt_signal_weak": 0.364301,
+      "rsi14": 0.299488,
+      "fb_roll5": 0.286725,
+      "vol_roll20": 0.286671,
+      "fb_pos": 0.283437,
+      "fb_chg": 0.28177,
+      "fb_neg": 0.281067,
+      "vol_z20": 0.280892
+    }
+  },
+  "top_edges": [
+    {
+      "ticker_a": "COP",
+      "ticker_b": "CVX",
+      "mean_importance": 0.27959757834672927
+    },
+    {
+      "ticker_a": "DUK",
+      "ticker_b": "PLD",
+      "mean_importance": 0.27756922274827955
+    },
+    {
+      "ticker_a": "JNJ",
+      "ticker_b": "MRK",
+      "mean_importance": 0.27697363644838335
+    },
+    {
+      "ticker_a": "AAPL",
+      "ticker_b": "COST",
+      "mean_importance": 0.2768229866027832
+    },
+    {
+      "ticker_a": "AMT",
+      "ticker_b": "PEP",
+      "mean_importance": 0.27636457622051236
+    },
+    {
+      "ticker_a": "CVX",
+      "ticker_b": "XOM",
+      "mean_importance": 0.27627171933650974
+    },
+    {
+      "ticker_a": "C",
+      "ticker_b": "XOM",
+      "mean_importance": 0.2748134031891823
+    },
+    {
+      "ticker_a": "BA",
+      "ticker_b": "MS",
+      "mean_importance": 0.2747862121462822
+    },
+    {
+      "ticker_a": "APD",
+      "ticker_b": "ECL",
+      "mean_importance": 0.27471183151006695
+    },
+    {
+      "ticker_a": "CVX",
+      "ticker_b": "NEM",
+      "mean_importance": 0.2742074143886566
+    }
+  ],
+  "n_dates_sampled": 25,
+  "task": "direction",
+  "n_edges_undirected": 207,
+  "n_edges_directed": 414,
+  "n_nodes": 57,
+  "features": [
+    "ret_lag1",
+    "ret_lag2",
+    "ret_lag3",
+    "ret_lag5",
+    "vol_roll5",
+    "vol_roll20",
+    "rsi14",
+    "ma_gap20",
+    "hl_range",
+    "co_ret",
+    "logvol",
+    "vol_z20",
+    "fb_score",
+    "fb_pos",
+    "fb_neg",
+    "lm_score",
+    "news_count",
+    "has_news",
+    "fb_roll3",
+    "fb_roll5",
+    "news_roll5",
+    "fb_chg",
+    "gt_noise",
+    "gt_signal",
+    "gt_signal_nl",
+    "gt_signal_weak",
+    "gt_redundant_copy",
+    "gt_redundant_partial"
+  ],
+  "retrained_with_gt_feats": true,
+  "epochs_retrain": 8,
+  "gnnexplainer_epochs": 100,
+  "test_year": 2023
+}

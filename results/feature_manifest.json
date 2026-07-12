@@ -1,0 +1,91 @@
+{
+  "price_features": [
+    "Open",
+    "High",
+    "Low",
+    "Close",
+    "Adj_close",
+    "Volume",
+    "logvol",
+    "ret_lag1",
+    "ret_lag2",
+    "ret_lag3",
+    "ret_lag5",
+    "ret_roll5",
+    "ret_roll10",
+    "vol_roll5",
+    "vol_roll20",
+    "rsi14",
+    "mom10",
+    "ma_gap5",
+    "ma_gap20",
+    "hl_range",
+    "co_ret",
+    "vol_z20"
+  ],
+  "sentiment_features": [
+    "fb_score",
+    "fb_pos",
+    "fb_neg",
+    "lm_score",
+    "news_count",
+    "has_news",
+    "fb_roll3",
+    "fb_roll5",
+    "news_roll5",
+    "fb_chg"
+  ],
+  "ground_truth_features": [
+    "gt_noise",
+    "gt_signal",
+    "gt_signal_nl",
+    "gt_signal_weak",
+    "gt_redundant_copy",
+    "gt_redundant_partial"
+  ],
+  "ground_truth_construction": {
+    "gt_noise": {
+      "true_importance": 0.0,
+      "construction": "iid N(0,1)"
+    },
+    "gt_signal": {
+      "true_importance": 0.15,
+      "construction": "rho*zscore(ret_next) + sqrt(1-rho^2)*N(0,1)",
+      "target_correlation": 0.15
+    },
+    "gt_signal_nl": {
+      "true_importance": "nonzero (interaction, not simple linear)",
+      "construction": "rho_nl*zscore(sign(dir_next)*|aux_N(0,1)|) + sqrt(1-rho_nl^2)*N(0,1)",
+      "nonlinear_signal_strength_param": 0.15,
+      "realized_pearson_corr_with_ret_next": 0.08102852503889771,
+      "realized_pointbiserial_corr_with_dir_next": 0.12283587805669938
+    },
+    "gt_signal_weak": {
+      "true_importance": 0.05,
+      "construction": "rho*zscore(ret_next) + sqrt(1-rho^2)*N(0,1), weak variant",
+      "target_correlation": 0.05
+    },
+    "gt_redundant_copy": {
+      "true_importance": "== vol_z20",
+      "construction": "exact copy of 'vol_z20'",
+      "source_feature": "vol_z20"
+    },
+    "gt_redundant_partial": {
+      "true_importance": "partially collinear with vol_z20 (target rho=0.8)",
+      "construction": "rho*zscore(vol_z20) + sqrt(1-rho^2)*N(0,1)",
+      "source_feature": "vol_z20",
+      "target_corr": 0.8,
+      "realized_corr_with_source": 0.800232515164065
+    }
+  },
+  "targets": {
+    "return": "ret_next",
+    "direction": "dir_next",
+    "level": "Close_next"
+  },
+  "n_rows": 127609,
+  "n_tickers": 57,
+  "date_min": "2015-02-03",
+  "date_max": "2023-12-27",
+  "news_coverage": 0.4777876168608797
+}

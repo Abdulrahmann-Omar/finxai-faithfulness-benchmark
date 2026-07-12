@@ -1,0 +1,731 @@
+[
+  {
+    "ticker": "AAPL",
+    "sector": "technology",
+    "present": true,
+    "start": "1980-12-12",
+    "end": "2023-12-28",
+    "n_rows": 10852,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "MSFT",
+    "sector": "technology",
+    "present": true,
+    "start": "1986-03-13",
+    "end": "2023-12-28",
+    "n_rows": 9526,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "NVDA",
+    "sector": "technology",
+    "present": false,
+    "start": null,
+    "end": null,
+    "n_rows": 0,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "INTC",
+    "sector": "technology",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11040,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "CSCO",
+    "sector": "technology",
+    "present": true,
+    "start": "1990-02-16",
+    "end": "2020-04-01",
+    "n_rows": 7589,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "ORCL",
+    "sector": "technology",
+    "present": true,
+    "start": "1986-03-12",
+    "end": "2023-12-28",
+    "n_rows": 9527,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "IBM",
+    "sector": "technology",
+    "present": true,
+    "start": "1962-01-02",
+    "end": "2023-12-28",
+    "n_rows": 15605,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "ADBE",
+    "sector": "technology",
+    "present": true,
+    "start": "1986-08-13",
+    "end": "2023-12-28",
+    "n_rows": 9420,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "CRM",
+    "sector": "technology",
+    "present": true,
+    "start": "2004-06-23",
+    "end": "2023-12-28",
+    "n_rows": 4914,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "TXN",
+    "sector": "technology",
+    "present": true,
+    "start": "1972-06-01",
+    "end": "2023-12-28",
+    "n_rows": 13006,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "QCOM",
+    "sector": "technology",
+    "present": true,
+    "start": "1991-12-13",
+    "end": "2023-12-28",
+    "n_rows": 8070,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "AMD",
+    "sector": "technology",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11040,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "GOOGL",
+    "sector": "communication_services",
+    "present": true,
+    "start": "2004-08-19",
+    "end": "2020-04-01",
+    "n_rows": 3932,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "META",
+    "sector": "communication_services",
+    "present": false,
+    "start": null,
+    "end": null,
+    "n_rows": 0,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "DIS",
+    "sector": "communication_services",
+    "present": true,
+    "start": "1962-01-02",
+    "end": "2023-12-28",
+    "n_rows": 15605,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "CMCSA",
+    "sector": "communication_services",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11040,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "VZ",
+    "sector": "communication_services",
+    "present": false,
+    "start": null,
+    "end": null,
+    "n_rows": 0,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "T",
+    "sector": "communication_services",
+    "present": true,
+    "start": "1983-11-21",
+    "end": "2023-12-28",
+    "n_rows": 10108,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "AMZN",
+    "sector": "consumer_discretionary",
+    "present": true,
+    "start": "1997-05-15",
+    "end": "2023-12-28",
+    "n_rows": 6700,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "HD",
+    "sector": "consumer_discretionary",
+    "present": true,
+    "start": "1981-09-22",
+    "end": "2020-06-19",
+    "n_rows": 9770,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "MCD",
+    "sector": "consumer_discretionary",
+    "present": true,
+    "start": "1966-07-05",
+    "end": "2020-07-02",
+    "n_rows": 13592,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "NKE",
+    "sector": "consumer_discretionary",
+    "present": true,
+    "start": "1980-12-02",
+    "end": "2023-12-28",
+    "n_rows": 10861,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "SBUX",
+    "sector": "consumer_discretionary",
+    "present": true,
+    "start": "2015-01-02",
+    "end": "2020-07-02",
+    "n_rows": 1385,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "TGT",
+    "sector": "consumer_discretionary",
+    "present": true,
+    "start": "1973-02-21",
+    "end": "2023-12-28",
+    "n_rows": 12826,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "LOW",
+    "sector": "consumer_discretionary",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11040,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "BKNG",
+    "sector": "consumer_discretionary",
+    "present": true,
+    "start": "1999-03-31",
+    "end": "2023-12-28",
+    "n_rows": 6228,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "WMT",
+    "sector": "consumer_staples",
+    "present": true,
+    "start": "1972-08-25",
+    "end": "2023-12-28",
+    "n_rows": 12946,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "PG",
+    "sector": "consumer_staples",
+    "present": true,
+    "start": "1970-01-02",
+    "end": "2020-06-19",
+    "n_rows": 12731,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "KO",
+    "sector": "consumer_staples",
+    "present": true,
+    "start": "1962-01-02",
+    "end": "2023-12-28",
+    "n_rows": 15606,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "PEP",
+    "sector": "consumer_staples",
+    "present": true,
+    "start": "1972-06-01",
+    "end": "2023-12-28",
+    "n_rows": 13006,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "COST",
+    "sector": "consumer_staples",
+    "present": true,
+    "start": "1986-07-09",
+    "end": "2023-12-28",
+    "n_rows": 9445,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "CL",
+    "sector": "consumer_staples",
+    "present": true,
+    "start": "1973-05-02",
+    "end": "2023-12-28",
+    "n_rows": 12777,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "MO",
+    "sector": "consumer_staples",
+    "present": true,
+    "start": "1962-01-02",
+    "end": "2020-07-02",
+    "n_rows": 14728,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "JPM",
+    "sector": "financials",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11040,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "BAC",
+    "sector": "financials",
+    "present": true,
+    "start": "1973-02-21",
+    "end": "2020-07-02",
+    "n_rows": 11949,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "WFC",
+    "sector": "financials",
+    "present": true,
+    "start": "1972-06-01",
+    "end": "2023-12-28",
+    "n_rows": 13006,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "GS",
+    "sector": "financials",
+    "present": true,
+    "start": "1999-05-04",
+    "end": "2023-12-28",
+    "n_rows": 6205,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "MS",
+    "sector": "financials",
+    "present": true,
+    "start": "1993-02-23",
+    "end": "2023-12-28",
+    "n_rows": 7771,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "C",
+    "sector": "financials",
+    "present": true,
+    "start": "1977-01-03",
+    "end": "2023-12-28",
+    "n_rows": 11849,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "AXP",
+    "sector": "financials",
+    "present": true,
+    "start": "1972-06-01",
+    "end": "2023-12-28",
+    "n_rows": 13006,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "BLK",
+    "sector": "financials",
+    "present": true,
+    "start": "1999-10-01",
+    "end": "2020-04-01",
+    "n_rows": 5158,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "SCHW",
+    "sector": "financials",
+    "present": true,
+    "start": "2015-01-02",
+    "end": "2020-07-02",
+    "n_rows": 1385,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "USB",
+    "sector": "financials",
+    "present": true,
+    "start": "1973-05-03",
+    "end": "2023-12-28",
+    "n_rows": 12776,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "JNJ",
+    "sector": "healthcare",
+    "present": true,
+    "start": "1962-01-02",
+    "end": "2023-12-28",
+    "n_rows": 15605,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "PFE",
+    "sector": "healthcare",
+    "present": true,
+    "start": "1972-06-01",
+    "end": "2023-12-28",
+    "n_rows": 13006,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "UNH",
+    "sector": "healthcare",
+    "present": false,
+    "start": null,
+    "end": null,
+    "n_rows": 0,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "MRK",
+    "sector": "healthcare",
+    "present": true,
+    "start": "1970-01-02",
+    "end": "2023-12-28",
+    "n_rows": 13618,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "ABT",
+    "sector": "healthcare",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11040,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "TMO",
+    "sector": "healthcare",
+    "present": false,
+    "start": null,
+    "end": null,
+    "n_rows": 0,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "ABBV",
+    "sector": "healthcare",
+    "present": true,
+    "start": "2013-01-02",
+    "end": "2023-12-28",
+    "n_rows": 2767,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "LLY",
+    "sector": "healthcare",
+    "present": true,
+    "start": "1972-06-01",
+    "end": "2023-12-28",
+    "n_rows": 13006,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "BMY",
+    "sector": "healthcare",
+    "present": true,
+    "start": "1972-06-01",
+    "end": "2020-07-02",
+    "n_rows": 12128,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "BA",
+    "sector": "industrials",
+    "present": true,
+    "start": "1962-01-02",
+    "end": "2023-12-28",
+    "n_rows": 15605,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "CAT",
+    "sector": "industrials",
+    "present": true,
+    "start": "1970-01-02",
+    "end": "2023-12-28",
+    "n_rows": 13618,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "GE",
+    "sector": "industrials",
+    "present": true,
+    "start": "1962-01-02",
+    "end": "2023-12-28",
+    "n_rows": 15605,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "HON",
+    "sector": "industrials",
+    "present": true,
+    "start": "1970-01-02",
+    "end": "2020-06-19",
+    "n_rows": 12731,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "UPS",
+    "sector": "industrials",
+    "present": true,
+    "start": "1999-11-10",
+    "end": "2023-12-28",
+    "n_rows": 6072,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "MMM",
+    "sector": "industrials",
+    "present": true,
+    "start": "1970-01-02",
+    "end": "2020-07-02",
+    "n_rows": 12740,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "LMT",
+    "sector": "industrials",
+    "present": true,
+    "start": "1977-01-03",
+    "end": "2023-12-28",
+    "n_rows": 11850,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "DE",
+    "sector": "industrials",
+    "present": true,
+    "start": "1972-06-01",
+    "end": "2023-12-28",
+    "n_rows": 13006,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "XOM",
+    "sector": "energy",
+    "present": true,
+    "start": "1970-01-02",
+    "end": "2023-12-28",
+    "n_rows": 13618,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "CVX",
+    "sector": "energy",
+    "present": true,
+    "start": "1962-01-02",
+    "end": "2023-12-28",
+    "n_rows": 15605,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "COP",
+    "sector": "energy",
+    "present": true,
+    "start": "1981-12-31",
+    "end": "2023-12-28",
+    "n_rows": 10587,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "SLB",
+    "sector": "energy",
+    "present": true,
+    "start": "2015-01-02",
+    "end": "2020-07-02",
+    "n_rows": 1385,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "EOG",
+    "sector": "energy",
+    "present": true,
+    "start": "1989-10-04",
+    "end": "2023-12-28",
+    "n_rows": 8625,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "PSX",
+    "sector": "energy",
+    "present": true,
+    "start": "2012-04-12",
+    "end": "2023-12-28",
+    "n_rows": 2948,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "LIN",
+    "sector": "materials",
+    "present": true,
+    "start": "1992-06-17",
+    "end": "2023-12-28",
+    "n_rows": 7942,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "APD",
+    "sector": "materials",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11040,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "ECL",
+    "sector": "materials",
+    "present": true,
+    "start": "1973-02-21",
+    "end": "2023-12-28",
+    "n_rows": 12827,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "NEM",
+    "sector": "materials",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11041,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "DOW",
+    "sector": "materials",
+    "present": true,
+    "start": "2019-03-20",
+    "end": "2023-12-28",
+    "n_rows": 1204,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "NEE",
+    "sector": "utilities",
+    "present": true,
+    "start": "1973-02-21",
+    "end": "2023-12-28",
+    "n_rows": 12826,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "DUK",
+    "sector": "utilities",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11040,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "SO",
+    "sector": "utilities",
+    "present": true,
+    "start": "2015-01-02",
+    "end": "2020-07-02",
+    "n_rows": 1385,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "D",
+    "sector": "utilities",
+    "present": true,
+    "start": "1980-03-17",
+    "end": "2023-12-28",
+    "n_rows": 11040,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "AEP",
+    "sector": "utilities",
+    "present": true,
+    "start": "1970-01-02",
+    "end": "2023-12-28",
+    "n_rows": 13618,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "AMT",
+    "sector": "real_estate",
+    "present": true,
+    "start": "1998-02-27",
+    "end": "2023-12-28",
+    "n_rows": 6502,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "PLD",
+    "sector": "real_estate",
+    "present": true,
+    "start": "1997-11-21",
+    "end": "2023-12-28",
+    "n_rows": 6567,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "CCI",
+    "sector": "real_estate",
+    "present": true,
+    "start": "1998-08-18",
+    "end": "2023-12-28",
+    "n_rows": 6383,
+    "full_2015_2023": true
+  },
+  {
+    "ticker": "SPG",
+    "sector": "real_estate",
+    "present": false,
+    "start": null,
+    "end": null,
+    "n_rows": 0,
+    "full_2015_2023": false
+  },
+  {
+    "ticker": "EQIX",
+    "sector": "real_estate",
+    "present": true,
+    "start": "2000-08-11",
+    "end": "2020-04-01",
+    "n_rows": 4940,
+    "full_2015_2023": false
+  }
+]

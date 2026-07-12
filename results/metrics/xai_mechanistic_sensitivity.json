@@ -1,0 +1,143 @@
+{
+  "protocol": "3 seeds (42/43/44) x 2 folds (2022/2023) = 6 independent Transformer trainings, each re-run through the identical SAE (D_hid=4*D_model, L1=1e-3, 400 epochs) + exhaustive head/layer ablation sweep as run(). seed=42/fold=2023 reproduces run()'s exact setting.",
+  "runs": [
+    {
+      "seed": 42,
+      "test_year": 2023,
+      "n_interpretable_latents": 254,
+      "hidden_dim": 256,
+      "n_dead": 0,
+      "mean_best_abs_corr": 0.494861765698135,
+      "std_best_abs_corr": 0.09644218036216955,
+      "pct_interpretable": 99.21875,
+      "n_notable_ablation_components": 1,
+      "notable_components": [
+        "layer1_full"
+      ],
+      "top_component": "layer1_full",
+      "max_ablation_z_score": 2.7550195378405333,
+      "mean_ablation_effect": 0.06154927983880043,
+      "std_ablation_effect": 0.057453703635216395
+    },
+    {
+      "seed": 43,
+      "test_year": 2023,
+      "n_interpretable_latents": 253,
+      "hidden_dim": 256,
+      "n_dead": 0,
+      "mean_best_abs_corr": 0.4853458864255422,
+      "std_best_abs_corr": 0.09468515105646896,
+      "pct_interpretable": 98.828125,
+      "n_notable_ablation_components": 1,
+      "notable_components": [
+        "layer1_full"
+      ],
+      "top_component": "layer1_full",
+      "max_ablation_z_score": 2.594431619513064,
+      "mean_ablation_effect": 0.0678098475560546,
+      "std_ablation_effect": 0.0471136659341341
+    },
+    {
+      "seed": 44,
+      "test_year": 2023,
+      "n_interpretable_latents": 253,
+      "hidden_dim": 256,
+      "n_dead": 0,
+      "mean_best_abs_corr": 0.48563774278678823,
+      "std_best_abs_corr": 0.09332305177664854,
+      "pct_interpretable": 98.828125,
+      "n_notable_ablation_components": 1,
+      "notable_components": [
+        "layer1_full"
+      ],
+      "top_component": "layer1_full",
+      "max_ablation_z_score": 2.813594526356479,
+      "mean_ablation_effect": 0.14226474203169345,
+      "std_ablation_effect": 0.1961244845746316
+    },
+    {
+      "seed": 42,
+      "test_year": 2022,
+      "n_interpretable_latents": 256,
+      "hidden_dim": 256,
+      "n_dead": 0,
+      "mean_best_abs_corr": 0.5216164474150871,
+      "std_best_abs_corr": 0.09388709941558225,
+      "pct_interpretable": 100.0,
+      "n_notable_ablation_components": 1,
+      "notable_components": [
+        "layer1_full"
+      ],
+      "top_component": "layer1_full",
+      "max_ablation_z_score": 2.6416020348682285,
+      "mean_ablation_effect": 0.09294282346963882,
+      "std_ablation_effect": 0.08017157398936722
+    },
+    {
+      "seed": 43,
+      "test_year": 2022,
+      "n_interpretable_latents": 254,
+      "hidden_dim": 256,
+      "n_dead": 0,
+      "mean_best_abs_corr": 0.50325805602711,
+      "std_best_abs_corr": 0.09657559042933334,
+      "pct_interpretable": 99.21875,
+      "n_notable_ablation_components": 1,
+      "notable_components": [
+        "layer1_full"
+      ],
+      "top_component": "layer1_full",
+      "max_ablation_z_score": 2.5946996107233877,
+      "mean_ablation_effect": 0.0951114423573017,
+      "std_ablation_effect": 0.07395014996507988
+    },
+    {
+      "seed": 44,
+      "test_year": 2022,
+      "n_interpretable_latents": 253,
+      "hidden_dim": 256,
+      "n_dead": 0,
+      "mean_best_abs_corr": 0.4932743932457416,
+      "std_best_abs_corr": 0.0970792642919011,
+      "pct_interpretable": 98.828125,
+      "n_notable_ablation_components": 1,
+      "notable_components": [
+        "layer0_full"
+      ],
+      "top_component": "layer0_full",
+      "max_ablation_z_score": 2.0525899803456618,
+      "mean_ablation_effect": 0.16535030640661716,
+      "std_ablation_effect": 0.1767006467216101
+    }
+  ],
+  "pct_interpretable_latents_across_runs": {
+    "mean": 99.15364583333333,
+    "std": 0.4168700675412011,
+    "min": 98.828125,
+    "max": 100.0
+  },
+  "n_notable_ablation_components_across_runs": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "max_ablation_z_across_runs": {
+    "mean": 2.5753228849412255,
+    "max": 2.813594526356479
+  },
+  "top_component_per_run": [
+    "layer1_full",
+    "layer1_full",
+    "layer1_full",
+    "layer1_full",
+    "layer1_full",
+    "layer0_full"
+  ],
+  "n_distinct_top_components": 2,
+  "stable_null_finding": false,
+  "consistent_top_component_across_runs": false,
+  "verdict": "NOT a stable null: 6/6 runs found exactly one component crossing z>2.0 (max z range 2.05-2.81), but the top component differs across runs (2/6 distinct: ['layer0_full', 'layer1_full']). This pattern -- some component always clears an arbitrary z=2 cutoff, but not the SAME one -- is the signature of a multiple-comparisons artifact (the max of ~10 noisy effect sizes crosses most fixed thresholds most of the time by construction), not a reproducible circuit. The honest revised finding is NEITHER 'no structure' (run()'s original claim, too strong) NOR 'a real notable component exists' (too strong the other way): no component is consistently, reproducibly notable across seeds/folds, and the original single-run null should have been reported with this caveat rather than as a clean zero."
+}

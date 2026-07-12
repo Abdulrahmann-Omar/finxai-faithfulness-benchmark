@@ -1,0 +1,22 @@
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Model & Family & Acc & F1 & MCC \\
+\midrule
+Transformer & attention & 0.504 & 0.590 & -0.003 \\
+CatBoost & classical/ML & 0.510 & 0.637 & 0.003 \\
+DecisionTree & classical/ML & 0.501 & 0.493 & 0.003 \\
+EBM & classical/ML & 0.506 & 0.583 & 0.005 \\
+KNN & classical/ML & 0.502 & 0.554 & 0.001 \\
+LightGBM & classical/ML & 0.508$\pm$0.004 & 0.613$\pm$0.013 & 0.003$\pm$0.007 \\
+Logistic & classical/ML & 0.512$\pm$0.004 & 0.638$\pm$0.015 & 0.011$\pm$0.008 \\
+MLP & classical/ML & 0.508 & 0.608 & 0.005 \\
+RandomForest & classical/ML & 0.501 & 0.527 & 0.001 \\
+SVC & classical/ML & 0.508 & 0.597 & 0.009 \\
+XGBoost & classical/ML & 0.509$\pm$0.005 & 0.621$\pm$0.013 & 0.004$\pm$0.008 \\
+CNN1d & conv & 0.507 & 0.590 & 0.002 \\
+TCN & conv & 0.508 & 0.546 & 0.004 \\
+GNN & graph & 0.502 & 0.598 & -0.006 \\
+GRU & recurrent & 0.500 & 0.547 & -0.003 \\
+LSTM & recurrent & 0.505 & 0.572 & 0.002 \\
+\bottomrule
+\end{tabular}

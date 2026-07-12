@@ -1,0 +1,28 @@
+# Pinned to the versions used in the Modal compute image (see rebuild/modal/_common.py).
+# Python 3.11 recommended.
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.2
+xgboost==2.1.1
+lightgbm==4.5.0
+shap==0.46.0
+lime==0.2.0.1
+PyALE==1.2.0
+captum==0.7.0
+torch==2.4.1
+transformers==4.44.2
+pysentiment2==0.1.1
+interpret==0.6.1
+yfinance==0.2.44
+catboost==1.2.7
+torch_geometric==2.6.1
+pandas_market_calendars==4.4.1
+pyspark==3.5.1
+huggingface_hub==0.25.1
+hf_transfer==0.1.8
+matplotlib==3.9.2
+seaborn==0.13.2
+pyarrow==17.0.0
+tqdm==4.66.5
+# statsmodels is intentionally omitted: HAC (Newey-West) is implemented directly
+# to avoid a scipy>=1.15 incompatibility.

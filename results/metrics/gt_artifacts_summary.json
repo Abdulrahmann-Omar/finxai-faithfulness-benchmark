@@ -1,0 +1,86 @@
+{
+  "features": [
+    "ret_lag1",
+    "ret_lag2",
+    "ret_lag3",
+    "ret_lag5",
+    "vol_roll5",
+    "vol_roll20",
+    "rsi14",
+    "ma_gap20",
+    "hl_range",
+    "co_ret",
+    "logvol",
+    "vol_z20",
+    "fb_score",
+    "fb_pos",
+    "fb_neg",
+    "lm_score",
+    "news_count",
+    "has_news",
+    "fb_roll3",
+    "fb_roll5",
+    "news_roll5",
+    "fb_chg",
+    "gt_noise",
+    "gt_signal",
+    "gt_signal_nl",
+    "gt_signal_weak",
+    "gt_redundant_copy",
+    "gt_redundant_partial"
+  ],
+  "n_features": 28,
+  "test_year": 2023,
+  "results": {
+    "gru": {
+      "model": "gru",
+      "task": "direction",
+      "fold": 2023,
+      "features": "price+sentiment+gt",
+      "n_features": 28,
+      "Acc": 0.557937181663837,
+      "F1": 0.5727179487179487,
+      "MCC": 0.11487908191754272
+    },
+    "lstm": {
+      "model": "lstm",
+      "task": "direction",
+      "fold": 2023,
+      "features": "price+sentiment+gt",
+      "n_features": 28,
+      "Acc": 0.5519949066213922,
+      "F1": 0.5616390946217208,
+      "MCC": 0.1040049235778651
+    },
+    "cnn1d": {
+      "model": "cnn1d",
+      "task": "direction",
+      "fold": 2023,
+      "features": "price+sentiment+gt",
+      "n_features": 28,
+      "Acc": 0.5565930956423316,
+      "F1": 0.5883898082479643,
+      "MCC": 0.10923782347875785
+    },
+    "tcn": {
+      "model": "tcn",
+      "task": "direction",
+      "fold": 2023,
+      "features": "price+sentiment+gt",
+      "n_features": 28,
+      "Acc": 0.5194538766270514,
+      "F1": 0.5330308654705438,
+      "MCC": 0.038272607973153384
+    },
+    "transformer": {
+      "model": "transformer",
+      "task": "direction",
+      "fold": 2023,
+      "features": "price+sentiment+gt",
+      "n_features": 28,
+      "Acc": 0.5600594227504244,
+      "F1": 0.575465902109359,
+      "MCC": 0.11899716391099224
+    }
+  }
+}
