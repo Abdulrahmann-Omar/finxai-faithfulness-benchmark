@@ -577,11 +577,21 @@ if "nl_faithful" not in catalogue.columns:
     catalogue["nl_faithful"] = "--"
 catalogue["nl_faithful"] = catalogue["nl_faithful"].fillna("--")
 catalogue.to_csv(os.path.join(TAB, "xai_method_catalogue.csv"), index=False)
-with open(os.path.join(TAB, "tab_method_catalogue.tex"), "w") as f:
-    f.write("\\begin{tabular}{@{}llllll@{}}\n\\toprule\n")
-    f.write("Method & Family & Applicable model(s) & Faithful (linear) & Faithful (nonlinear) & Note \\\\\n\\midrule\n")
+# B5 (R4 revision): the dense 6-column catalogue table was split into two --
+# an applicability matrix (method/family/applicable models) and a results
+# table (faithfulness verdicts + note) -- per reviewer feedback that mixing
+# both axes in one table was too dense to read.
+with open(os.path.join(TAB, "tab_method_applicability.tex"), "w") as f:
+    f.write("\\begin{tabular}{@{}lll@{}}\n\\toprule\n")
+    f.write("Method & Family & Applicable model(s) \\\\\n\\midrule\n")
     for _, r in catalogue.iterrows():
-        f.write(f"{tex_escape(r['method'])} & {tex_escape(r['family'])} & {tex_escape(r['models'])} & "
+        f.write(f"{tex_escape(r['method'])} & {tex_escape(r['family'])} & {tex_escape(r['models'])} \\\\\n")
+    f.write("\\bottomrule\n\\end{tabular}\n")
+with open(os.path.join(TAB, "tab_method_catalogue.tex"), "w") as f:
+    f.write("\\begin{tabular}{@{}llll@{}}\n\\toprule\n")
+    f.write("Method & Faithful (linear) & Faithful (nonlinear) & Note \\\\\n\\midrule\n")
+    for _, r in catalogue.iterrows():
+        f.write(f"{tex_escape(r['method'])} & "
                 f"{r['ranks_signal_above_noise']} & {r['nl_faithful']} & {r['redundant_copy_credit_share']} \\\\\n")
     f.write("\\bottomrule\n\\end{tabular}\n")
 macros["nXaiMethodsCatalogued"] = str(len(catalogue))
@@ -605,6 +615,70 @@ n_faithful = int(catalogue.loc[scoreable, "ranks_signal_above_noise"].map(_is_fu
 macros["nXaiFaithfulOfScoreable"] = f"{n_faithful}/{n_scoreable}"
 print(f"XAI method catalogue: {len(catalogue)} methods; "
       f"{n_faithful}/{n_scoreable} scoreable methods rank gt_signal above gt_noise")
+
+# ---------------- R4 revision: A1 TCAV null, A2 SAE/ablation null, ----------------
+# ---------------- A3 year-robustness, A4 jackknife -------------------------------
+def _sci(x):
+    """Format a small p-value as LaTeX scientific notation, e.g. 5.5e-05 ->
+    '5.5\\times10^{-5}'. Used inline in math mode ($p=\\recurPBinomOne$)."""
+    if x == 0:
+        return "0"
+    exp = math.floor(math.log10(abs(x)))
+    mant = x / (10 ** exp)
+    return f"{mant:.1f}\\times10^{{{exp}}}"
+
+tcav_sig = jload_opt("xai_tcav_significance.json")
+if tcav_sig:
+    ps = [c["p_empirical"] for c in tcav_sig["concepts"]]
+    means = sorted(c["random_mean"] for c in tcav_sig["concepts"])
+    macros["tcavPEmp"] = fmt(max(ps), 2)
+    macros["tcavNullMeanRange"] = f"{fmt(means[0], 2)}--{fmt(means[-1], 2)}"
+    print(f"A1 TCAV null: p_empirical={ps}, random means={means}")
+
+sae_null = jload_opt("xai_sae_null.json")
+if sae_null:
+    macros["saeNullMean"] = fmt(sae_null["null_interpretable_mean"], 2)
+    macros["saeNullPHi"] = fmt(sae_null["null_interpretable_p95"], 2)
+    macros["saeNullMax"] = str(int(sae_null["null_interpretable_max"]))
+    print(f"A2 SAE null: observed={sae_null['observed_interpretable']}/{sae_null['n_latents']}, "
+          f"null_mean={sae_null['null_interpretable_mean']}, null_p95={sae_null['null_interpretable_p95']}")
+
+abl_null = jload_opt("xai_ablation_null.json")
+if abl_null:
+    macros["ablNullMean"] = fmt(abl_null["null_notable_count_mean"], 2)
+    macros["ablNullPHi"] = fmt(abl_null["null_notable_count_p95"], 2)
+    rec = abl_null["recurrence"]
+    macros["recurC"] = str(rec["C"])
+    macros["recurK"] = str(rec["k"])
+    macros["recurR"] = str(rec["R"])
+    macros["recurPBinomOne"] = _sci(rec["p_binom_one"])
+    macros["recurPUnion"] = _sci(rec["p_union"])
+    print(f"A2 ablation null: null_notable_mean={abl_null['null_notable_count_mean']}, "
+          f"recurrence k={rec['k']}/{rec['R']} of C={rec['C']}, "
+          f"p_binom_one={rec['p_binom_one']}, p_union={rec['p_union']}")
+
+by_year = jload_opt("faithfulness_by_year.json")
+if by_year:
+    sp_ts = by_year["spread"]["treeshap"]
+    macros["yearMarginMinTreeshap"] = fmt(sp_ts["margin_min"], 3)
+    macros["yearMarginMaxTreeshap"] = fmt(sp_ts["margin_max"], 3)
+    macros["yearCopyCreditMinTreeshap"] = fmt(sp_ts["copy_credit_min"], 3)
+    macros["yearCopyCreditMaxTreeshap"] = fmt(sp_ts["copy_credit_max"], 3)
+    sp_perm = by_year["spread"]["permutation"]
+    macros["yearPctSymMinPermutation"] = fmt(sp_perm["pct_symbols_correct_min"] * 100, 1)
+    macros["yearPctSymMaxPermutation"] = fmt(sp_perm["pct_symbols_correct_max"] * 100, 1)
+    print(f"A3 year robustness: treeshap margin range [{sp_ts['margin_min']:.3f},{sp_ts['margin_max']:.3f}], "
+          f"permutation pct-correct range [{sp_perm['pct_symbols_correct_min']:.3f},"
+          f"{sp_perm['pct_symbols_correct_max']:.3f}]")
+
+jack = jload_opt("faithfulness_jackknife.json")
+if jack:
+    jts = jack["methods"]["treeshap"]
+    margin_delta_pct = abs(jts["jackknife_mean_margin"] - jts["full_margin"]) / jts["full_margin"] * 100
+    mdes_delta_pct = (jts["jackknife_mdes_mean"] - jts["full_mdes"]) / jts["full_mdes"] * 100
+    macros["jackMarginDeltaTreeshap"] = fmt(margin_delta_pct, 2)
+    macros["jackMdesDeltaTreeshap"] = fmt(mdes_delta_pct, 1)
+    print(f"A4 jackknife: treeshap margin delta {margin_delta_pct:.3f}%, MDES delta {mdes_delta_pct:.1f}%")
 
 # ---------------- rewrite numbers.tex with the full macro set ----------------
 with open(os.path.join(PAP, "numbers.tex"), "w") as f:

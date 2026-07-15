@@ -1,0 +1,29 @@
+\begin{tabular}{@{}lll@{}}
+\toprule
+Method & Family & Applicable model(s) \\
+\midrule
+treeshap & attribution & 5 tree models \\
+kernelshap & attribution & Logistic/RF/XGBoost/EBM/SVM \\
+lime & attribution & Logistic/RF/XGBoost/EBM/SVM \\
+permutation & attribution & Logistic/RF/XGBoost/EBM/SVM \\
+integrated\_gradients & gradient & GRU/LSTM/CNN1d/TCN/Transformer \\
+rise & attribution (adapted) & XGBoost \\
+ebm\_intrinsic & intrinsic & EBM \\
+gam\_aggregation & global aggregation & XGBoost (TreeSHAP-derived) \\
+muse\_brcg & rule surrogate & XGBoost \\
+lrp & gradient/propagation & MLP (GRU: N/A, no supported layers) \\
+guided\_backprop & gradient/propagation & MLP \\
+deconvnet & gradient/propagation & MLP \\
+gnnexplainer & graph & GNN \\
+anchors & rule/example & XGBoost \\
+counterfactual & rule/example & XGBoost \\
+cem & rule/example & XGBoost \\
+tcav (high\_attention) & concept & GRU \\
+tcav (positive\_sentiment) & concept & GRU \\
+gradcam & CAM (vision-native) & CNN1d only \\
+gradcam\_pp & CAM (vision-native) & CNN1d only \\
+score\_cam & CAM (vision-native) & CNN1d only \\
+sae & mechanistic & Transformer \\
+acdc (ablation) & mechanistic & Transformer \\
+\bottomrule
+\end{tabular}

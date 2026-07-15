@@ -1,0 +1,44 @@
+{
+  "correlation_threshold": 0.3,
+  "observed_interpretable": 253,
+  "n_latents": 256,
+  "n_shuffles": 20,
+  "null_interpretable_mean": 0.0,
+  "null_interpretable_p95": 0.0,
+  "null_interpretable_max": 0,
+  "excess_over_chance_at_0p3": 253.0,
+  "threshold_sweep": [
+    {
+      "tau": 0.2,
+      "observed": 256,
+      "null_mean": 0.05,
+      "null_p95": 0.05000000000000071
+    },
+    {
+      "tau": 0.3,
+      "observed": 253,
+      "null_mean": 0.0,
+      "null_p95": 0.0
+    },
+    {
+      "tau": 0.4,
+      "observed": 218,
+      "null_mean": 0.0,
+      "null_p95": 0.0
+    },
+    {
+      "tau": 0.5,
+      "observed": 112,
+      "null_mean": 0.0,
+      "null_p95": 0.0
+    },
+    {
+      "tau": 0.6,
+      "observed": 40,
+      "null_mean": 0.0,
+      "null_p95": 0.0
+    }
+  ],
+  "smallest_tau_observed_exceeds_null_p95": 0.2,
+  "verdict": "The multiplicity concern is NOT confirmed: at tau=0.2 the observed interpretable-latent count already clearly exceeds the feature-shuffle null's 95th percentile, and at tau=0.3 the feature-shuffle null is essentially zero (null_mean=0.00, null_p95=0.00, null_max=0 out of 256) against an observed count of 253. Destroying the real feature-latent relationship (independently permuting each of the 22 feature columns) collapses the 'interpretable' count to essentially 0, so the max-over-22-features selection is NOT manufacturing the 253/256 figure by chance -- almost all of it (253/253 = 100.0%) is excess over the null and reflects a real, reproducible correlation between SAE latents and named input features, not a multiple-comparisons artifact. The paper can keep reporting 253/256 but SHOULD add the null baseline (null_mean=0.00 at tau=0.3, essentially 0/256 under a feature-shuffle null) as the guard that was previously missing, rather than reporting 253/256 unguarded."
+}

@@ -64,6 +64,9 @@ NOTEBOOK_NAMES = [
     "30_faithfulness_benchmark.ipynb", "31_agreement_and_modelclass.ipynb",
     "32_mechanistic_deep_dive.ipynb", "33_actionability_recourse.ipynb",
     "34_paper_figures.ipynb",
+    # R4 revision: reviewer-requested null baselines and robustness checks.
+    "26_tcav_null.ipynb", "27_mechanistic_null.ipynb",
+    "28_faithfulness_robustness.ipynb",
 ]
 
 

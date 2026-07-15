@@ -1,0 +1,47 @@
+{
+  "n_drop": 10,
+  "n_iter": 200,
+  "methods": {
+    "treeshap": {
+      "full_margin": 0.14559603051135414,
+      "jackknife_mean_margin": 0.14555819704494577,
+      "jackknife_ci": [
+        0.14332819703094501,
+        0.1477898026915624
+      ],
+      "full_mdes": 0.007059118017795343,
+      "jackknife_mdes_mean": 0.007722060150568695
+    },
+    "kernelshap": {
+      "full_margin": 0.03541510295585044,
+      "jackknife_mean_margin": 0.03544261085016751,
+      "jackknife_ci": [
+        0.0348174199166752,
+        0.036014648383705654
+      ],
+      "full_mdes": 0.0019210810029206735,
+      "jackknife_mdes_mean": 0.002131755462464675
+    },
+    "lime": {
+      "full_margin": 0.05609440894893494,
+      "jackknife_mean_margin": 0.05610055670804032,
+      "jackknife_ci": [
+        0.05467648875441546,
+        0.057249080054499094
+      ],
+      "full_mdes": 0.0042032912228131885,
+      "jackknife_mdes_mean": 0.004648019091125546
+    },
+    "permutation": {
+      "full_margin": 0.0213638936049802,
+      "jackknife_mean_margin": 0.021325969457789987,
+      "jackknife_ci": [
+        0.018144517844886764,
+        0.02368780027453673
+      ],
+      "full_mdes": 0.008457525020412924,
+      "jackknife_mdes_mean": 0.009277067447027448
+    }
+  },
+  "verdict": "Dropping 10 of 57 symbols at random (J=200 resamples, 47 remaining) shifts the mean signal-noise margin by at most 0.2% relative to the full-sample value across the four methods, and the jackknife mean MDES tracks the full-sample MDES closely -- the 95% CI computed from 57 correlated stocks is not fragile to which 47 of them are used."
+}

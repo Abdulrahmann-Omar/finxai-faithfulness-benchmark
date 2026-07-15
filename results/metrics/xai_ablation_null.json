@@ -1,0 +1,16 @@
+{
+  "notable_z_threshold": 2.0,
+  "n_shuffles": 20,
+  "null_notable_count_mean": 1.0,
+  "null_notable_count_p95": 1.0,
+  "observed_n_notable_reproduced": 0,
+  "recurrence": {
+    "R": 6,
+    "C": 10,
+    "k": 5,
+    "modal_component": "layer1_full",
+    "p_binom_one": 5.500000000000001e-05,
+    "p_union": 0.0005500000000000001
+  },
+  "verdict": "The recurrence of 'layer1_full' as the top ablation component in 5/6 independent seed/fold runs beats chance: under the null that each run's top component is uniform over the C=10 candidates, P(a specific component recurs >= 5/6 times) = 5.50e-05, and even after a union-bound correction over all 10 candidate components (P(ANY component recurs that often) <= 5.50e-04) this remains far below 0.05. The z>2.0 threshold itself is not special on its own -- the shuffle null shows 1.00 components cross z>2.0 by chance on average (null_p95=1.00) -- but the SAME component winning in 5/6 runs is not a fluke of that arbitrary threshold."
+}

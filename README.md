@@ -33,6 +33,9 @@ modal/                 # compute pipeline (runs on Modal.com)
   s5_xai.py            # TreeSHAP / KernelSHAP / LIME / permutation / block-perm / ALE / Integrated Gradients
   s6_eda.py            # stationarity, autocorrelation, fat tails, cross-sectional correlation
   s7_faithfulness.py   # ground-truth faithfulness benchmark, stock-clustered CI + effective N
+  s5g_tcav_null.py             # R4: TCAV vs. 100 random-concept CAVs (significance test)
+  s5h_mechanistic_null.py      # R4: SAE + ablation feature-shuffle null baselines
+  s7b_faithfulness_robustness.py  # R4: year-robustness (2021/2022/2023) + leave-10-stocks jackknife
 make_tables.py         # metrics -> LaTeX tables + numbers.tex
 notebooks/             # runnable analysis notebooks (from the built panel)
 paper/                 # LaTeX source (main.tex, refs.bib, generated tables/figures)

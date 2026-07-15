@@ -25,6 +25,12 @@ wait
 modal run s3_experiments.py::stats
 modal run s5_xai.py::run
 
+echo "== 3b. R4 revision: null baselines and robustness checks =="
+modal run s5g_tcav_null.py::run &
+modal run s5h_mechanistic_null.py::run &
+modal run s7b_faithfulness_robustness.py::run &
+wait
+
 echo "== 4. pull results and build the paper =="
 cd "$ROOT"
 modal volume get finsent-data results/figures  ./results/  || true

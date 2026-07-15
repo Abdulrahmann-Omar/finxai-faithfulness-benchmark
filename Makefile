@@ -66,6 +66,11 @@ experiments: check  ## Run all experiments (independent stages concurrently) + s
 	cd modal && $(MODAL) s5_xai.py::agreement_matrix
 	cd modal && $(MODAL) s7_faithfulness.py::run
 	cd modal && $(MODAL) s5e_mechanistic.py::run_seed_fold_sensitivity
+	cd modal && \
+	  $(MODAL) s5g_tcav_null.py::run & \
+	  $(MODAL) s5h_mechanistic_null.py::run & \
+	  $(MODAL) s7b_faithfulness_robustness.py::run & \
+	  wait
 
 results:  ## Pull metrics/figures/panel from the Modal Volume and regenerate tables
 	modal volume get $(VOL) results/figures ./results/ || true

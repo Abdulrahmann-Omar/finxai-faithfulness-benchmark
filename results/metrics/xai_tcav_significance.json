@@ -1,0 +1,35 @@
+{
+  "method": "TCAV random-concept null (Kim et al. 2018)",
+  "n_random_cavs": 100,
+  "concepts": [
+    {
+      "concept": "high_attention",
+      "n_pos_examples": 300,
+      "n_neg_examples": 300,
+      "cav_train_accuracy": 0.875,
+      "n_tcav_test_examples": 400,
+      "tcav_score": 1.0,
+      "random_mean": 0.53,
+      "random_std": 0.5016135580465918,
+      "z": 0.9369762688040114,
+      "p_empirical": 1.0,
+      "p_normal_approx": 0.34877076511629934,
+      "significant": false
+    },
+    {
+      "concept": "positive_sentiment",
+      "n_pos_examples": 300,
+      "n_neg_examples": 300,
+      "cav_train_accuracy": 0.78,
+      "n_tcav_test_examples": 400,
+      "tcav_score": 1.0,
+      "random_mean": 0.58,
+      "random_std": 0.49604496374885826,
+      "z": 0.8466974381230511,
+      "p_empirical": 1.0,
+      "p_normal_approx": 0.3971637870523175,
+      "significant": false
+    }
+  ],
+  "verdict": "None of the 2 real concepts beat the 100-random-CAV null at p<0.05; the raw TCAV scores are not statistically distinguishable from a random linear direction in the GRU's hidden state, so TCAV significance is NOT established here and the paper should carry this as a caveat rather than a claim."
+}

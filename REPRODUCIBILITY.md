@@ -75,6 +75,21 @@ items below marked `[ ]` are `full`-profile scope.
       stock-clustered (5000/1000-draw bootstrap per profile) with effective N
       (`N/(1+(N-1)*rho_bar)`) and an approximate MDES reported alongside every
       claim. `results/metrics/faithfulness_benchmark.json`.
+- [x] **R4 revision: null baselines and robustness checks**, added in response
+      to peer review:
+      - TCAV vs. 100 random-concept CAVs, empirical significance test
+        (`modal/s5g_tcav_null.py` -> `xai_tcav_significance.json`).
+      - SAE interpretable-latent count and ablation notable-component count vs.
+        a 20-shuffle feature-permutation null, plus the exact recurrence
+        probability for the `layer1_full` ablation finding
+        (`modal/s5h_mechanistic_null.py` -> `xai_sae_null.json`,
+        `xai_ablation_null.json`).
+      - Faithfulness benchmark re-scored with 2021/2022 (not just 2023) as the
+        held-out year, and a leave-10-stocks-out jackknife on the 2023 result
+        (`modal/s7b_faithfulness_robustness.py` -> `faithfulness_by_year.json`,
+        `faithfulness_jackknife.json`).
+      All three write NEW metric files and never modify the outputs of the
+      stages they check.
 
 ## Manuscript & artifact
 - [x] Anonymized for double-blind review.
