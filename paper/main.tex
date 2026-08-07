@@ -1107,12 +1107,19 @@ choice is representative or an artifact of one year, and whether a 95\% CI
 from $\faithUniverseN$ correlated stocks is fragile to which stocks it happens
 to include. We check both directly. \emph{Year robustness:} re-running the identical per-symbol
 cluster-bootstrap protocol with 2021 and 2022, in turn, as the held-out
-scoring fold (training on the complement) reproduces the 2023 numbers within
-$10\%$ in every case (largest deviation $4.2\%$, TreeSHAP's exact-copy credit
-share), a genuine sanity check, not just a claim. TreeSHAP's signal-noise
-margin ranges only $[\yearMarginMinTreeshap,\yearMarginMaxTreeshap]$ across
-the three years, and its credit share on the exact duplicate ranges
-$[\yearCopyCreditMinTreeshap,\yearCopyCreditMaxTreeshap]$; permutation
+scoring fold (training on the complement) reproduces every qualitative
+conclusion: the method ranking, each pass/fail verdict, and the
+credit-splitting pattern are unchanged in all three years. Quantitatively,
+across the three reliable methods (TreeSHAP, KernelSHAP, LIME), signal-noise
+margins deviate from their 2023 values by at most $12.5\%$ in relative terms
+(TreeSHAP, 2022; at most $0.018$ in absolute margin units), and exact-copy
+credit shares by at most $22.1\%$ (LIME, 2021; at most $0.076$ in absolute
+share units). Concretely, TreeSHAP's signal-noise
+margin ranges $[\yearMarginMinTreeshap,\yearMarginMaxTreeshap]$ across
+the three years (a $12.5\%$ relative swing from the 2023 value of
+$\yearMarginMinTreeshap$), and its credit share on the exact duplicate ranges
+$[\yearCopyCreditMinTreeshap,\yearCopyCreditMaxTreeshap]$ (a $17.1\%$
+relative swing from the 2023 value of $\yearCopyCreditMinTreeshap$); permutation
 importance is the least reliable method in \emph{every} year, never reaching
 100\% of stocks ranked correctly (range
 $[\yearPctSymMinPermutation,\yearPctSymMaxPermutation]\%$ across
@@ -1125,7 +1132,12 @@ $n{=}19/57$), because permutation importance can itself go negative
 (shuffling a feature can spuriously improve held-out accuracy), which both
 flips the sign of the ratio $a/(a+b)$ for some stocks and shrinks the number
 of stocks with a well-defined credit share to well under
-$\faithUniverseN$ in every year. We read this as a further, independent
+$\faithUniverseN$ in every year. With only 19--27 stocks contributing, this
+particular subresult carries even less statistical power than the headline
+$N_{\text{eff}}=\faithEffN$ caveat (Section~\ref{sec:faithfulness}) already
+assigns to the full sample, so it should not be compared to the
+$n{=}\faithUniverseN$ credit shares as if the two were equally well
+powered. We read this as a further, independent
 symptom of permutation importance's unreliability under this data's
 collinearity (Section~\ref{sec:collinearity}), not as evidence against the
 SHAP/LIME credit-share story, which stays stable across years.
