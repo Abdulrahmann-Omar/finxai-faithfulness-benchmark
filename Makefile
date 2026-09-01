@@ -80,8 +80,8 @@ results:  ## Pull metrics/figures/panel from the Modal Volume and regenerate tab
 	python make_tables.py
 	cp results/figures/*.png paper/figures/
 
-paper: results  ## Compile the anonymized PDF
-	cd paper && tectonic main.tex && echo "PDF -> paper/main.pdf"
+paper: results  ## Compile the PDF into docs/
+	cd paper && tectonic main.tex && mkdir -p ../docs && mv main.pdf ../docs/main.pdf && echo "PDF -> docs/main.pdf"
 
 notebooks: results  ## Execute the notebook suite on Modal (not locally) with outputs embedded
 	cd modal && $(MODAL) s8_notebooks.py::run_all
@@ -89,7 +89,7 @@ notebooks: results  ## Execute the notebook suite on Modal (not locally) with ou
 all: experiments results paper notebooks  ## experiments -> results -> paper -> notebooks
 
 reproduce: data build all  ## FULL reproduction from scratch (one command)
-	@echo "Done. Paper at paper/main.pdf, notebooks executed in notebooks/"
+	@echo "Done. Paper at docs/main.pdf, notebooks executed in notebooks/"
 
 clean:  ## Remove local build artifacts (keeps Modal Volume + source)
 	rm -f paper/*.aux paper/*.log paper/*.out paper/*.bbl paper/*.blg

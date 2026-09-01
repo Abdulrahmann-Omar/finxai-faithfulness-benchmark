@@ -6,7 +6,7 @@ A fully reproducible benchmark that measures whether XAI explanations of
 financial forecasting models can be *trusted*, by injecting features with
 known ground-truth importance into a real, leakage-free 57-stock panel and
 scoring 23 XAI methods across 16 ML/DL architectures against that ground
-truth. The compiled paper is at [`paper/main.pdf`](paper/main.pdf).
+truth. The compiled paper is at [`docs/main.pdf`](docs/main.pdf).
 
 > **TL;DR of the findings.** Of 23 catalogued XAI methods (classical
 > attribution, rule/example-based, concept-based and intrinsic,

@@ -2,7 +2,7 @@
 
 Status: `profile: full` (16 ML/DL models including a GNN, 23 catalogued XAI
 methods, 57-stock universe) is implemented end-to-end and is what the paper
-(`paper/main.pdf`) reports. `profile: reviewer` remains available in
+(`docs/main.pdf`) reports. `profile: reviewer` remains available in
 `config.xai.yaml` as a fast small-scale run. Items below marked `[ ]` were
 written when `full` was still in progress and are now covered by the full
 pipeline.
