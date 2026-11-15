@@ -1,7 +1,8 @@
 # FinXAI benchmark configuration (single source of truth for the XAI paper).
 # Switch `profile` to control cost:
 #   reviewer -> small + fast, for the first green end-to-end run on Modal
-#   full     -> the paper (15 ML/DL models + GNN, ~26 XAI methods, 60 stocks)
+#   full     -> the paper (15 ML/DL models + GNN, 57 stocks; the xai_methods keys
+#               below map to the 22 methods of the paper, see README "Terminology")
 # _common.py should read this file and select the active profile block.
 
 profile: full
@@ -23,7 +24,8 @@ ground_truth:
   noise_feature: true            # true importance = 0 (a faithful method must NOT rank it high)
   signal_feature: true           # planted feature with KNOWN predictive value (controlled, LINEAR leak)
   signal_strength: 0.15          # target-correlation of the planted linear feature
-  nonlinear_signal_feature: true # planted feature via a sign x magnitude INTERACTION (not additive-linear)
+  nonlinear_signal_feature: true # sign-coded signal: sign of the next-day return x an independent magnitude.
+                                 # A nonlinear effect of ONE feature, not an interaction between inputs.
   nonlinear_signal_strength: 0.15  # strength parameter (realized correlation measured empirically, see feature_manifest.json)
   redundant_copy: true           # duplicate of a real feature (tests credit-splitting under collinearity)
   # R3 revision (M5): broaden the ground-truth grid per reviewer request -- a

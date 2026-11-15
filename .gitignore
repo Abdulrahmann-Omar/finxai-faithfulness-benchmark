@@ -17,3 +17,7 @@ paper/*.out
 paper/*.bbl
 paper/*.blg
 .DS_Store
+
+# local build tools (LaTeX compiler, Python env for make_tables.py)
+.venv/
+.tools/
