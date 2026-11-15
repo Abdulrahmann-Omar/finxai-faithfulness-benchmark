@@ -1,93 +1,26 @@
-\documentclass[journal]{IEEEtran}
+\documentclass[conference]{IEEEtran}
 \IEEEoverridecommandlockouts
+% T1 encoding: with the XeTeX-based tectonic engine the Times text font that
+% IEEEtran selects is only available in a legacy encoding.
+\usepackage[T1]{fontenc}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
-\usepackage{algorithmic}
 \usepackage{graphicx}
-\usepackage{subcaption}
 \usepackage{booktabs}
-\usepackage{multirow}
 \usepackage{xcolor}
 \usepackage{textcomp}
 \usepackage[hidelinks]{hyperref}
 \usepackage{url}
-\graphicspath{{figures/}}
 
-\providecommand{\nTickers}{11}
-\providecommand{\nObs}{10{,}704}
-\providecommand{\nArticles}{18{,}600}
-\providecommand{\newsCov}{34.7}
-\providecommand{\dateMin}{2018}
-\providecommand{\dateMax}{2023}
-\providecommand{\RleakRand}{0.999}
-\providecommand{\RleakChrono}{0.999}
-\providecommand{\RleakPersist}{0.999}
-\providecommand{\RleakReturns}{-0.037}
-\providecommand{\vifClose}{22{,}977}
-\providecommand{\vifStatMax}{1{,}347}
-\providecommand{\shapSentShare}{X}
-\providecommand{\igSentShare}{X}
-\providecommand{\permSentShare}{X}
-\providecommand{\blockPermSent}{X}
-\providecommand{\blockPermPrice}{X}
-\providecommand{\sentOnlyMaxMCC}{X}
-\providecommand{\bestDirAcc}{X}
-\providecommand{\majAcc}{X}
-\providecommand{\sentDeltaAcc}{X}
-\providecommand{\sentCIlo}{X}
-\providecommand{\sentCIhi}{X}
-\providecommand{\edaKurtosis}{X}
-\providecommand{\edaCrossCorr}{X}
-\providecommand{\edaAcfClose}{X}
-\providecommand{\edaAcfReturn}{X}
-\providecommand{\edaFeatTargetMax}{X}
-\providecommand{\edaSentTargetMax}{X}
-\providecommand{\edaLevelsNonstat}{X}
-\providecommand{\edaReturnsStat}{X}
-\providecommand{\edaUpRate}{X}
-\providecommand{\nModelsZoo}{X}
-\providecommand{\nModelsZooCiScored}{X}
-\providecommand{\modelZooMaxMCC}{X}
-\providecommand{\modelZooMeanAcc}{X}
-\providecommand{\faithUniverseN}{X}
-\providecommand{\faithRhoBar}{X}
-\providecommand{\faithEffN}{X}
-\providecommand{\nXaiMethodsCatalogued}{X}
-\providecommand{\nXaiFaithfulOfScoreable}{X}
-\providecommand{\marginTreeshap}{X}\providecommand{\mdesTreeshap}{X}\providecommand{\mdesRatioTreeshap}{X}
-\providecommand{\pctSymTreeshap}{X}\providecommand{\pctSymCiLoTreeshap}{X}\providecommand{\pctSymCiHiTreeshap}{X}
-\providecommand{\marginKernelshap}{X}\providecommand{\mdesKernelshap}{X}\providecommand{\mdesRatioKernelshap}{X}
-\providecommand{\pctSymKernelshap}{X}\providecommand{\pctSymCiLoKernelshap}{X}\providecommand{\pctSymCiHiKernelshap}{X}
-\providecommand{\marginLime}{X}\providecommand{\mdesLime}{X}\providecommand{\mdesRatioLime}{X}
-\providecommand{\pctSymLime}{X}\providecommand{\pctSymCiLoLime}{X}\providecommand{\pctSymCiHiLime}{X}
-\providecommand{\marginPermutation}{X}\providecommand{\mdesPermutation}{X}\providecommand{\mdesRatioPermutation}{X}
-\providecommand{\pctSymPermutation}{X}\providecommand{\pctSymCiLoPermutation}{X}\providecommand{\pctSymCiHiPermutation}{X}
-\providecommand{\mcnemarPTreeshap}{X}\providecommand{\wilcoxonPTreeshap}{X}
-\providecommand{\mcnemarPKernelshap}{X}\providecommand{\wilcoxonPKernelshap}{X}
-\providecommand{\mcnemarPLime}{X}\providecommand{\wilcoxonPLime}{X}
-\providecommand{\nWeakSignalScored}{X}
-\providecommand{\nModelsZooCiScored}{X}
-\providecommand{\nAgreementMethods}{X}\providecommand{\nAgreementExcluded}{X}
-\providecommand{\agreementRhoMin}{X}\providecommand{\agreementRhoMax}{X}\providecommand{\agreementRhoMean}{X}
-\providecommand{\nSensRuns}{X}\providecommand{\sensPctInterpMin}{X}\providecommand{\sensPctInterpMax}{X}
-\providecommand{\sensPctInterpMean}{X}\providecommand{\nSensRunsWithNotable}{X}
-\providecommand{\sensMaxZMin}{X}\providecommand{\sensMaxZMax}{X}\providecommand{\nSensDistinctTop}{X}
-\providecommand{\sensMajorityComponent}{X}\providecommand{\sensMajorityN}{X}\providecommand{\sensTotalRuns}{X}
-\providecommand{\saeNullMean}{X}\providecommand{\saeNullPHi}{X}\providecommand{\saeNullMax}{X}
-\providecommand{\ablNullMean}{X}\providecommand{\ablNullPHi}{X}
-\providecommand{\recurC}{X}\providecommand{\recurK}{X}\providecommand{\recurR}{X}
-\providecommand{\recurPBinomOne}{X}\providecommand{\recurPUnion}{X}
-\providecommand{\tcavPEmp}{X}\providecommand{\tcavNullMeanRange}{X}
-\providecommand{\yearMarginMinTreeshap}{X}\providecommand{\yearMarginMaxTreeshap}{X}
-\providecommand{\yearCopyCreditMinTreeshap}{X}\providecommand{\yearCopyCreditMaxTreeshap}{X}
-\providecommand{\yearPctSymMinPermutation}{X}\providecommand{\yearPctSymMaxPermutation}{X}
-\providecommand{\jackMarginDeltaTreeshap}{X}\providecommand{\jackMdesDeltaTreeshap}{X}
+% Every result quoted in the text is a macro defined in numbers.tex, which is
+% generated from results/ by make_tables.py. No result is typed by hand.
 \input{numbers.tex}
 
 \begin{document}
 
-\title{\fontsize{21}{26}\selectfont A Ground-Truth Benchmark of Classical, Concept-Based,\\ and Mechanistic XAI on Financial Forecasters}
+\title{A Planted-Signal Recovery Benchmark for\\ XAI Methods on Financial Forecasters}
 
+% Author block kept as in the journal version: three columns side by side.
 \author{%
 \begin{minipage}[t]{0.33\textwidth}\centering
 {\normalsize Abdulrahman Omar}\\[3pt]
@@ -113,1380 +46,536 @@
 \maketitle
 
 \begin{abstract}
-Explainable AI (XAI) methods are widely applied to financial forecasting
-models, and their attributions are often read as evidence of what drives a
-prediction. This practice is rarely verified: without a model whose true
-feature importances are known, a faithful explanation cannot be
-distinguished from a plausible-looking one. In this paper, a ground-truth
-faithfulness benchmark is constructed by injecting synthetic features with
-known importance (linear and nonlinear signals at two strengths, pure
-noise, and a redundant feature at exact and partial collinearity) into a
-real, leakage-free panel of \faithUniverseN{} large-cap stocks, and scoring
-$\nXaiMethodsCatalogued$ XAI methods across a zoo of \nModelsZoo{} model
-architectures against that known ground truth, with stock-clustered
-inference and an explicit effective sample size throughout. Of the
-$\nXaiMethodsCatalogued$ catalogued methods, 16
-yielded a directly scoreable evaluation under the study's defined criteria;
-every directly evaluated method ranked the planted signals above pure
-noise. Permutation importance showed lower and less consistent recovery
-than TreeSHAP, KernelSHAP, and LIME in the tested setting, and methods
-differed substantially in how they split credit between collinear features.
-Mechanistic analysis of the Transformer variant indicated a shallow,
-largely linear internal representation, together with a weak but recurring
-layer-level ablation effect under a seed and fold sensitivity check. These
-findings are specific to the studied panel, models, and ground-truth
-constructions. The full benchmark and a reproducible pipeline are released.
+Attributions produced by explainable AI (XAI) methods are often read as
+evidence of what drives a financial forecast, yet they are rarely checked
+against a known answer. In this paper, a planted-signal recovery benchmark is
+constructed on real market data. Six synthetic features with known relations
+to the target (a linear signal at two strengths, a sign-coded nonlinear
+signal, pure noise, and an exact and a partial copy of a real feature) are
+injected into a panel of \nTickers{} large-cap stocks, and
+\nXaiMethodsCatalogued{} XAI methods are catalogued across \nModelsZoo{}
+model architectures. Recovery, defined as ranking a planted signal above the
+noise feature on held-out data, is treated as a necessary condition for a
+faithful explanation and not as a sufficient one. All \nXaiNativeScored{}
+methods that yield a feature-importance vector recovered the two strong
+signals on every model tested. At the level of individual stocks, TreeSHAP,
+KernelSHAP, and LIME recovered all three signals in every stock, whereas
+permutation importance recovered the strong linear signal in
+\pctSymPermutation\% of stocks and did not recover the weak one. The credit
+assigned to duplicated features differed widely between methods, and two
+concept-based scores could not be distinguished from those of random
+directions. The pipeline, configuration, and results are publicly released.
 \end{abstract}
 
 \begin{IEEEkeywords}
-explainable AI, XAI faithfulness, ground truth, mechanistic interpretability,
-SHAP, TCAV, sparse autoencoders, GNNExplainer, financial forecasting, FNSPID
+explainable AI, feature attribution, planted signal, benchmark, SHAP, LIME,
+permutation importance, financial forecasting
 \end{IEEEkeywords}
 
 \section{Introduction}
-Explainable AI (XAI) is increasingly used to justify financial models to
-regulators, risk committees, and end users. In this paper,
-\emph{faithfulness} denotes the degree to which an explanation reflects the
-features the model actually relies on, rather than producing a
-plausible-looking account. The field's own literature shows that popular
-attribution methods can be unfaithful: they can disagree with each
-other~\cite{krishna2022disagreement}, degrade under feature removal in ways
-that expose them as unreliable~\cite{hooker2019roar}, and fail basic
-randomization sanity checks~\cite{adebayo2018sanity}. When such methods are
-applied to financial forecasters, their attributions are therefore evidence
-of unknown quality.
+Explainable AI (XAI) methods are increasingly used to justify financial
+models to regulators, risk committees, and end users. An explanation is
+called \emph{faithful} when it reflects the features on which the model
+actually relies. Faithfulness cannot be taken for granted. Popular post hoc
+methods often disagree with one another~\cite{krishna2024disagreement};
+several gradient-based methods were found to be no better than a random
+ranking when image classifiers were retrained after feature
+removal~\cite{hooker2019roar}; and some saliency methods were shown to be
+insensitive to the randomization of model parameters and of training
+labels~\cite{adebayo2018sanity}. When such methods are applied to financial
+forecasters, the quality of the resulting attributions is therefore unknown.
 
-Evaluating attribution methods against known ground truth is an active line
-of work: XAI-Bench, OpenXAI, GraphXAI, XAI-Units, and M\textsuperscript{4}
-all benchmark attribution methods against known answers on fully synthetic
-data or controlled image, text, or graph
-tasks~\cite{liu2021xaibench,agarwal2022openxai,agarwal2023graphxai,lee2025xaiunits,li2023m4}.
+A direct remedy is to evaluate explanations against a known answer. Such
+benchmarks exist for synthetic tabular data, graphs, images, and
+text~\cite{liu2021xaibench,agarwal2022openxai,agarwal2023graphxai,lee2025xaiunits,li2023m4},
+as reviewed in Section~\ref{sec:related}. To the best of the authors'
+knowledge, none of them plants known signals inside a real financial
+forecasting panel, where market noise, non-stationarity, and cross-sectional
+dependence are present.
 
-To our knowledge, prior work has not combined these elements in a real
-financial forecasting panel under the same experimental framework: known
-ground truth injected into a real, leakage-free financial panel alongside
-genuine market noise, non-stationarity, and cross-sectional dependence; an
-explicit collinearity stress test; mechanistic interpretability applied to
-a financial forecaster; and stock-clustered, effective-sample-size-aware
-inference.
+In this paper, such a benchmark is constructed. Six synthetic features are
+injected into a real panel of \nTickers{} US large-cap stocks in which, as is
+verified, the real features carry almost no out-of-sample predictive signal.
+Each XAI method is then scored on whether the planted signals are ranked
+above a planted noise feature on held-out data.
 
-A leakage-free, multi-stock financial forecaster is used as the domain, not
-because strong predictive skill is expected (its absence is validated in
-Section~\ref{sec:leakage}), but because a near-zero-signal setting is a
-demanding stress test: a faithful method should report ``no recoverable
-signal,'' while an unfaithful one will assign large importance to features
-that carry none. Into this test bed, six synthetic features with
-\emph{known} importance are injected, spanning a grid rather than one point
-per condition: a pure-noise feature (true importance zero); a planted linear
-signal at a strong ($\rho{=}0.15$) and a weak, near-noise-floor
-($\rho{=}0.05$) strength; a genuinely nonlinear sign-times-magnitude
-interaction signal; and a duplicate of a real feature at both exact
-(identical copy) and partial ($\rho{=}0.8$) collinearity, testing whether
-methods split or hide credit under collinearity in general rather than only
-its edge case. A method's faithfulness score is how well it recovers this
-known truth across the whole grid.
-
-\textbf{Research questions.} The primary question is RQ1; RQ2--RQ5 are
-supporting analyses that qualify, stress-test, and explain the RQ1 answer.
-\begin{itemize}
-\item \textbf{RQ1 (faithfulness, primary).} Against features with known importance,
-which XAI methods correctly recover the truth, and how faithful is each?
-\item \textbf{RQ2 (agreement).} How much do explanations agree with each other
-(rank correlation), and does disagreement concentrate in specific method pairs
-or model classes?
-\item \textbf{RQ3 (model-class dependence).} Does faithfulness depend on model
-class, glass-box, tree ensemble, kernel/instance-based, recurrent,
-convolutional, attention, graph, and which model+method pairs are
-trustworthy?
-\item \textbf{RQ4 (mechanistic).} What do concept-based (TCAV) and mechanistic
-(sparse autoencoders, circuit-ablation analysis) methods reveal about the
-Transformer variant that attribution methods miss, or do they find
-only noise?
-\item \textbf{RQ5 (actionability).} Which explanations translate into
-actionable, example-based recourse rather than an importance score alone?
-\end{itemize}
+The scope of this test is stated explicitly. The relation between each
+planted feature and the target is known by construction, but the extent to
+which a fitted model relies on the feature is not. The benchmark therefore
+measures \emph{signal recovery}, which is a necessary condition for
+faithfulness: a method that fails to recover a learnable signal cannot be
+considered faithful, whereas a method that recovers it has not thereby been
+shown to be faithful.
 
 The contributions of this paper are summarized as follows:
 \begin{itemize}
-\item \textbf{A ground-truth faithfulness benchmark on a real financial
-panel.} Six synthetic features with known importance (linear and nonlinear
-signals at two strengths, pure noise, and a redundant feature at exact and
-partial collinearity) are injected into a leakage-free
-\faithUniverseN{}-stock panel and used to score $\nXaiMethodsCatalogued$
-XAI methods under a single protocol with stock-clustered inference and an
-explicit effective sample size (Section~\ref{sec:faithfulness}).
-\item \textbf{Coverage of the modern XAI toolkit.} Classical attribution,
-rule- and example-based, concept-based, gradient and propagation, graph,
-and mechanistic-interpretability methods, including sparse autoencoders and
-ablation-based circuit analysis applied, to our knowledge for the first
-time, to a financial time-series forecasting Transformer.
-\item \textbf{A \nModelsZoo{}-model zoo spanning seven model families}
-(linear/glass-box, tree ensembles, kernel/instance-based, a GAM, recurrent,
-convolutional, attention, and graph neural networks), enabling a
-model-class-dependence analysis (RQ3) rather than a single-model case study.
-\item \textbf{A test bed validated to the standards of a dedicated
-forecasting study.} Stationary targets, embargoed walk-forward evaluation,
-strong baselines, and correlation-robust feature engineering, since a leaky
-or collinear substrate would invalidate any faithfulness claim built on it.
-\item \textbf{Null results reported as findings.} Mechanistic
-interpretability on the Transformer indicates a shallow, largely linear
-internal representation rather than deep circuit structure, with no
-evidence of head-level specialization and only a weak, recurring
-layer-level ablation effect under a seed and fold sensitivity check.
-\item \textbf{A reproducible artifact.} A Modal-based pipeline (Spark
-ingestion, FinBERT sentiment, 15+ trained models, the full XAI suite), fixed
-splits, and one-command reproduction.
+\item A planted-signal recovery benchmark is constructed on a real financial
+panel, with a linear signal at two strengths, a sign-coded nonlinear signal,
+a noise feature, and an exact and a partial copy of a real feature, all
+scored out of sample.
+\item \nXaiMethodsCatalogued{} XAI methods are catalogued across
+\nModelsZoo{} models. The \nXaiNativeScored{} methods that yield a
+feature-importance vector are scored on their own output, and the remaining
+\nXaiNotScored{} are reported as not scored.
+\item Four widely used attribution methods are compared stock by stock, and
+the scope of the accompanying inference is delimited.
+\item The credit that each method assigns to duplicated features is
+reported without a target value being assumed.
+\item Null checks are applied to concept-based and mechanistic outputs,
+which are reported as exploratory.
 \end{itemize}
 
 \section{Related Work}
-\textbf{Text-driven forecasting.} Event- and sentiment-based models have a long
-history~\cite{ding2015deep,xu2018stocknet,sawhney2020multimodal}, more recently
-using domain-specific encoders such as FinBERT~\cite{araci2019finbert} and
-cross-modal fusion architectures~\cite{kim2024textts}. FNSPID~\cite{dong2024fnspid}
-provides large-scale, time-aligned news; the test bed builds on it and treats
-its forecasting task as a substrate for XAI evaluation.
-A recent survey~\cite{arsenault2025xaifinance} taxonomizes the broad
-literature applying XAI methods to financial time-series forecasting; this
-paper sits within that space but is narrower and different in kind, not
-another application of an existing XAI method to a finance task, but a
-ground-truth faithfulness check on a broad slate of methods, which the survey
-does not itself provide.
+\label{sec:related}
+\textbf{Attribution methods.} SHAP is an additive feature-attribution
+framework based on Shapley values; its model-agnostic estimator, KernelSHAP,
+is obtained by weighted linear regression, with feature independence among
+the simplifying assumptions of its derivation~\cite{lundberg2017shap}.
+TreeSHAP is its variant for tree ensembles~\cite{lundberg2020treeshap}. LIME
+fits an interpretable model locally around a
+prediction~\cite{ribeiro2016lime}. Permutation importance measures the loss
+in performance after the values of one feature are shuffled, a procedure
+introduced for random forests~\cite{breiman2001random}. Integrated Gradients
+attribute the prediction of a deep network to its inputs on an axiomatic
+basis~\cite{sundararajan2017ig}.
 
-\textbf{Leakage and evaluation.} The dangers of look-ahead bias and improper
-cross-validation in finance are well documented~\cite{lopez2018advances};
-purged, embargoed, walk-forward protocols are recommended precisely because
-adjacent observations are serially correlated. The efficient-market
-view~\cite{fama1970efficient} further predicts that next-day returns are close
-to unforecastable from public information, making strong naive baselines
-essential and a near-zero-signal regime the expected, not surprising, outcome.
+\textbf{Benchmarks with known answers.} XAI-Bench releases synthetic data
+sets with known distributions, from which ground-truth Shapley values and
+other metrics are computed~\cite{liu2021xaibench}. XAI-Units pairs synthetic
+data sets with models of known behaviour, in the manner of unit
+tests~\cite{lee2025xaiunits}. GraphXAI provides a synthetic graph generator
+with ground-truth explanations together with real-world graph data
+sets~\cite{agarwal2023graphxai}. OpenXAI combines a synthetic generator with
+seven real-world tabular data sets, including credit data, but its
+ground-truth metrics apply only to synthetic data or to logistic-regression
+models~\cite{agarwal2022openxai}. $\mathcal{M}^4$ evaluates attribution
+methods on real image and text data, mainly with faithfulness metrics that
+require no ground truth~\cite{li2023m4}.
 
-\textbf{Classical attribution.} SHAP~\cite{lundberg2017shap} and
-LIME~\cite{ribeiro2016lime} are standard but can misattribute importance under
-correlated features; Accumulated Local Effects (ALE)~\cite{apley2020ale} were
-designed to remain valid in that regime, and Integrated
-Gradients~\cite{sundararajan2017ig} provide axiomatic attribution for neural
-models. Rule-based methods (Anchors~\cite{ribeiro2018anchors}) and
-example-based methods (counterfactuals~\cite{wachter2017counterfactual}, the
-contrastive explanation method~\cite{dhurandhar2018cem}) explain individual
-decisions rather than global importance; RISE~\cite{petsiuk2018rise} adapts
-randomized input masking from vision to arbitrary black-box models.
+\textbf{XAI in finance.} A recent survey provides a taxonomy of XAI
+approaches for financial time-series
+forecasting~\cite{arsenault2025xaifinance}; it is a literature review and
+reports no check of explanations against a known answer. The present study
+is positioned between the two lines of work: known signals are planted, as
+in the synthetic benchmarks, but inside a real financial panel.
 
-\textbf{Faithfulness and disagreement.} ROAR~\cite{hooker2019roar} shows that
-many attribution methods fail a feature-removal sanity check; the disagreement
-problem~\cite{krishna2022disagreement} documents that popular explainers
-routinely disagree with each other in practice; sanity-check
-randomization~\cite{adebayo2018sanity} shows several saliency methods are
-insensitive to both model parameters and labels. All three motivate measuring
-faithfulness against \emph{known} ground truth rather than asserting it, which
-motivates the present study.
+\section{Test Bed and Evaluation Protocol}
+\label{sec:testbed}
+\subsection{Data and Features}
+The FNSPID data set~\cite{dong2024fnspid} is used; it provides daily prices
+per ticker and time-aligned financial news. The universe consists of \nTickers{}
+US large-cap stocks, selected from \nCandidates{} sector-diverse candidates
+by data availability alone (at least \minNewsDays{} news days and a complete
+price history for \dateMin--\dateMax). The panel contains \nObs{} stock-day
+rows from \panelStart{} to \panelEnd; news is present on \newsCov\% of them.
 
-\textbf{Prior ground-truth XAI benchmarks.} Synthetic ground-truth
-benchmarking of attribution methods is an established, active line of
-work. XAI-Bench
-provides synthetic datasets with known Shapley-value ground truth for tabular
-attribution methods~\cite{liu2021xaibench}; OpenXAI is an extensible framework
-with a synthetic generator and $\sim$22 faithfulness/stability/fairness
-metrics~\cite{agarwal2022openxai}; GraphXAI provides a synthetic graph
-generator with ground-truth explanations for benchmarking GNN
-explainers~\cite{agarwal2023graphxai}; XAI-Units builds paired unit-test
-datasets/models with known internal mechanisms to stress-test attribution
-methods~\cite{lee2025xaiunits}; and M\textsuperscript{4} unifies faithfulness
-metrics across image/text modalities and multiple
-architectures~\cite{li2023m4}. Every one of these evaluates on \emph{fully
-synthetic} data or controlled image/text/graph tasks. To our knowledge,
-prior work has not combined these elements in a real financial forecasting
-panel under the same experimental framework: known ground truth injected
-alongside genuine market noise, non-stationarity, and cross-sectional
-dependence; an explicit collinearity/duplicate-feature stress test; and
-mechanistic interpretability.
+For each stock and trading day $t$, \nFeatPrice{} price-based features (four
+lagged returns, two rolling volatilities, a 14-day RSI, a 20-day
+moving-average gap, the high--low range, the open-to-close return, log
+volume, and a 20-day volume $z$-score) and \nFeatSent{} news-sentiment
+features (FinBERT~\cite{araci2019finbert} and
+Loughran--McDonald~\cite{loughran2011liability} scores, news counts, and
+short rolling aggregates) are computed from information available at the
+close of day $t$. News published after the close is assigned to the next
+session. The targets are the next-day log return $r_{t+1}$ and its direction
+$d_{t+1}=\mathbf{1}[r_{t+1}>0]$. Daily returns with $|r|>\returnClip$ are
+treated as data errors and masked; this rule is fixed in the configuration
+and is applied before any split.
 
-\textbf{Concept-based, intrinsic, and graph methods.} TCAV~\cite{kim2018tcav}
-tests whether a model's internal representation is sensitive to a
-human-defined concept direction; EBMs/GA2Ms~\cite{nori2019interpretml} are
-self-explaining by construction; GNNExplainer~\cite{ying2019gnnexplainer}
-explains graph neural networks via learned edge/feature masks, applicable here
-because we model the cross-stock correlation structure explicitly as a graph.
+\subsection{Models and Walk-Forward Protocol}
+The model zoo comprises \nModelsZoo{} models: logistic regression, a
+decision tree, a random forest, XGBoost~\cite{chen2016xgboost}, LightGBM,
+CatBoost, a support vector machine, $k$-nearest neighbours, an explainable
+boosting machine (EBM)~\cite{nori2019interpretml}, a multilayer perceptron
+(MLP), a GRU, an LSTM, a 1D convolutional network (CNN), a temporal
+convolutional network (TCN), a small Transformer, and a graph neural network
+(GNN) over a cross-stock correlation graph. The last \lookback{} trading
+days are supplied to the sequence models.
 
-\textbf{Gradient/propagation and mechanistic interpretability.}
-Layer-wise Relevance Propagation~\cite{bach2015lrp} and Grad-CAM and its
-variants~\cite{selvaraju2017gradcam} propagate or localize attribution through
-network layers, the latter vision-native and applied here only to our
-convolutional model variant. Sparse autoencoders~\cite{cunningham2023sae} and
-automated circuit discovery~\cite{conmy2023acdc} are recent mechanistic-
-interpretability tools, to date applied almost exclusively to language
-models (concurrent work applies mechanistic interpretability to LLMs in
-finance for fraud, credit, and trading tasks~\cite{tatsat2025blackbox}, a
-different model class and task); both are applied here to a financial
-time-series Transformer.
-
-\textbf{Actionability.} Actionable recourse~\cite{ustun2019recourse} asks
-whether an explanation can be turned into a concrete, achievable change in
-outcome, which frames the example-based methods' practical value
-(RQ5) beyond an importance score alone.
-
-\section{The Test-Bed}
-This section describes the forecasting substrate on which the XAI benchmark
-is constructed. Because the validity of the faithfulness analysis depends
-on the soundness of this substrate, rigorous leakage and collinearity
-controls are applied, and the test bed is evaluated to standards comparable
-to those of a dedicated forecasting study
-(Sections~\ref{sec:zoo}--\ref{sec:faithfulness} present the primary
-contributions).
-
-\textbf{Problem setup.} This is a supervised
-\emph{time-series} problem; it is stated precisely because the entangling of
-features and targets across time is the source of the errors under study.
-For each stock $s$
-and trading day $t$, a feature vector $\mathbf{x}_{s,t}$ is built using
-\emph{only} information available at the close of day $t$, lagged returns,
-rolling volatility, RSI, momentum, moving-average gaps, range/volume statistics,
-and news-sentiment features aggregated from articles known by that close. The
-target is realized on the \emph{next} trading day:
-\[
-y^{\text{ret}}_{s,t}=\log\frac{P_{s,t+1}}{P_{s,t}},\quad
-y^{\text{dir}}_{s,t}=\mathbb{1}\!\left[y^{\text{ret}}_{s,t}>0\right],
-\]
-with the price \emph{level} $P_{s,t+1}$ used only as a diagnostic target in the
-leakage study. Every feature is strictly backward-looking (verified by an
-empirical leakage screen, Sec.~\ref{sec:eda}), targets are produced by a
-per-ticker forward shift, and all splitting preserves temporal order. The
-panel is never treated as i.i.d.\ tabular data.
-
-\textbf{Data.} The study uses FNSPID~\cite{dong2024fnspid}: per-ticker daily OHLCV
-and an external financial-news corpus. Because the news file is multi-gigabyte,
-ingestion and filtering use Apache Spark~\cite{zaharia2016spark} (streaming,
-bounded-memory), after which the compact per-ticker panel is processed in
-pandas. The panel covers \nTickers{} large-cap stocks with adequate news coverage over
-\dateMin--\dateMax{}, yielding \nObs{} stock-day observations and \nArticles{}
-aligned articles (news present on \newsCov\% of stock-days).
-
-\textbf{Time-aware alignment (no leakage).} Each article is timestamped in
-US/Eastern and mapped to a trading session so that only information available by
-the close of day $t$ can inform the prediction of day $t{+}1$: intraday news
-maps to the same session, after-close and non-trading-day news to the next
-session. Sentiment is aggregated per (stock, session).
-
-\textbf{Sentiment.} Opaque or proprietary sentiment scores are replaced with
-two reproducible signals: (i) \emph{FinBERT}~\cite{araci2019finbert} probabilities
-(positive$-$negative), and (ii) the \emph{Loughran--McDonald} finance
-lexicon~\cite{loughran2011liability} polarity. Both are aggregated to daily
-features with short rolling histories and a news-count/volume signal.
-
-\textbf{Features and targets.} All predictive features use only information
-available at the close of day $t$: lagged returns, rolling volatility, RSI,
-momentum, moving-average gaps, range/volume statistics, and the sentiment
-features. Targets are next-day log-return $r_{t+1}$, direction
-$\mathbb{1}[r_{t+1}{>}0]$, and (for the leakage study only) the next-day price
-level.
-
-\textbf{Ground-truth features.}\label{sec:groundtruth}
-Six synthetic features with \emph{known} true importance are injected into
-the panel, constructed deterministically (seed 42) so faithfulness scoring is
-reproducible, spanning a grid of conditions rather than one point per
-condition: (a)
-\texttt{gt\_noise}, i.i.d.\ $\mathcal{N}(0,1)$, true importance exactly zero;
-(b) \texttt{gt\_signal}, a controlled additive \emph{linear} leak
-$\rho\cdot z(r_{t+1}) + \sqrt{1-\rho^2}\cdot\mathcal{N}(0,1)$ with
-$\rho=0.15$, i.e.\ a feature with \emph{known} target-correlation $0.15$;
-(b$'$) \texttt{gt\_signal\_weak}, the identical construction with
-$\rho=0.05$, a weak signal near the noise floor, testing recovery
-\emph{sensitivity} rather than only the easy, strong-signal case; (c)
-\texttt{gt\_signal\_nl}, a genuinely \emph{nonlinear} planted signal built
-from a sign$\times$magnitude \emph{interaction} rather than a simple additive
-combination, $\rho_{\text{nl}}\cdot z\big(\text{sign}(y_{\text{dir}})\cdot
-|\mathcal{N}(0,1)|\big) + \sqrt{1-\rho_{\text{nl}}^2}\cdot\mathcal{N}(0,1)$
-with $\rho_{\text{nl}}=0.15$, whose realized linear (Pearson/point-biserial)
-correlation with the targets is empirically only $0.08$--$0.12$, weaker than
-its designed strength parameter, precisely because the relationship is
-encoded through an interaction a simple correlation screen partially misses;
-(d) \texttt{gt\_redundant\_copy}, an \emph{exact} duplicate of a real,
-already-informative feature (\texttt{vol\_z20}), used to test whether a
-method over-credits the copy or splits credit between the two collinear
-columns; and (d$'$) \texttt{gt\_redundant\_partial}, a \emph{partially}
-collinear variant of the same source feature ($\rho=0.8$, not an exact
-copy), the common real case (two related-but-distinct indicators) rather
-than only the edge case an exact duplicate represents. A method's
-faithfulness score (Section~\ref{sec:faithfulness}) is whether it ranks (b),
-(b$'$), and (c) above (a), and how it handles (d) and (d$'$), not a plot, a
-number. Every applicable model (including every neural, convolutional,
-attention, and graph architecture) is given a version of its inputs that
-includes all six ground-truth columns specifically for this scoring, trained
-separately from the unaugmented predictive-performance results in
-Section~\ref{sec:zoo} so the model-zoo table is never polluted by a
-synthetic leak.
-
-\section{Exploratory Data Analysis and Data Integrity}
-\label{sec:eda}
-Before modelling we run a time-series EDA that both validates the setup and
-surfaces a data-integrity problem that would otherwise corrupt every
-return-based result.
-
-\textbf{Non-stationary levels, stationary returns.} Augmented Dickey--Fuller
-tests find $\edaLevelsNonstat\%$ of the price-level series non-stationary but
-$\edaReturnsStat\%$ of the return series stationary; lag-1 autocorrelation is
-$\edaAcfClose$ for levels versus $\edaAcfReturn$ for returns
-(Fig.~\ref{fig:eda_acf}). This is the formal justification for predicting
-returns rather than levels, the apparent ``predictability'' of levels is a
-unit-root artifact.
-
-\textbf{Data integrity.} A first EDA pass showed an
-impossible excess kurtosis ($>\!4000$) and \emph{no} volatility clustering, red
-flags for real equity returns. The cause was a handful of impossible single-day
-returns (e.g.\ AMZN $-294\%$ on 2020-07-06) where FNSPID splices unadjusted and
-split-adjusted prices. We compute returns from adjusted closes and mask
-$|r|>0.5$ (a data error for these large caps, not a market move). After cleaning,
-excess kurtosis is a realistic $\edaKurtosis$ with pronounced volatility
-clustering (Ljung--Box on squared returns, $p<10^{-3}$), matching known stylized
-facts (Fig.~\ref{fig:eda_dist}).
-
-\textbf{Cross-sectional dependence.} The 57 stocks in the universe co-move
-strongly (mean pairwise return correlation $\edaCrossCorr$; Fig.~\ref{fig:eda_cross}), so
-stock-days are far from independent and inference is clustered by stock.
-
-\textbf{Why the task is hard, and a leakage screen.} The largest absolute
-correlation between any backward-looking feature and the next-day return is only
-$\edaFeatTargetMax$ (sentiment peaks at $\edaSentTargetMax$;
-Fig.~\ref{fig:eda_feat}). This near-orthogonality is the reason next-day
-prediction is close to chance, and it doubles as a leakage screen: no feature is
-suspiciously predictive, as look-ahead would produce.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_eda_acf.png}
-\caption{Autocorrelation: price levels (left) are near-unit-root; returns (right)
-are effectively white. Predicting levels exploits the left panel.}
-\label{fig:eda_acf}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.82\columnwidth]{fig_eda_feat_target.png}
-\caption{Correlation of each backward-looking feature with the next-day return.
-The maximum is $\edaFeatTargetMax$; sentiment features (orange) are near zero.}
-\label{fig:eda_feat}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.82\columnwidth]{fig_eda_cross_corr.png}
-\caption{Cross-sectional return correlation across all 57 stocks in the
-universe (mean $\edaCrossCorr$): observations are not independent, motivating
-symbol-clustered inference.}
-\label{fig:eda_cross}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.9\columnwidth]{fig_eda_return_dist.png}
-\caption{Return distribution after data cleaning: fat-tailed
-(excess kurtosis $\edaKurtosis$) but free of the splice artifacts that
-originally produced kurtosis $>\!4000$.}
-\label{fig:eda_dist}
-\end{figure}
-
-\section{The Illusion of Skill: A Leakage Study}
-\label{sec:leakage}
-The next four sections (through Section~\ref{sec:xai}) establish the
-near-zero-signal substrate RQ1 requires; they reproduce results that are
-well established in the financial machine-learning literature
-(look-ahead-biased ``skill,'' persistence-strength baselines, negligible
-sentiment value) and serve to validate the substrate the faithfulness
-benchmark depends on. The standard ``high-accuracy'' setup is first
-reproduced and dissected: Table~\ref{tab:leakage} and
-Fig.~\ref{fig:leakage} report four experiments with the \emph{same} Random
-Forest.
+An expanding-window walk-forward protocol with \nFolds{} test years is used
+(Table~\ref{tab:folds}). For test year $Y$, the training set contains all
+rows dated more than \embargoDays{} calendar days before 1~January of $Y$;
+such an embargo between training and test rows is recommended when
+observations are not independent over time~\cite{lopez2018advances}.
+Features are standardized with statistics of the training rows only. No
+hyperparameter search is performed and no validation split is used for model
+selection: every hyperparameter is fixed in advance in the released code,
+and the neural sequence and graph models are trained for a fixed number of
+epochs. The only internal hold-outs are the early-stopping splits that the
+library implementations of the MLP and of the EBM draw from their training
+rows.
 
 \begin{table}[t]
-\caption{Next-day prediction under different protocols (Random Forest).
-Random-split level prediction reproduces $R^2\approx0.99$, but a persistence
-baseline matches it and performance on the return task collapses.}
-\label{tab:leakage}
-\centering
-\input{tables/tab_leakage.tex}
-\end{table}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_leakage.png}
-\caption{The reported $R^2\approx0.99$ is autocorrelation, not skill. A naive
-persistence baseline equals the model on levels; predicting returns yields
-$R^2<0$.}
-\label{fig:leakage}
-\end{figure}
-
-The random-split level model attains $R^2=\RleakRand$, barely changed by a
-chronological split ($R^2=\RleakChrono$), the ``skill'' is autocorrelation,
-not the split. The decisive comparison is the persistence baseline
-$\hat P_{t+1}=P_t$ ($R^2=\RleakPersist$, indistinguishable from the model);
-predicting \emph{returns} instead collapses performance to
-$R^2=\RleakReturns$, worse than a constant zero. Level-scale $R^2$ is not a
-meaningful skill measure here.
-
-\section{Correlation Structure of the Data}
-\label{sec:collinearity}
-A second hazard, and the one most likely to threaten conclusions in this
-literature, is the strong correlation \emph{among} features, \emph{across}
-stocks, and \emph{across} time. We treat it as a first-class threat to validity.
-
-\textbf{Three kinds of correlation.} (i) \emph{Feature multicollinearity}:
-Fig.~\ref{fig:vif} reports variance inflation factors (VIF); the raw OHLCV levels
-used by prior pipelines are near-perfectly collinear (VIF up to $\vifClose$,
-versus the usual threshold of 10), which destabilizes linear coefficients and
-invalidates PDP- and coefficient-based explanations. We report raw VIF values
-rather than lean on any single cutoff: the conventional thresholds (5 or 10)
-are both dwarfed by the raw levels' VIF of $\vifClose$ versus $\vifStatMax$
-for the stationary features we actually model, so the conclusion, raw levels
-are severely collinear, our features are not, holds regardless of which
-conventional threshold is used. (ii) \emph{Temporal
-autocorrelation}: price levels are near-unit-root and overlapping features are
-serially correlated, so IID cross-validation and IID significance tests are
-invalid. (iii) \emph{Cross-sectional correlation}: the stocks co-move with the
-market, so pooled stock-day observations are far from independent and naive tests
-overstate significance.
-
-\textbf{Why our conclusion is robust to all three.} Crucially, our central claim
-is a \emph{null} (news sentiment adds no measurable value). Correlation threatens
-a null in only one way, by \emph{masking} a real effect behind correlated price
-features, and we rule this out directly: the \emph{sentiment-only} models
-(Sec.~\ref{sec:results}) test sentiment in complete isolation and still achieve no
-skill ($R^2\!\le\!0$, MCC$\approx\!0$), so no price feature can be hiding it. The
-other failure mode of correlation, \emph{inflating} apparent significance, can
-only make a positive claim look stronger, and no positive claim is made; it
-is nonetheless guarded against so that the ``no-effect'' confidence intervals
-remain valid. Concretely, the pipeline uses: stationary transforms (returns, ratios, $z$-scores; max VIF
-$\vifStatMax$, a $\sim$17$\times$ reduction); ALE~\cite{apley2020ale} and
-\emph{grouped} attribution rather than PDP or per-feature bars; \emph{grouped
-block-permutation} importance that permutes the entire sentiment block jointly
-(preserving within-block correlation, so redundancy cannot hide the block's
-contribution); embargoed walk-forward splits; a \emph{symbol-clustered} bootstrap
-that resamples whole stocks (respecting cross-sectional dependence); and
-Newey--West HAC Diebold--Mariano tests (respecting temporal dependence), using
-a fixed Bartlett-kernel bandwidth of 5 lags (weights $1-\ell/(L{+}1)$ for
-$\ell=1,\dots,5$), short enough to match the daily, low-order dependence in
-next-day return series and consistent with common practice for this
-frequency. Every significance statement below uses stocks, not stock-days,
-as the effective unit.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_vif.png}
-\caption{Variance inflation factors. Raw OHLCV levels (red) are severely
-collinear; the stationary features we use (green) are well conditioned.}
-\label{fig:vif}
-\end{figure}
-
-\section{Leakage-Free Evaluation}
-\textbf{Protocol.} The evaluation uses an expanding-window walk-forward: for
-each test year $Y\in\{2021,2022,2023\}$, models are trained on all data
-before $Y$ (with a 10-day embargo) and tested on $Y$. Features are
-standardized on the training fold only. Per-fold metrics and their mean are
-reported.
-
-\textbf{Models and baselines.} Ridge/Logistic, Random Forest, XGBoost,
-LightGBM, SVM, and a two-layer GRU. Baselines: persistence and historical-mean
-returns (regression) and majority-class/always-up (direction).
-
-\textbf{Ablation.} Each model is trained on \emph{price-only},
-\emph{sentiment-only}, and \emph{price$+$sentiment} feature sets, isolating the
-marginal contribution of news.
-
-\begin{table*}[t]
-\caption{Leakage-free walk-forward results (mean over test years 2021--2023).
-No model beats the naive baselines on returns; directional accuracy is near
-chance; adding sentiment does not help.}
-\label{tab:main}
-\centering
-\footnotesize
+\caption{Walk-forward folds (expanding window) and the split used for
+recovery scoring. Embargoed rows are used neither for training nor for
+testing. The panel ends on \panelEnd.}
+\label{tab:folds}
+\centering\footnotesize
 \setlength{\tabcolsep}{4pt}
-\input{tables/tab_main.tex}
-\end{table*}
-
-\subsection{Results}
-\label{sec:results}
-Table~\ref{tab:main} summarizes the leakage-free tasks. On \textbf{returns}, every
-model's $R^2$ is near zero or negative, beating neither the persistence nor
-historical-mean baseline (Fig.~\ref{fig:returns}); on \textbf{direction}, the
-best model reaches $\bestDirAcc\%$ versus a $\majAcc\%$ majority baseline with
-near-zero MCC (Fig.~\ref{fig:mcc}), weak but stable across regimes including
-the 2022 drawdown (Fig.~\ref{fig:wf}). The \emph{sentiment-only}
-models, news isolated from all price information, are also no better than
-chance, so sentiment's non-contribution in the combined model is not price
-features masking a real signal.
-
-\begin{figure*}[t]
-\centering
-\begin{subfigure}[t]{0.32\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_returns_r2.png}
-\caption{Return $R^2$ by model/feature set.}
-\label{fig:returns}
-\end{subfigure}\hfill
-\begin{subfigure}[t]{0.32\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_direction_mcc.png}
-\caption{Directional MCC by model/feature set.}
-\label{fig:mcc}
-\end{subfigure}\hfill
-\begin{subfigure}[t]{0.32\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_walkforward.png}
-\caption{Walk-forward accuracy, 2021--2023.}
-\label{fig:wf}
-\end{subfigure}
-\caption{Predictive performance is near chance throughout, by every measure
-and across regimes: (a) return $R^2$ and (b) directional MCC are near zero
-for every model and feature set (sentiment does not shift either picture);
-(c) walk-forward directional accuracy stays near the majority baseline
-across 2021--2023, including the 2022 drawdown.}
-\label{fig:forecast_perf}
-\end{figure*}
-
-\subsection{Does news sentiment help? A dependence-aware test}
-Table~\ref{tab:ablation} reports the marginal value of sentiment. Adding news
-features changes directional accuracy by $\sentDeltaAcc$ points, 95\%
-symbol-clustered CI $[\sentCIlo,\sentCIhi]$ (straddles zero, Wilcoxon
-non-significant); HAC Diebold--Mariano tests on returns find no consistent
-error reduction (Fig.~\ref{fig:ablation}). This XGBoost result is
-representative of the tree-ensemble/kernel majority of the zoo but not
-universal: Logistic Regression's clustered CI on the same ablation,
-$[-0.26,-0.02]$ points, excludes zero (Wilcoxon $p=0.06$, borderline), a
-small but directionally consistent \emph{negative} effect for that one linear
-model. In summary, the effects are model-dependent and near zero, mostly
-indistinguishable from noise, with one linear-model exception that argues
-against sentiment adding value rather than for it.
-
-\begin{table}[t]
-\caption{Marginal value of news sentiment (price$+$sentiment vs.\ price-only),
-with dependence-aware inference.}
-\label{tab:ablation}
-\centering\scriptsize
-\input{tables/tab_ablation.tex}
+\input{tables/tab_folds.tex}
 \end{table}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_ablation.png}
-\caption{Change in directional accuracy from adding sentiment, with 95\%
-symbol-clustered bootstrap CIs. All intervals include zero.}
-\label{fig:ablation}
-\end{figure}
+\subsection{Substrate Check}
+The real features carry almost no out-of-sample signal. On the direction
+task, the mean accuracy of the \nModelsZoo{} models over the \nFolds{} folds
+is \modelZooMeanAccPct\%, against \majAcc\% for the majority-class baseline,
+and the largest absolute Matthews correlation coefficient is
+\modelZooMaxMCC. Adding the sentiment features to the price features changes
+directional accuracy by between $\sentDeltaMin$ and $\sentDeltaMax$
+percentage points for the \nSentModels{} models with stored per-stock
+predictions; the stock-resampled 95\% interval contains zero for XGBoost and
+LightGBM and lies below zero for logistic regression
+($[\sentCIloLogistic,\,\sentCIhiLogistic]$). The planted features described
+next are therefore the only signals in the panel whose relation to the
+target is known.
 
-\section{Explainability: Attribution Is Not Predictive Value}
-\label{sec:xai}
-Applying explainability here yields a cautionary lesson, not a simple
-verdict. \emph{In-sample} attribution assigns news sentiment a sizable role:
-SHAP gives the ten sentiment features $\shapSentShare\%$ of total importance
-(Fig.~\ref{fig:shap}), and the GRU's Integrated Gradients give sentiment
-channels $\igSentShare\%$ (Fig.~\ref{fig:xai2}), read naively, evidence that
-sentiment matters. It is not: attribution measures how a flexible model
-\emph{uses} features to fit training data, not their out-of-sample value, and
-the two diverge sharply here. The correlation-robust \emph{grouped
-block-permutation} test, jointly permuting the sentiment block so
-within-group redundancy cannot hide a real effect, changes test accuracy by
-only $\blockPermSent$ points, within noise and no larger than the price
-block's $\blockPermPrice$ points (Fig.~\ref{fig:blockperm}); ALE curves for
-sentiment are nearly flat, and the sentiment-only models
-(Sec.~\ref{sec:results}) have no skill. The large SHAP/IG share therefore
-reflects in-sample fitting of noise, not signal, a large attribution share
-is not evidence of predictive value; the ablation and block-permutation
-tests, not the attribution bars, settle the question.
-
-\begin{figure*}[t]
-\centering
-\begin{subfigure}[t]{0.32\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_shap_grouped.png}
-\caption{SHAP (in-sample), $\shapSentShare\%$.}
-\label{fig:shap}
-\end{subfigure}\hfill
-\begin{subfigure}[t]{0.32\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_ig_gru.png}
-\caption{GRU Integrated Gradients (in-sample), $\igSentShare\%$.}
-\label{fig:xai2}
-\end{subfigure}\hfill
-\begin{subfigure}[t]{0.32\textwidth}
-\centering
-\includegraphics[width=\textwidth]{fig_block_perm.png}
-\caption{Block-permutation (out-of-sample), $\blockPermSent$ pp.}
-\label{fig:blockperm}
-\end{subfigure}
-\caption{In-sample attribution versus out-of-sample value for news
-sentiment (orange). Two independent \emph{in-sample} attribution methods,
-(a) grouped SHAP and (b) GRU Integrated Gradients, both give sentiment a
-sizable share of importance; (c) the correlation-robust, \emph{out-of-sample}
-grouped block-permutation test, jointly permuting the entire sentiment
-block so within-group redundancy cannot hide a real effect, changes test
-accuracy by only $\blockPermSent$ points, within noise. The contrast between
-(a)/(b) and (c) is this section's central lesson: a large attribution share
-is not evidence of predictive value.}
-\label{fig:attribution_vs_value}
-\end{figure*}
-
-\section{Model Zoo}
-\label{sec:zoo}
-To make faithfulness a function of model class (RQ3) rather than a single
-case study, \nModelsZoo{} models spanning seven families are trained on the
-identical panel and walk-forward protocol: linear/glass-box (Ridge/Logistic),
-a single decision tree, tree ensembles (Random Forest, XGBoost, LightGBM,
-CatBoost), kernel/instance-based (SVM, $k$-NN), a GAM (EBM), dense/recurrent/
-convolutional/attention neural networks (MLP, GRU, LSTM, 1D-CNN, TCN, a small
-Transformer), and a graph neural network over a static cross-stock
-correlation graph (top-5 $|\rho|$ neighbors, built from training-fold returns
-only, to avoid leaking future co-movement structure into the graph). All are
-evaluated on the same direction/return tasks; Table~\ref{tab:zoo} reports
-directional accuracy, F1, and MCC for the price+sentiment feature set,
-averaged over the \faithUniverseN{}-stock, four-fold walk-forward.
+\section{Planted Features and Scoring}
+\label{sec:planted}
+\subsection{Planted Features}
+Six synthetic features are added to the panel (Table~\ref{tab:planted}).
+They are generated once with a fixed seed and are all present at the same
+time. For scoring, models are trained on inputs augmented with these
+features (\nFeatTotal{} features in total), separately from the models of
+Section~\ref{sec:testbed}; the accuracy of the augmented models is raised by
+the planted signals and is not a measure of forecasting skill.
 
 \begin{table}[t]
-\centering\tiny
-\caption{Model zoo, direction task (price+sentiment, mean over folds). Near-chance
-accuracy and near-zero MCC across every family is the expected result on this
-validated near-zero-signal test-bed, not a modelling failure. $\pm$ values
-are the half-width of a stock-clustered 95\% CI (5000 resamples, whole
-symbols, matching Table~\ref{tab:faithfulness}'s protocol) where per-symbol
-predictions were cached (XGBoost, LightGBM, Logistic, $\nModelsZooCiScored{}$
-models); see text.}
-\input{tables/tab_model_zoo.tex}
-\label{tab:zoo}
+\caption{Planted features. $\varepsilon$ and $a$ are independent standard
+normal draws (fresh for each feature), $z(\cdot)$ denotes standardization,
+$s_{t+1}\in\{-1,+1\}$ is the sign of the next-day return, and $v$ is the
+real feature \texttt{\gtSource}. The last column gives the correlation with
+the variable in parentheses.}
+\label{tab:planted}
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Feature & Construction & $\rho$ & Correlation \\
+\midrule
+Noise & $\varepsilon$ & -- & none \\
+Linear signal & $\rho z(r_{t+1})+\sqrt{1-\rho^2}\,\varepsilon$ & $\gtRhoStrong$ & $\gtRhoStrong$ ($r_{t+1}$) \\
+Weak linear signal & same & $\gtRhoWeak$ & $\gtRhoWeak$ ($r_{t+1}$) \\
+Sign-coded signal & $\rho z(s_{t+1}|a|)+\sqrt{1-\rho^2}\,\varepsilon$ & $\gtRhoNl$ & $\gtNlCorrDir$ ($d_{t+1}$) \\
+Exact copy & $v$ & -- & identical ($v$) \\
+Partial copy & $\rho z(v)+\sqrt{1-\rho^2}\,\varepsilon$ & $\gtPartialRho$ & $\gtPartialRealized$ ($v$) \\
+\bottomrule
+\end{tabular}
 \end{table}
 
-Mean accuracy across the zoo is $\modelZooMeanAcc$ (majority-class baseline:
-$\majAcc\%$) and the largest-magnitude MCC across all \nModelsZoo{} models is
-only $\modelZooMaxMCC$. This is the validated substrate the faithfulness
-benchmark stress-tests: no model family finds exploitable real-world signal,
-so any method that reports large, confident importance for a \emph{real}
-(non-ground-truth) feature on this substrate is reporting something the data
-does not support.
+The correlations of the two linear signals are the designed values; those of
+the sign-coded signal and of the partial copy are the realized values. The
+sign-coded signal depends on the next-day return only through its sign, so
+it is a nonlinear function of the return; its realized correlation with the
+return itself is \gtNlCorrRet. In the released data, the names of the six
+columns carry the prefix \texttt{gt\_}.
 
-\textbf{Interval-aware reporting.} Table~\ref{tab:zoo} reports point Acc/F1/MCC for all
-\nModelsZoo{} models; $\nModelsZooCiScored{}$ of them (XGBoost, LightGBM,
-Logistic) additionally carry a real stock-clustered 95\% CI, computed from
-cached per-symbol predictions with the identical whole-symbol-resampling
-protocol as the faithfulness benchmark (Section~\ref{sec:faithfulness}). For
-the remaining models no interval is fabricated: per-symbol predictions
-are not yet cached for them, so no bootstrap is possible without a further
-training pass. The caution this omission calls for is the same one already
-argued from Section~\ref{sec:collinearity}'s $\bar\rho=\edaCrossCorr$
-cross-sectional dependence and $\faithEffN$ effective sample size, every
-point estimate in Table~\ref{tab:zoo} should be read as resting on
-$\faithEffN$, not $\faithUniverseN$, independent units, whether or not its
-row carries an explicit bracket. Extending real per-symbol CIs to the full
-zoo is a direct, mechanical extension of the existing pipeline and is left
-as immediate future work.
+\subsection{What Recovery Measures}
+\label{sec:meaning}
+The planted features fix the relation between a feature and the target, not
+the function that a fitted model learns from it. Three consequences follow.
+First, no ``true importance'' value is assigned to any planted feature; only
+its ordering against the noise feature is scored. Second, the sign-coded
+signal is the nonlinear effect of a single feature. No interaction between
+distinct inputs is planted, and no claim about the recovery of interactions
+is made. Third, no target value is asserted for the credit given to a
+duplicated feature. A fitted model is free to rely on either of two
+identical columns, so the share of credit that would be correct depends on
+the model and is not known. Credit shares are therefore reported
+descriptively.
 
-\section{The XAI Method Suite and Applicability}
-\label{sec:xaisuite}
-Methods are organized by taxonomy, attribution, rule/example-based,
-concept-based, gradient/propagation, graph, and mechanistic, and each is
-applied only to model classes it is architecturally valid for (methods are
-never force-fitted; an inapplicable cell is reported as such). Every neural, convolutional, attention, and graph model is given a
-ground-truth-augmented version of its inputs specifically for this scoring
-(Section~\ref{sec:groundtruth}), so a method being N/A here reflects a genuine
-architectural limit (e.g.\ captum's LRP has no propagation rule for a
-recurrent layer), not a missing artifact. Table~\ref{tab:catalogue} is the
-applicability matrix; Table~\ref{tab:catalogue_results} is the corresponding
-per-method faithfulness summary, reported separately for the linear
-(\texttt{gt\_signal}) and nonlinear (\texttt{gt\_signal\_nl}) planted
-signals. ``Faithful?'' reports, for methods that yield a global
-importance vector, whether the corresponding planted signal ranks above
-\texttt{gt\_noise} (aggregated as $k/n$ across the $n$ applicable models where
-more than one was tested); for methods evaluated on other criteria per
-convention (rule/example methods on precision/coverage or validity/sparsity;
-mechanistic methods on their own stated verdict), that criterion is reported
-instead and the nonlinear column is left blank (not applicable to a
-precision/coverage or validity/sparsity criterion).
+\subsection{Scoring}
+\label{sec:scoring}
+\textbf{Catalogue level.} Each method is applied to every model for which it
+is defined; a method is never forced onto an architecture that it does not
+support. The model is trained on all rows before \scoreYear{}
+(Table~\ref{tab:folds}, last row) and the global importance vector of the
+method is computed on the rows of \scoreYear. No embargo is applied at this
+stage, so the target of the last training day is realized on the first test
+day. A planted signal counts as recovered on a model if its importance
+exceeds that of the noise feature.
 
-\textbf{Which split these verdicts use (out-of-sample).} This matters
-especially here because \texttt{gt\_signal}
-is constructed from the target return ($\rho\cdot z(r_{t+1})+$ noise), so
-\emph{any} model will fit it easily on data it has seen; an in-sample check
-would then mostly show the explainers are not broken, not that they are
-faithful in the harder out-of-sample sense used throughout this paper.
-Every catalogued method is therefore scored the same way as every other
-result in the paper: each model is trained only on the pre-2023 fold and each
-method's importance is computed on the held-out 2023 walk-forward fold the
-model never saw during training (identical to the leakage-free protocol of
-Section~\ref{sec:leakage} and to the stock-clustered benchmark of
-Section~\ref{sec:faithfulness}). The headline
-``$\nXaiFaithfulOfScoreable$ scoreable methods recover the planted signal''
-verdict below is thus an \emph{out-of-sample} faithfulness result, not an
-in-sample one, and should be read as a conservative estimate rather than an
-upper bound.
+\textbf{Stock level.} For four widely used methods, the analysis is repeated
+stock by stock on a single XGBoost classifier (400 trees of depth~4,
+learning rate 0.03, row and column subsampling of 0.8). For every stock, an
+importance vector is computed from the rows of that stock in \scoreYear:
+for TreeSHAP, the mean absolute SHAP value over 52 randomly drawn rows; for
+KernelSHAP, the same quantity over 40 rows, with 50 background rows and 150
+perturbation samples per row; for LIME, the mean absolute weight over 10
+rows; and for permutation importance, the mean drop in accuracy over 10
+shuffles of all rows of the stock. The \emph{margin} of a planted signal is
+its importance minus that of the noise feature. The four importances are
+expressed in different units (log-odds for TreeSHAP, probability for
+KernelSHAP, weights of a local surrogate for LIME, and accuracy for
+permutation importance). A margin is therefore compared only with zero and
+never between methods. Methods are compared through a unit-free quantity,
+the share of stocks in which the margin is positive. For the two copies, the
+\emph{credit share} $a/(a+b)$ is reported, where $a$ and $b$ are the
+importances of the copy and of its source.
 
-\textbf{What the Note column means.} Every row in
-Table~\ref{tab:catalogue_results}, including TreeSHAP/KernelSHAP/LIME/
-permutation, reports a single-fit credit share averaged across that method's
-applicable \emph{models} (tagged \emph{avg./$k$ models} when $k{>}1$), 
-\emph{not} the stock-clustered value. This column and
-Table~\ref{tab:faithfulness}'s Credit column average over two different axes
-(models here, stocks there) and are not interchangeable; both are labeled
-explicitly.
-The genuinely stock-clustered credit share exists only for the four core
-methods, in Table~\ref{tab:faithfulness}. For methods evaluated on other
-criteria (precision, coverage, validity, sparsity, TCAV score, etc.), that
-metric is self-labeled instead. Extending stock-clustered per-symbol
-treatment to every neural/graph method is a natural next step
-(Section~\ref{sec:limits}), not yet part of this release.
+\subsection{Inference and Its Scope}
+\label{sec:inference}
+Intervals are percentile bootstrap intervals from \nBootstrap{} resamples of
+whole stocks. The model is fitted once and every importance vector is
+computed once; neither is repeated within the bootstrap. The intervals
+therefore describe the variation of the mean margin over the stocks of this
+universe, conditional on one fitted model and one run of each explainer.
+Three sources of uncertainty are not covered. First, variation due to the
+training seed is not measured. Second, variation due to the sampling of the
+explainers themselves is not contained in the intervals; a partial
+indication is given in Section~\ref{sec:stability}. Third, the stocks are
+not independent: the mean pairwise correlation of their daily returns is
+\faithRhoBar, which under equal correlation corresponds to about \faithEffN{}
+independent units, and serial dependence within the test year is not
+modelled. Resampling stocks leaves this dependence in place. The intervals
+and the paired tests below are therefore reported as descriptive summaries
+and not as exact significance statements.
 
-\begin{table*}[t]
-\centering\tiny
-\caption{XAI method applicability: family and the model class(es) each method
-is architecturally valid for (never force-fit; an inapplicable pairing is a
-genuine limit, not a gap). Faithfulness verdicts for the same methods are
-reported separately in Table~\ref{tab:catalogue_results}, so applicability
-and results are never conflated in one dense table.}
-\input{tables/tab_method_applicability.tex}
+\begin{table}[t]
+\caption{The \nXaiMethodsCatalogued{} catalogued methods. For the scored
+methods, an entry is the number of models on which the planted signal was
+ranked above the noise feature over the number of models scored (training
+before \scoreYear, scoring on \scoreYear). DT: decision tree; RF: random
+forest; XGB: XGBoost; LGBM: LightGBM; CatB: CatBoost; LR: logistic
+regression; SVM: support vector machine; Trf: Transformer.}
 \label{tab:catalogue}
-\end{table*}
+\centering\scriptsize
+\setlength{\tabcolsep}{3pt}
+\input{tables/tab_method_recovery.tex}
+\end{table}
 
 \begin{table*}[t]
-\centering\tiny
-\caption{XAI method faithfulness verdict against both the linear and
-nonlinear planted signal, for the methods and model classes listed in
-Table~\ref{tab:catalogue}. The Grad-CAM family's native output is a
-per-timestep curve, not a per-feature vector, so its faithfulness score is
-reported via a paired per-feature Integrated-Gradients pass on the same
-ground-truth-augmented CNN1d model (documented in the Note column);
-Grad-CAM/++/Score-CAM remain restricted to the 1D-CNN as a vision-native
-family, never applied to non-convolutional models.}
-\input{tables/tab_method_catalogue.tex}
-\label{tab:catalogue_results}
+\caption{Stock-level recovery on \faithUniverseN{} stocks, scored on
+\scoreYear. \emph{Stocks}: share of stocks in which the planted signal is
+ranked above the noise feature. \emph{Margin}: mean importance of the signal
+minus that of the noise feature, with the 95\% interval from \nBootstrap{}
+resamples of stocks. Margins are in the units of each method and are
+compared with zero only, never across rows. \emph{Credit share}: importance
+of the copy divided by the summed importances of the copy and its source.
+$^{\dagger}$Defined for \nCreditPermutation{} of the \faithUniverseN{}
+stocks only.}
+\label{tab:core}
+\centering\footnotesize
+\setlength{\tabcolsep}{4.5pt}
+\input{tables/tab_core_recovery.tex}
 \end{table*}
 
-\textbf{The \texttt{muse\_brcg} surrogate.} It combines two global-surrogate
-techniques, not one algorithm: MUSE selects an interpretable input subspace;
-BRCG (Boolean Rule Column Generation) fits a compact Boolean rule list on it
-to approximate the black box. Our 8-leaf surrogate of the XGBoost classifier
-has high fidelity to the black box's own predictions but only near-chance
-accuracy against true labels, the expected, consistent combination for a
-faithful surrogate of an unskilled model, not a contradiction.
+\section{Results}
+\label{sec:results}
+\subsection{Recovery Across the Catalogue}
+Table~\ref{tab:catalogue} lists the \nXaiMethodsCatalogued{} methods.
+\nXaiNativeScored{} of them yield a feature-importance vector and are scored
+on that output. The remaining \nXaiNotScored{} are not scored on feature
+recovery. Anchors, counterfactual search, and the contrastive explanation
+method return rules or examples for individual predictions. The three
+Grad-CAM variants return a curve over time steps and not over features; a
+per-feature score obtained with Integrated Gradients on the same CNN is
+stored with the released results, but it is a result of Integrated Gradients
+and is counted once, under that method. The concept-based and mechanistic
+tools are treated in Section~\ref{sec:exploratory}.
 
-Of the $\nXaiMethodsCatalogued$ methods catalogued, $\nXaiFaithfulOfScoreable$
-are scoreable against ground truth and every one of them correctly ranks the
-planted signal above pure noise, for both the linear and the nonlinear
-signal, wherever both were checked. This is a substantially larger scoreable
-set than a single-model, tabular-only check would give: Integrated Gradients
-now has a real score on all five sequence architectures, and the Grad-CAM
-family, while still restricted to the CNN1d for its native temporal output, no
-longer reports a blanket N/A for feature-level faithfulness. The remaining
-non-scoreable rows are genuine architectural limits (captum's LRP has no rule
-for a recurrent layer; CAM's temporal-only native output) or methods
-evaluated on other, equally rigorous criteria (Anchors on precision/coverage,
-counterfactuals on validity/sparsity) rather than gaps. No scoreable method
-that \emph{could} be checked against ground truth failed to recover either
-planted signal at the global level, the harder, more informative question,
-addressed next, is not \emph{whether} a method finds the signal but \emph{how
-reliably} and \emph{how it behaves under collinearity}.
+SHAP, LIME, permutation importance, Integrated Gradients, LRP, guided
+backpropagation, deconvnet, Grad-CAM, the EBM, and GNNExplainer are taken
+from reference libraries. Anchors, counterfactual search, the contrastive
+explanation method, RISE, Grad-CAM++, and Score-CAM are simplified
+re-implementations adapted to tabular or one-dimensional inputs; in
+particular, RISE was proposed for image classifiers~\cite{petsiuk2018rise}
+and is applied here by masking features at random. The rank-aggregated
+TreeSHAP row averages the within-instance ranks of local TreeSHAP values,
+and the surrogate row is a shallow decision tree fitted to the predictions
+of the XGBoost model.
 
-\section{Ground-Truth Faithfulness Benchmark}
-\label{sec:faithfulness}
-\textbf{All scores below are out-of-sample.} Every importance and
-faithfulness number in this section is computed on the held-out 2023 test
-fold: the model is fit only on years before 2023 and never sees the 2023 rows
-during training, and every explainer (TreeSHAP, KernelSHAP, LIME,
-permutation) is then run only on those unseen 2023 rows. Faithfulness here is
-therefore an out-of-sample measure, not an in-sample fit-quality check:
-a method that recovers ground truth on data it never trained on demonstrates
-genuinely out-of-sample-faithful attribution rather than an ability to
-fit its own training signal.
+All \nXaiRecoveredLinear{} scored methods ranked the linear signal above the
+noise feature, and all \nXaiRecoveredNl{} did so for the sign-coded signal,
+on every model on which they were scored. At this signal strength and at the
+level of a global importance vector, recovery therefore does not
+discriminate between methods. The comparison is sharpened below by lowering
+the signal strength and by scoring each stock separately.
 
-The headline result requires more than a single global check: a method that
-looks faithful in one fit could be capitalizing on chance. Each core
-method's importance is therefore computed \emph{per stock} (not once,
-globally) and cluster-bootstrapped over stocks, the correct unit of
-resampling, since
-stock-days are not independent (Section~\ref{sec:collinearity}), reporting a
-95\% confidence interval on the mean importance margin for \emph{both}
-planted signals (\texttt{gt\_signal}$-$\texttt{gt\_noise} and
-\texttt{gt\_signal\_nl}$-$\texttt{gt\_noise}), the fraction of stocks where
-the method gets each ranking right, and the credit share it assigns to the
-redundant copy versus its source feature. The effective sample size is also reported,
-$N_{\text{eff}}=N/(1+(N-1)\bar\rho)$ using the mean pairwise cross-sectional
-return correlation $\bar\rho$ of the universe, and an approximate
-minimum-detectable-effect-size (MDES) at 80\% power, because $\bar\rho$ is
-large in equity markets (one dominant market factor), $N_{\text{eff}}$ is far
-below the raw stock count and every interval should be read with that power
-constraint in mind.
+\subsection{Stock-Level Recovery}
+Table~\ref{tab:core} reports the stock-level results. TreeSHAP, KernelSHAP,
+and LIME ranked each of the three planted signals above the noise feature in
+every stock, including the weak signal ($\rho=\gtRhoWeak$), and the
+intervals of their margins lie above zero. Permutation importance behaved
+differently. The linear signal was ranked above the noise feature in
+\pctSymPermutation\% of stocks (interval
+\pctSymCiLoPermutation--\pctSymCiHiPermutation\%), the sign-coded signal in
+\pctSymNlPermutation\%, and the weak signal in \pctSymWeakPermutation\%,
+with a weak-signal margin whose interval contains zero. The weak signal was
+thus recovered by \nWeakRecovered{} of the \nCoreMethods{} methods.
 
-\textbf{Bootstrap procedure.} Every clustered interval here
-is computed identically: the model is fit \emph{once} on the training years,
-and each method's per-symbol importance vector is computed \emph{once} on the
-held-out fold and then reused, unchanged, across every resample: the
-bootstrap resamples \emph{symbols}, and never re-trains the model or
-re-computes an explanation. Concretely: 5000 resamples, each drawn by
-resampling whole \emph{symbols with replacement} from that fixed set of
-per-symbol importances (never stock-days, which would treat correlated
-observations as independent), recomputing the mean margin (or proportion, for
-\%Symbols) each time, and taking the 2.5th/97.5th percentiles as the 95\% CI
-(a \emph{percentile} bootstrap interval throughout this paper, not a
-bias-corrected-and-accelerated, BCa, interval). Temporal dependence is
-handled separately, upstream, by the embargoed walk-forward train/test split
-(Section~\ref{sec:leakage}); the cross-sectional bootstrap here resamples
-\emph{across} stocks at a fixed point in that split and never reorders time
-within a stock. A natural question is how a clustered interval can be tight
-when $N_{\text{eff}}\approx2.5$. $N_{\text{eff}}$
-and the bootstrap CI answer different questions. The per-symbol margins are
-themselves stable (most stocks agree on the sign and rough size of the
-signal-noise gap), so resampling those 57 stable numbers yields a tight
-interval on \emph{this universe's} mean; $N_{\text{eff}}$ instead cautions
-how far that conclusion \emph{generalizes} to a less-correlated universe, not
-that the reported interval is miscalibrated, complementary diagnostics, not
-competing ones.
+In the paired comparison on the linear signal, permutation importance failed
+in \mcnemarPermOnlyWrong{} stocks in which each of the other three methods
+succeeded, and the reverse occurred in \mcnemarOtherOnlyWrong{} stocks
+(exact McNemar test, $\mcnemarPExpr$ for each pair, subject to the caveats
+of Section~\ref{sec:inference}). A likely contributor, which was not tested,
+is that the per-stock permutation importance is estimated from changes in
+accuracy on one year of daily rows of a single stock, which is a coarse
+statistic for a signal of this strength.
 
-\begin{table*}[t]
-\centering\tiny
-\caption{Stock-clustered faithfulness benchmark, $N=\faithUniverseN$ stocks,
-$\bar\rho=\faithRhoBar$, $N_{\text{eff}}=\faithEffN$. Margin is the mean
-importance difference against \texttt{gt\_noise} ($\pm$ = half-width of the
-95\% clustered CI), reported separately for the linear (\texttt{gt\_signal})
-and nonlinear (\texttt{gt\_signal\_nl}) planted signal; \%Sym is the fraction
-of stocks where the method ranks the signal above noise; MDES is the
-approximate minimum detectable effect size at 80\% power
-(Section~\ref{sec:faithfulness}); Credit reports the mean share assigned to
-the duplicated feature for both the exact copy (\texttt{gt\_redundant\_copy})
-and the partially collinear variant (\texttt{gt\_redundant\_partial},
-$\rho=0.8$), 0.5 = perfectly even split with the source feature in both
-cases.}
-\input{tables/tab_faithfulness_benchmark.tex}
-\label{tab:faithfulness}
-\end{table*}
+The margins of the linear and the sign-coded signal are not compared with
+each other, because the two signals are not matched in strength with respect
+to the direction label: the realized correlation of the sign-coded signal
+with the label is \gtNlCorrDir, whereas the corresponding value for the
+linear signal was not stored.
 
-\begin{table}[t]
-\centering\scriptsize
-\caption{Weak planted-signal recovery (\texttt{gt\_signal\_weak},
-$\rho=0.05$): the near-noise-floor condition, same stock-clustered
-protocol as Table~\ref{tab:faithfulness}.}
-\input{tables/tab_faithfulness_weak_signal.tex}
-\label{tab:faithfulness_weak_signal}
-\end{table}
+\subsection{Credit Assigned to Duplicated Features}
+For the exact copy, the mean credit share was \creditExactTreeshap{} for
+TreeSHAP, \creditExactKernelshap{} for KernelSHAP, and \creditExactLime{}
+for LIME; for the partial copy, the shares were \creditPartialTreeshap,
+\creditPartialKernelshap, and \creditPartialLime. The two SHAP estimators
+thus assigned about a fifth of the credit of the pair to an exact copy and
+nearly half to a partial copy, whereas LIME assigned a little over a third
+in both cases. The ordering of the methods is not the same in the two cases.
+For permutation importance, the share is defined for only
+\nCreditPermutation{} of the \faithUniverseN{} stocks, because stocks in
+which the two importances sum to a non-positive value are excluded; its
+values are therefore not comparable with the others. No share is taken to be
+the correct one. As noted in Section~\ref{sec:meaning}, part of this pattern
+may be a property of the fitted model and not of the explainer, since an
+even split is expected only if the model itself relies on both columns
+equally.
 
-\begin{table}[t]
-\centering\scriptsize
-\caption{Paired per-stock tests: permutation vs.\ each SHAP/LIME method
-on the symbol-level signal-vs-noise outcome. McNemar tests the binary
-(ranked correctly) outcome; Wilcoxon signed-rank tests the continuous
-margin. Both use the SAME clustering unit (symbol) as
-Table~\ref{tab:faithfulness}, so both are valid paired tests.}
-\input{tables/tab_paired_tests.tex}
-\label{tab:paired_tests}
-\end{table}
+\subsection{Stability}
+\label{sec:stability}
+Three checks that are stored with the results bear on the stability of these
+findings.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_faithfulness_benchmark.png}
-\caption{Stock-clustered faithfulness benchmark (linear signal): mean
-signal-minus-noise importance margin with 95\% clustered confidence
-intervals, $N=\faithUniverseN$ stocks. All four intervals exclude zero; the
-nonlinear-signal intervals (Table~\ref{tab:faithfulness}) also all exclude
-zero and are not separately plotted.}
-\label{fig:faithbench}
-\end{figure}
+\textbf{Scored year.} The stock-level analysis was repeated with each of the
+years \yearRobustFirst--\yearRobustLast{} as the scored year. In these
+repetitions the model is trained on all other years, so for the years before
+\scoreYear{} the training set includes later years; the repetitions are not
+out-of-time evaluations and test only whether the pattern depends on the
+scored year. TreeSHAP, KernelSHAP, and LIME ranked the linear signal above
+the noise feature in every stock in each year, and permutation importance
+did so in \yearPctSymMinPermutation--\yearPctSymMaxPermutation\% of stocks.
+The credit share of the exact copy ranged over
+\yearCopyCreditMinTreeshap--\yearCopyCreditMaxTreeshap{} for TreeSHAP,
+\yearCopyCreditMinKernelshap--\yearCopyCreditMaxKernelshap{} for KernelSHAP,
+and \yearCopyCreditMinLime--\yearCopyCreditMaxLime{} for LIME, whereas that
+of permutation importance changed sign ($\yearCopyCreditMinPermutation$ to
+$\yearCopyCreditMaxPermutation$).
 
-Five findings survive the clustered, effective-N-aware treatment, each
-stated with the $N_{\text{eff}}=\faithEffN$ power caveat attached. First, at
-$N=\faithUniverseN$ stocks, TreeSHAP
-($\pctSymTreeshap\%$, 95\% CI $[\pctSymCiLoTreeshap,\pctSymCiHiTreeshap]$),
-KernelSHAP ($\pctSymKernelshap\%$), and LIME ($\pctSymLime\%$) rank the linear
-planted signal above noise in the overwhelming majority of stocks with tight
-clustered intervals on \emph{this} $\faithUniverseN$-stock universe; because
-$N_{\text{eff}}\approx\faithEffN$, we read this as strong evidence for these
-methods on the equity universes this correlation structure is typical of, not
-as a claim that would automatically transfer to a less-correlated domain.
-TreeSHAP's margin ($\marginTreeshap$) clears its own MDES
-($\mdesTreeshap$) by roughly $\mdesRatioTreeshap\times$, a large,
-well-powered effect, not a borderline detection. Second, and only visible at
-this scale, \textbf{permutation importance shows lower and less consistent
-recovery than TreeSHAP, KernelSHAP, and LIME}: it
-ranks the linear signal above noise in only $\pctSymPermutation\%$ of stocks
-(margin $\marginPermutation$, MDES $\mdesPermutation$, clearing it by
-$\mdesRatioPermutation\times$, still a real effect, just a smaller and less
-consistent one), a genuine cross-method reliability gap that a single-fit
-check would have missed entirely. This is supported by a paired per-stock
-test rather than non-overlapping CIs alone: McNemar's test on the
-symbol-level ranked-correctly outcome gives $p=$\,\mcnemarPTreeshap{}
-(permutation vs.\ TreeSHAP), $p=$\,\mcnemarPKernelshap{} (vs.\ KernelSHAP), and
-$p=$\,\mcnemarPLime{} (vs.\ LIME), corroborated by the continuous-margin Wilcoxon
-signed-rank test ($p=$\,\wilcoxonPTreeshap{}, \wilcoxonPKernelshap{},
-\wilcoxonPLime{} respectively), both pairings are on the SAME clustering
-unit (symbol), so both tests are valid. McNemar's test pairs, per symbol, the
-binary indicator of whether that method ranked the planted signal above noise
-(margin$>$0), the same ranked-correctly outcome Table~\ref{tab:faithfulness}
-reports as \%Sym, while the Wilcoxon signed-rank test pairs the continuous
-margin itself, so the two probe the same disagreement at a coarse and a fine
-grain. Wilcoxon is used rather than a paired $t$-test because the per-symbol
-margins are non-normal and heavy-tailed at $N=\faithUniverseN$ symbols (a
-handful of stocks dominate the spread; Section~\ref{sec:eda}'s kurtosis
-finding is the same underlying phenomenon one level up), where a
-rank-based test is the more defensible choice. Third, \textbf{the nonlinear signal is
-recovered at least as reliably as the linear one, and with a consistently
-\emph{larger} importance margin}, for every one of the four core methods
-(Table~\ref{tab:faithfulness}), despite the nonlinear signal's weaker raw
-correlation with the targets (Section~\ref{sec:groundtruth}). This directly
-addresses the concern that the ground truth might only certify recovery of
-simple additive effects: a genuinely interaction-based signal is, if anything,
-easier for these methods to surface, not harder. Fourth, \textbf{the weak
-planted signal (\texttt{gt\_signal\_weak}, $\rho=0.05$, near the noise floor)
-is still recovered by $\nWeakSignalScored$/4 core methods}
-(Table~\ref{tab:faithfulness_weak_signal}): recovery at a strong
-$\rho=0.15$ signal does not by itself establish sensitivity near the
-detection limit, so the limit is tested directly rather than only the easy
-case. Fifth, methods disagree sharply on \emph{how} they handle the
-duplicated feature, and this disagreement is not specific to an exact
-duplicate: credit-splitting on \texttt{gt\_redundant\_copy} (an exact copy)
-ranges from roughly a quarter of the credit (TreeSHAP, KernelSHAP
-$\approx$0.24--0.25) to a near-exact 50/50 split (GNNExplainer, 0.500); the
-partially collinear variant \texttt{gt\_redundant\_partial} ($\rho=0.8$ with
-its source, Table~\ref{tab:faithfulness}) shows the same qualitative
-ranking across methods, so the credit-splitting disagreement is a property of
-collinearity handling in general, not an artifact of testing only the exact-
-duplicate edge case. None of the compact attribution methods split credit as
-evenly as this graph-based explainer did on this architecture, a concrete,
-measured instance of the disagreement
-problem~\cite{krishna2022disagreement} rather than an assertion of it, and
-one not generalized beyond the single GNN/GNNExplainer pairing tested
-here.
+\textbf{Choice of stocks.} When \jackNDrop{} of the \faithUniverseN{} stocks
+were left out at random (\jackNIter{} draws), the mean margin of each method
+changed by at most \jackMarginDeltaMax\%.
 
-\textbf{Reconciling raw magnitude with credit share.} A raw importance bar
-chart (e.g.\ Fig.~\ref{fig:shap}) shows \texttt{gt\_redundant\_copy} as one
-of the smaller bars, since it duplicates \texttt{vol\_z20}, itself a modest
-feature, not in tension with the $\approx$0.24--0.25 credit share in
-Table~\ref{tab:faithfulness}: credit share is the \emph{ratio} $a/(a+b)$
-between two small raw-importance numbers, not a claim about either one's
-absolute size.
+\textbf{Explainer sampling.} In the robustness stage, \scoreYear{} was
+scored a second time with a different random selection of explained rows.
+Relative to Table~\ref{tab:core}, the margin of the linear signal changed by
+\rerunDeltaTreeshap\% for TreeSHAP, \rerunDeltaKernelshap\% for KernelSHAP,
+and \rerunDeltaLime\% for LIME. These differences are small, but they are
+not contained in the reported intervals.
 
-\textbf{Robustness across test years.} Every number above uses the 2023
-held-out fold to score importance, which raises two questions: whether that
-choice is representative or an artifact of one year, and whether a 95\% CI
-from $\faithUniverseN$ correlated stocks is fragile to which stocks it happens
-to include. Both are checked directly. \emph{Year robustness:} re-running the identical per-symbol
-cluster-bootstrap protocol with 2021 and 2022, in turn, as the held-out
-scoring fold (training on the complement) reproduces every qualitative
-conclusion: the method ranking, each pass/fail verdict, and the
-credit-splitting pattern are unchanged in all three years. Quantitatively,
-across the three reliable methods (TreeSHAP, KernelSHAP, LIME), signal-noise
-margins deviate from their 2023 values by at most $12.5\%$ in relative terms
-(TreeSHAP, 2022; at most $0.018$ in absolute margin units), and exact-copy
-credit shares by at most $22.1\%$ (LIME, 2021; at most $0.076$ in absolute
-share units). Concretely, TreeSHAP's signal-noise
-margin ranges $[\yearMarginMinTreeshap,\yearMarginMaxTreeshap]$ across
-the three years (a $12.5\%$ relative swing from the 2023 value of
-$\yearMarginMinTreeshap$), and its credit share on the exact duplicate ranges
-$[\yearCopyCreditMinTreeshap,\yearCopyCreditMaxTreeshap]$ (a $17.1\%$
-relative swing from the 2023 value of $\yearCopyCreditMinTreeshap$); permutation
-importance is the least reliable method in \emph{every} year, never reaching
-100\% of stocks ranked correctly (range
-$[\yearPctSymMinPermutation,\yearPctSymMaxPermutation]\%$ across
-2021--2023, versus 100\% every year for TreeSHAP/KernelSHAP/LIME). One
-subresult does \emph{not} replicate cleanly: permutation's own credit share
-on the exact duplicate is
-unstable across years in both magnitude and sign (2021: $0.077$, $n{=}24/57$
-symbols scored; 2022: $-0.093$, $n{=}27/57$; 2023: $0.277$,
-$n{=}19/57$), because permutation importance can itself go negative
-(shuffling a feature can spuriously improve held-out accuracy), which both
-flips the sign of the ratio $a/(a+b)$ for some stocks and shrinks the number
-of stocks with a well-defined credit share to well under
-$\faithUniverseN$ in every year. With only 19--27 stocks contributing, this
-particular subresult carries even less statistical power than the headline
-$N_{\text{eff}}=\faithEffN$ caveat (Section~\ref{sec:faithfulness}) already
-assigns to the full sample, so it should not be compared to the
-$n{=}\faithUniverseN$ credit shares as if the two were equally well
-powered. This is read as a further, independent
-symptom of permutation importance's unreliability under this data's
-collinearity (Section~\ref{sec:collinearity}), not as evidence against the
-SHAP/LIME credit-share story, which stays stable across years.
-\emph{Stock-resampling robustness:} repeating the 2023 cluster-bootstrap
-$200$ times while additionally dropping 10 of the $\faithUniverseN$ stocks
-at random each time, testing whether the reported interval depends on which
-particular stocks are included, not just how many, moves TreeSHAP's mean
-margin by only $\jackMarginDeltaTreeshap\%$ relative to the full-sample
-value, with the MDES increasing by the expected, modest
-$\jackMdesDeltaTreeshap\%$ from the smaller effective sample; the pattern is
-the same for the other three methods (\texttt{faithfulness\_jackknife.json}).
-A tight clustered CI at $N_{\text{eff}}=\faithEffN$ is therefore not fragile
-to which $47$ of the $\faithUniverseN$ stocks happen to be resampled, which
-directly addresses the effective-sample-size caveat
-(Section~\ref{sec:faithfulness}).
+\subsection{Agreement Between Rankings}
+For pairs of methods that were run on a common model, the Spearman rank
+correlation between the full importance rankings was averaged over the
+shared models (\agrCommonMin{} to \agrCommonMax{} models per pair). TreeSHAP,
+KernelSHAP, and LIME agreed with one another (\agrKernelshapTreeshap{} for
+TreeSHAP and KernelSHAP, \agrLimeTreeshap{} for TreeSHAP and LIME, and
+\agrKernelshapLime{} for KernelSHAP and LIME), whereas the rankings of
+permutation importance were only weakly related to theirs
+(\agrPermMin--\agrPermMax). Methods that share no model with these four are
+not included.
 
-\subsection{Why the paradigms diverge}
-\label{sec:whydiverge}
-The findings above report \emph{whether} each paradigm is faithful; this
-subsection examines \emph{why} they diverge.
+\subsection{Concept-Based and Mechanistic Outputs}
+\label{sec:exploratory}
+The following outputs are not recovery scores and are reported as
+exploratory.
 
-\textbf{Perturbation is weakest because collinearity masks single-feature
-ablation.} Permutation importance measures the drop in model performance
-when one feature is shuffled in isolation. Under the correlation structure
-this paper documents (Section~\ref{sec:collinearity}), the planted signal's
-information is not carried by \texttt{gt\_signal} alone in any strict sense
-once a model has learned to lean on correlated real features that happen to
-move with it during training; shuffling \texttt{gt\_signal} alone leaves
-enough of that information reachable through other inputs that the measured
-performance drop understates the feature's true importance. TreeSHAP,
-KernelSHAP, and LIME do not have this failure mode because they attribute
-credit \emph{jointly} across coalitions of features (Shapley values) or a
-local linear surrogate, rather than via single-feature ablation, consistent
-with permutation importance's measurably lower \%Sym and wider clustered CI
-(Section~\ref{sec:faithfulness}) being a structural property of the method,
-not noise.
+\textbf{TCAV.} TCAV quantifies the sensitivity of a prediction to a concept
+that is represented as a direction in the activation space of a
+layer~\cite{kim2018tcav}. For two concepts defined on the GRU (days with
+high news volume and days with positive sentiment), the raw TCAV score was
+\tcavScoreMax{} in both cases. A statistical test of TCAV scores is
+prescribed by the original method~\cite{kim2018tcav}. As a null check, each
+score was compared here with the scores of \tcavNRandom{} concept vectors
+fitted to random relabelings of the same activations. The random vectors
+produced mean scores of \tcavNullMeanRange{} with a wide spread, and neither
+concept was distinguished from them (empirical two-sided $p=\tcavPEmp$). The
+raw scores are therefore not evidence of concept sensitivity.
 
-\textbf{TreeSHAP outperforms KernelSHAP because it is exact, not sampled.}
-Within the SHAP family, TreeSHAP's margin against noise
-($\marginTreeshap$) is consistently larger than KernelSHAP's
-($\marginKernelshap$, Table~\ref{tab:faithfulness}) because TreeSHAP computes
-\emph{exact} per-tree Shapley values via the tree structure itself, while
-KernelSHAP approximates the same quantity with a sampled weighted linear
-regression (here, 150 samples per instance), exactness versus
-Monte-Carlo approximation, not a difference in what each method is trying to
-measure.
+\textbf{Sparse autoencoder.} A sparse autoencoder of the kind used for
+language models~\cite{cunningham2024sae} was trained on the last-token
+representation of the Transformer. For \saeObserved{} of the \saeLatents{}
+latents, the absolute correlation with at least one input feature exceeded
+\saeThreshold. Under \saeNShuffles{} shuffles of the feature columns the
+maximum count was \saeNullMax, and across \nSensRuns{} training runs
+(\sensNSeeds{} seeds, \sensNYears{} test years) the share of such latents
+was \sensPctInterpMin--\sensPctInterpMax\%. The latents thus track input
+features. This finding is correlational: it does not show how the
+representation is computed, and no claim about the linearity of the
+mechanism is made.
 
-\textbf{The nonlinear signal recovers more strongly than the linear one
-because tree/SHAP-based methods pick up interaction variance more readily
-than a diluted additive effect.} Despite \texttt{gt\_signal\_nl}'s weaker
-\emph{raw} (Pearson) correlation with the target than \texttt{gt\_signal}'s
-(Section~\ref{sec:groundtruth}), every core method's importance margin is
-\emph{larger} for the nonlinear signal (Section~\ref{sec:faithfulness}). The
-likely mechanism: a simple additive linear leak spreads its explanatory
-credit across every tree split and every locally-linear neighborhood that
-happens to correlate with it, diluting the signal a raw correlation already
-struggles to isolate; a sign$\times$magnitude interaction, by contrast,
-creates sharp, learnable splits that a tree ensemble's recursive partitioning
-exploits directly and that SHAP's game-theoretic attribution then credits
-concentrated, not diffuse. Interaction structure is, if anything, easier for
-these methods to surface than a diluted additive one, a result that would
-look paradoxical without this mechanism stated explicitly.
+\textbf{Component ablation.} Each of the eight attention heads and the two
+encoder layers of the Transformer was ablated in turn. This is a manual
+sweep and not the automated circuit-discovery algorithm
+of~\cite{conmy2023acdc}. In each of the \nSensRuns{} runs, exactly one of the
+\ablNComponents{} components exceeded the threshold of $z>\ablThreshold$,
+and in every run it was a full encoder layer
+(\texttt{\sensMajorityComponent} in \sensMajorityN{} of the \sensTotalRuns{}
+runs); no single head exceeded the threshold. An earlier single run with the
+configuration of one of these runs found no component above the threshold,
+which illustrates the variation between runs. Because the ablation of a full
+layer removes all of its heads, a larger effect is expected for a layer than
+for a head, and under a shuffle null about one component (\ablNullMean{} on
+average) exceeds the threshold by chance. These observations are therefore
+not interpreted as evidence of a circuit.
 
-\textbf{Concept, gradient, and graph methods answer a different question
-and inherit different caveats.} TCAV's raw score answers whether a concept
-direction has a consistent sign, not whether that consistency exceeds what a
-random direction would show; Section~\ref{sec:mechanistic}'s random-concept
-null shows it currently does not, for either concept tested here. The
-Grad-CAM family answers a spatial/temporal localization question, not a
-per-feature attribution one, which is why its faithfulness score
-(Table~\ref{tab:catalogue_results}) is reported via a paired Integrated-
-Gradients pass rather than natively. GNNExplainer's near-even
-(0.500) credit split on the duplicated feature, versus the compact
-attribution methods' $\approx$0.24--0.25, likely reflects that it optimizes a
-mask over the correlation \emph{graph}'s edges and node features jointly,
-so a duplicated node feature is redundant from the graph's perspective in a
-way it is not from a single feature vector's perspective, a genuinely
-different notion of ``credit'' than the tabular methods use, not a
-disagreement about the same quantity.
-
-\section{RQ2: Pairwise Method Agreement}
-\label{sec:agreement}
-RQ2 asks how much explanations agree with each other, not just whether each
-one individually recovers the planted signal (RQ1).
-Table~\ref{tab:catalogue_results} already shows disagreement
-\emph{indirectly}, through diverging faithfulness verdicts and
-redundant-feature credit shares; here it is answered directly with
-a pairwise rank-correlation matrix over the subset of methods for which a
-same-model comparison is well posed (scoped explicitly below, not a claim
-that every catalogued method enters it). For every pair of methods that (a)
-produce a complete per-feature importance ranking over the same feature set
-and (b) were both run on at least one common model class, the
-Spearman rank correlation between their two importance vectors is computed
-on that model and averaged across every shared model. The comparison is
-scoped deliberately rather than forcing every method into one it cannot
-support: block-permutation and
-ALE only score the 4 ground-truth-relevant features in this pipeline, not a
-full ranking (Section~\ref{sec:xaisuite}), and Integrated Gradients, LRP,
-Grad-CAM family, and GNNExplainer each run on a disjoint neural- or graph-only
-model class with no model in common with the classical methods below, none
-of those five can enter a same-model rank correlation by construction
-($\nAgreementExcluded$ methods are
-excluded for this reason; see \texttt{xai\_agreement\_matrix.json}). The
-matrix below therefore covers the $\nAgreementMethods$ methods that share a
-model class pairwise: TreeSHAP, KernelSHAP, LIME, and permutation importance.
-
-\begin{table}[t]
-\centering\small
-\caption{RQ2 pairwise agreement: mean Spearman rank correlation between each
-method pair's full per-feature importance ranking, averaged over every model
-where both methods were run (Fig.~\ref{fig:agreement}).}
-\input{tables/tab_agreement_matrix.tex}
-\label{tab:agreement}
-\end{table}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.82\columnwidth]{fig_agreement_matrix.png}
-\caption{RQ2 pairwise XAI method agreement (Spearman rank correlation of
-full-feature importance rankings, averaged across shared models).}
-\label{fig:agreement}
-\end{figure}
-
-Off-diagonal agreement ranges $[\agreementRhoMin,\agreementRhoMax]$ (mean
-$\agreementRhoMean$) across the $\nAgreementMethods$-method matrix. This is
-the direct evidence RQ2 asks for, on top of (not instead of) the indirect
-disagreement already visible in the faithfulness benchmark's credit-splitting
-spread (Section~\ref{sec:faithfulness}): the two are complementary views of
-the same disagreement problem~\cite{krishna2022disagreement}, one on rankings
-and one on a specific quantitative credit allocation.
-
-\section{Mechanistic Deep-Dive}
-\label{sec:mechanistic}
-Mechanistic interpretability, sparse autoencoders (SAEs) and automated
-circuit discovery, has to date been applied almost exclusively to language
-models. Both are applied, for the first time to our knowledge on a financial
-time-series model, to the Transformer variant's last-token hidden
-representation.
-
-\textbf{Sparse autoencoder.} A 4$\times$-overcomplete SAE (ReLU
-encoder, L1-penalized hidden activations) is trained on the Transformer's
-64-dimensional representation, and each of the 256 learned latent directions
-is correlated against every named input feature. Using a pre-declared threshold
-($|r|>0.3$), 253/256 latents (98.8\%) are ``interpretable'' by this
-criterion. Because each latent's score is the \emph{maximum} $|r|$ over 22
-candidate features, this count is exposed to a genuine multiple-comparisons
-risk, so it is not reported unguarded: the identical procedure is recomputed
-on 20 independent
-feature-shuffle nulls (each feature column independently permuted, breaking
-any true latent-feature dependence). The null count collapses to
-$\saeNullMean$ interpretable latents on average (95th percentile
-$\saeNullPHi$, maximum $\saeNullMax$, out of 256) at the same $|r|>0.3$
-threshold, i.e.\ essentially none of the 253 observed latents are explained
-by chance, and a threshold sweep ($|r|>0.2$ through $|r|>0.6$;
-\texttt{xai\_sae\_null.json}) shows the same near-zero null at every
-threshold tested. The 253/256 finding is therefore real, not a
-multiple-comparisons artifact, but it is still not the deep circuit-level
-abstraction the method targets in language models: the dominant correlates
-are price/technical features (\texttt{logvol}, \texttt{rsi14},
-\texttt{vol\_z20}, \texttt{ma\_gap20}), consistent with a shallow, two-layer
-Transformer whose last-token representation is largely a near-linear echo of
-the raw last-day input rather than an emergent, abstracted concept. This
-finding is reported as it stands: interpretable in the narrow, correlational
-sense, \emph{and} guarded against chance, but not evidence of learned market
-structure.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.86\columnwidth]{fig_sae_latent_corr_hist.png}
-\caption{Distribution of SAE latent-to-input-feature correlations. Most
-latents strongly track a single raw price/technical feature, consistent with
-a shallow representation rather than emergent abstraction.}
-\label{fig:sae}
-\end{figure}
-
-\textbf{Ablation-based circuit analysis.} Each of the Transformer's
-8 attention head$\times$layer combinations and its 2 full encoder layers is
-ablated, measuring the resulting change in model output relative to the unablated
-model, against a pre-declared notability threshold ($z>2$ over the ten
-components' effect distribution). This threshold is not, on its own, highly
-selective: a feature/label-shuffle null (20 shuffles) finds
-$\ablNullMean$ components crossing $z>2$ by chance on average (95th
-percentile $\ablNullPHi$), so roughly one ``notable'' component is expected
-in any single run purely by chance, the identity and recurrence of the
-component, not its bare $z>2$ crossing, is what carries evidential weight
-(below). In the single original run, no component exceeds the
-threshold, the pre-registered ``no structure'' outcome. A single run
-cannot establish that this is not an artifact of one initialization, so the
-identical SAE+ablation pipeline is re-run across 3 seeds and 2 folds
-($\nSensRuns$ independent Transformer trainings; see below), and that check
-changes the finding.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=0.86\columnwidth]{fig_acdc_ablation_bar.png}
-\caption{Ablation-based component importance (mean $|\Delta\text{output}|$)
-across the Transformer's attention heads and encoder layers, single original
-run. No component exceeds the pre-declared notability threshold ($z>2$,
-dashed) in this run; Fig.~\ref{fig:mechsens} shows this does not hold
-uniformly across seeds/folds.}
-\label{fig:acdc}
-\end{figure}
-
-\textbf{Seed/fold sensitivity.} Re-running the identical SAE + ablation
-pipeline across $\nSensRuns$ independent (seed, fold) configurations shows
-the SAE finding is stable but the ablation finding is \emph{not}: the
-interpretable-latent share stays in a narrow, consistently high band
-($\sensPctInterpMin$--$\sensPctInterpMax\%$, mean $\sensPctInterpMean\%$)
-across every run, confirming the ``shallow, largely-linear representation''
-finding is not a fluke of one initialization. The ablation finding is
-different, $\nSensRunsWithNotable$/$\nSensRuns$ runs find \emph{some}
-component crossing $z>2$ (range $\sensMaxZMin$--$\sensMaxZMax$), which on its
-own would look like the original null was too strong. But the identity of
-that component is what resolves it: $\sensMajorityN$/$\sensTotalRuns$ runs
-independently point to the \emph{same} component
-(\texttt{\sensMajorityComponent}, a full-layer bypass, not a single
-attention head), with $\nSensDistinctTop$ distinct components appearing
-across all runs total. This recurrence is quantified against chance: under
-the null that
-each run's top component is drawn uniformly at random from the
-$\recurC$ candidates, the exact probability that \emph{one specific}
-component recurs as the top component in $\recurK$ of $\recurR$ independent
-runs is $p=\recurPBinomOne$, and even after a Bonferroni-style correction
-for testing all $\recurC$ candidate components, the probability that
-\emph{any} one of them recurs that often by chance is still only
-$p\le\recurPUnion$, both far below 0.05. This is evidence of a real, if
-modest, reproducible effect concentrated at the whole-layer level rather than
-in any individual attention head.
-The finding is revised accordingly: the original single-run
-``no notable component'' claim was too strong, but so would ``no reproducible
-structure at all'' be; the sensitivity-checked finding is a weak but
-recurring layer-level effect, with no evidence of head-level specialization.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{fig_mechanistic_sensitivity.png}
-\caption{Seed/fold sensitivity: interpretable-latent share (left) and
-maximum ablation $z$-score (right) across $\nSensRuns$ independent
-(seed, fold) Transformer trainings. The SAE finding is stable; the ablation
-finding recurs at a similar magnitude but is not perfectly uniform, see
-text.}
-\label{fig:mechsens}
-\end{figure}
-
-\textbf{TCAV significance.} The two concept-based TCAV scores reported in
-Table~\ref{tab:catalogue_results} (\texttt{high\_attention} and
-\texttt{positive\_sentiment}, both raw score 1.00, i.e.\ a positive
-directional derivative on every test example) require the significance test
-the original TCAV method calls for~\cite{kim2018tcav}: a comparison against
-random, meaningless concept directions. For each concept,
-$100$ random CAVs are fitted from random relabelings of the same activation
-pool and the real TCAV score is compared to that null distribution. Neither concept
-survives it: the empirical two-sided $p$-value is $\tcavPEmp$ for both
-concepts (random-CAV mean scores $\tcavNullMeanRange$, with a large enough
-spread that most random directions in this GRU's hidden state also produce a
-lopsided, near-1 or near-0 score by chance). Accordingly, a raw
-TCAV score of 1.00 is not, by itself, evidence that the
-GRU's hidden state is sensitive to either concept in a way a random direction
-would not also show; both TCAV rows in
-Table~\ref{tab:catalogue_results} are reported with this caveat attached
-rather than as a validated concept-sensitivity finding, and a better-powered
-TCAV significance test (e.g.\ more concept examples, a stratified random-CAV
-sample) is left as future work.
-
-\section{Discussion and Limitations}
+\section{Limitations}
 \label{sec:limits}
-\textbf{Ground-truth limits (lead threat).} The faithfulness claims are only
-as strong as the synthetic ground truth they are checked against. A grid of
-known effects is planted, rather than a single point: a simple
-additive linear leak at a strong ($\rho=0.15$) and a weak, near-noise-floor
-($\rho=0.05$) strength; a genuinely nonlinear sign$\times$magnitude
-interaction ($\rho_{\text{nl}}=0.15$, realized linear correlation only
-$0.08$--$0.12$); and a redundant feature at both exact and partial
-($\rho=0.8$) collinearity, so the benchmark certifies recovery beyond simple
-additive effects at a single strength, and credit-splitting beyond the
-exact-duplicate edge case (Section~\ref{sec:faithfulness} reports both
-extensions; the nonlinear signal is, if anything, recovered more strongly,
-and the collinearity disagreement pattern holds under partial as well as
-exact redundancy). This still does not exhaust the space of possible
-real-world relationships: every construction is a single-feature effect with
-one documented functional form, not a sweep over higher-order interactions
-among multiple planted features simultaneously, or non-stationary effect
-strength over time. The benchmark is treated as a necessary condition: a
-method that fails it cannot be considered faithful, while passing it is not
-sufficient to establish faithfulness in general.
+\textbf{Recovery is not faithfulness.} The benchmark establishes whether a
+method surfaces a signal that is present in the data and learnable. It does
+not establish how a model uses that signal. A direct test of faithfulness
+requires models whose dependence on each input is known by construction, as
+in unit-test benchmarks~\cite{lee2025xaiunits}; such controlled models were
+not built in this study.
 
-\textbf{Effective sample size.} Every clustered claim in this paper is
-reported with its effective $N$, not the raw stock count, because equity
-returns co-move heavily ($\bar\rho=\faithRhoBar$ across \faithUniverseN{}
-stocks yields $N_{\text{eff}}=\faithEffN$, not \faithUniverseN$)$. This is
-smaller than the raw stock count suggests;
-it is reported explicitly so that the raw count does not imply more
-statistical power than the data provides, and every claim is framed
-comparatively (method A more reliable than method B) rather than absolutely,
-per the same discipline used for the sentiment-value null below.
+\textbf{Planted constructions.} Every planted signal is the effect of a
+single feature. No interaction between distinct inputs is planted, the
+strengths of the linear and the sign-coded signal are not matched, and no
+target is defined for the credit shares under collinearity.
 
-\textbf{Scope of the mechanistic and gradient/CAM sections.} Sparse-autoencoder
-and ablation-based circuit analysis are run on a single Transformer
-configuration (2 layers, 4 heads); the seed/fold sensitivity check
-(Section~\ref{sec:mechanistic}) re-runs the identical pipeline across 3 seeds
-and 2 folds and reports whether the finding is stable, so this is not a
-single, unverified run. No claim is made that the finding generalizes to
-\emph{larger} financial Transformers.
-Every neural, convolutional, attention, and graph architecture
-now has a ground-truth-augmented artifact (Section~\ref{sec:groundtruth}), so
-Integrated Gradients and the Grad-CAM family are no longer blanket-N/A; the
-remaining non-scoreable cells are genuine architectural limits (e.g.\ no LRP
-propagation rule exists for a recurrent layer) rather than an artifact gap.
-The ground-truth-augmented artifacts are trained separately from the
-unaugmented model-zoo results, and are evaluated for a single held-out test
-fold (2023)
-and one task (direction): each is trained on the pre-2023 data and every
-faithfulness score is computed on the unseen 2023 fold (never on the training
-rows), so the recovery verdicts are out-of-sample throughout
-(Section~\ref{sec:xaisuite}). Their own predictive accuracy is elevated by the
-intentional leak (unlike the unaugmented zoo's near-chance results) and should not
-be read as a claim about real forecasting skill; they exist only to give every
-architecture something to be faithfulness-scored against.
+\textbf{Inference.} The intervals condition on one fitted model and one run
+of each explainer. Variation between training seeds was not measured, and
+dependence between stocks and over time is not modelled
+(Section~\ref{sec:inference}).
 
-\textbf{Scope of RQ2 and RQ5.} Beyond the disagreement
-surfaced indirectly by the credit-splitting spread and per-method
-faithfulness verdicts, Section~\ref{sec:agreement} delivers the pairwise
-rank-correlation agreement matrix RQ2 asks for directly, scoped to
-the $\nAgreementMethods$ methods that share a common model class
-($\nAgreementExcluded$ methods excluded by construction, as
-detailed there). RQ5 remains illustrative
-rather than compliance-ready: the counterfactual and Anchors metrics reported
-in Table~\ref{tab:catalogue_results} (validity, sparsity, precision,
-coverage) show
-that these methods produce well-formed, valid alternative scenarios, but we
-do not map them onto real trading constraints, transaction costs, position
-limits, borrow availability, or a regulator's specific actionable-recourse
-standard~\cite{ustun2019recourse}. RQ5's contribution should be read as
-showing that the example-based methods work mechanically on this forecaster,
-not as a deployable recourse framework; that translation is a natural next
-step.
+\textbf{Methods not scored.} The Grad-CAM variants were not scored, since no
+signal that is localized in time was planted, and the rule-based and
+example-based methods were not scored on recovery. Several methods are
+simplified re-implementations.
 
-\textbf{The sentiment-value null, and why it still matters here.} A
-controlled ablation with dependence-aware inference (symbol-clustered
-bootstrap, HAC Diebold--Mariano) finds that engineered news sentiment changes
-directional accuracy by $\sentDeltaAcc$ percentage points (95\% clustered CI
-$[\sentCIlo,\sentCIhi]$), indistinguishable from zero. This is not a claim
-that sentiment has exactly zero effect, only that it is not statistically
-detectable here; the same discipline that produced this careful null
-(strong baselines, clustered inference, correlation-robust attribution) is
-what makes the ground-truth faithfulness benchmark trustworthy, since a
-pipeline that could not correctly report ``no effect'' here could not be
-trusted to report ``no signal'' in Section~\ref{sec:faithfulness}
-either. In-sample attribution assigning sentiment $\shapSentShare$--$\igSentShare\%$
-importance (Fig.~\ref{fig:shap}) while the correlation-robust, out-of-sample
-grouped block-permutation test moves accuracy by only $\blockPermSent$ points
-is itself a small, real illustration of RQ1's central lesson: a large
-attribution share is not evidence of predictive value on its own.
+\textbf{Exploratory analyses.} No direct test of the representation, such as
+a linear probe, and no structure-aware null for the ablation were carried
+out.
 
-\textbf{Scope.} The study covers \faithUniverseN{} large caps with adequate
-FNSPID news+price coverage (\dateMin--\dateMax), daily granularity, and one
-synthetic ground-truth construction. No claim is made beyond this regime;
-different domains, targets, or ground-truth constructions may shift which
-methods are most faithful.
+\textbf{Scope.} One panel (\nTickers{} US large caps, daily data,
+\dateMin--\dateMax) and one scoring task (direction) were used, and at the
+catalogue level one scored year and one fit per model. Other markets,
+horizons, or constructions may change which methods recover the signals.
 
 \section{Conclusion}
-Post-hoc explanations are routinely trusted without being checked against a
-model whose true importances are actually known. This paper constructs that
-check; the primary contribution is the answer to RQ1, and the agreement
-(RQ2), model-class (RQ3), mechanistic (RQ4), and actionability (RQ5)
-analyses qualify and explain that answer rather than stand as separate,
-co-equal findings.
-Concretely: six synthetic features with known importance (pure noise, a
-linear leak at a strong and a near-noise-floor strength, a nonlinear
-interaction, and a redundant duplicate at exact and partial collinearity),
-injected into every
-applicable model's inputs, including every neural, convolutional, attention,
-and graph architecture, in a real, leakage-free, near-zero-signal financial
-forecaster, and used to benchmark $\nXaiMethodsCatalogued$ XAI methods
-across $\nModelsZoo{}$ models and seven model families. $\nXaiFaithfulOfScoreable$
-of those methods are scoreable against ground truth, and every one of them
-correctly recovers both the linear \emph{and} the nonlinear planted signal,
-with stock-clustered 95\% confidence intervals (effective $N=\faithEffN$)
-excluding zero for the four core attribution methods checked at scale, and
-the nonlinear signal, despite a weaker raw correlation with the target, is
-recovered with a \emph{larger} importance margin than the linear one across
-every core method, evidence that these methods are not merely picking up
-simple additive correlation. Still, the methods disagree sharply on \emph{how}
-they behave under collinearity, and one standard method (permutation
-importance) is measurably less reliable than the rest at this scale.
-Mechanistic interpretability on the Transformer variant indicates a
-shallow internal representation with no head-level specialization and a weak
-but recurring layer-level effect, reported as findings. The
-underlying forecasting substrate adds no statistically detectable value from
-engineered news sentiment either, a controlled null that used the same
-correlation-robust, dependence-aware discipline the faithfulness benchmark
-depends on. The full benchmark, applicability matrix, and a
-reproducible Modal-based pipeline are released so that future faithfulness
-claims about any XAI method can be checked against ground truth rather
-than asserted.
+A planted-signal recovery benchmark was constructed on a real financial
+panel, and \nXaiMethodsCatalogued{} XAI methods were catalogued across
+\nModelsZoo{} models. All \nXaiNativeScored{} methods that yield a
+feature-importance vector recovered the two strong planted signals on
+held-out data, so recovery at this strength did not separate them.
+Differences appeared at a finer resolution. Stock by stock, TreeSHAP,
+KernelSHAP, and LIME recovered every signal in every stock, whereas
+permutation importance did not recover the weak signal. The credit assigned
+to duplicated features depended strongly on the method, and raw TCAV scores
+were not distinguishable from those of random directions. Recovery is a
+necessary condition for faithfulness and not a proof of it. Controlled
+models with known dependencies, planted interactions and time-localized
+signals, and repeated training runs are identified as the next steps.
+
+\section*{Data and Code Availability}
+The pipeline, the configuration file that fixes the splits and seeds, the
+stored results, and the script that generates every table and number in this
+paper are available at
+\url{https://github.com/Abdulrahmann-Omar/finxai-faithfulness-benchmark}.
+The raw data are the public FNSPID data set~\cite{dong2024fnspid}, which is
+not redistributed; the panel is rebuilt from it by the released scripts.
 
 \section*{Funding Statement}
 This research received no specific grant from any funding agency in the

@@ -453,6 +453,7 @@ catalogue_spec = [
     ("gnnexplainer", "graph", "xai_graph.json", "GNN"),
 ]
 cat_rows = []
+paper_cat = {}   # method -> per-model recovery counts, for the compact table in the paper
 for method, family, fname, models in catalogue_spec:
     d = jload_opt(fname)
     scored = []   # entries that actually carry a real ground-truth verdict
@@ -493,6 +494,12 @@ for method, family, fname, models in catalogue_spec:
                          else ("yes" if nl_yes else "no"))
         else:
             nl_verdict = "--"
+        paper_cat[method] = {
+            "models": [e.get("model") for e in scored if e.get("model")],
+            "n": len(scored), "lin_yes": n_yes,
+            "nl_n": len(nl_scored),
+            "nl_yes": sum(1 for e in nl_scored if e["ranks_nonlinear_signal_above_noise"]),
+        }
     else:
         verdict, credit, nl_verdict = "n/a (no gt feats in artifact)", "--", "--"
     cat_rows.append({"method": method, "family": family, "models": models,
@@ -524,17 +531,26 @@ if "tcav" in concept_d and isinstance(concept_d["tcav"], list):
                          "ranks_signal_above_noise": f"TCAV={fmt(c.get('tcav_score', float('nan')),2)}",
                          "redundant_copy_credit_share": f"CAV acc={fmt(c.get('cav_train_accuracy', float('nan')),2)}"})
 gc_d = jload_opt("xai_gradient_cam.json") or {}
+# The Grad-CAM family's native output is a per-time-step curve, which cannot
+# rank a planted FEATURE against the noise feature. The stored per-feature
+# score for these rows comes from an Integrated-Gradients pass on the same
+# CNN: it is IG's result, not a result of the CAM methods, so the CAM rows are
+# reported as "not scored natively" and are NOT counted among the scored
+# methods (IG is already counted once, in its own row).
+n_cam_proxy = 0
 for cam in ("gradcam", "gradcam_pp", "score_cam"):
     if cam in gc_d:
         fe = _faith_fields(gc_d[cam])
         if fe is not None and "ranks_signal_above_noise" in fe:
-            verdict = "yes" if fe["ranks_signal_above_noise"] else "no"
-            credit = fmt(fe.get("redundant_copy_credit_share", float("nan")), 2)
+            n_cam_proxy += 1
+            note = (f"IG pass on the same CNN: signal "
+                    f"{'above' if fe['ranks_signal_above_noise'] else 'not above'} noise, "
+                    f"credit {fmt(fe.get('redundant_copy_credit_share', float('nan')), 2)}")
         else:
-            verdict, credit = "n/a (no gt feats in artifact)", "--"
+            note = "--"
         cat_rows.append({"method": cam, "family": "CAM (vision-native)", "models": "CNN1d only",
-                         "ranks_signal_above_noise": verdict,
-                         "redundant_copy_credit_share": credit})
+                         "ranks_signal_above_noise": "not scored natively",
+                         "redundant_copy_credit_share": note})
 mech_d = jload_opt("xai_mechanistic.json") or {}
 if "sae" in mech_d:
     s = mech_d["sae"]
@@ -589,12 +605,16 @@ with open(os.path.join(TAB, "tab_method_applicability.tex"), "w") as f:
     f.write("\\bottomrule\n\\end{tabular}\n")
 with open(os.path.join(TAB, "tab_method_catalogue.tex"), "w") as f:
     f.write("\\begin{tabular}{@{}llll@{}}\n\\toprule\n")
-    f.write("Method & Faithful (linear) & Faithful (nonlinear) & Note \\\\\n\\midrule\n")
+    f.write("Method & Signal $>$ noise (linear) & Signal $>$ noise (sign-coded) & Note \\\\\n\\midrule\n")
     for _, r in catalogue.iterrows():
         f.write(f"{tex_escape(r['method'])} & "
                 f"{r['ranks_signal_above_noise']} & {r['nl_faithful']} & {r['redundant_copy_credit_share']} \\\\\n")
     f.write("\\bottomrule\n\\end{tabular}\n")
-macros["nXaiMethodsCatalogued"] = str(len(catalogue))
+# Distinct methods: TCAV appears once per concept in the catalogue rows, so
+# rows are de-duplicated on the method name before counting.
+import re
+distinct_methods = sorted({re.sub(r"\s*\(.*\)$", "", m) for m in catalogue["method"]})
+macros["nXaiMethodsCatalogued"] = str(len(distinct_methods))
 def _is_scoreable(v):
     return v == "yes" or v == "no" or v.endswith(" yes")
 
@@ -612,9 +632,17 @@ def _is_fully_faithful(v):
 scoreable = catalogue["ranks_signal_above_noise"].map(_is_scoreable)
 n_scoreable = int(scoreable.sum())
 n_faithful = int(catalogue.loc[scoreable, "ranks_signal_above_noise"].map(_is_fully_faithful).sum())
-macros["nXaiFaithfulOfScoreable"] = f"{n_faithful}/{n_scoreable}"
-print(f"XAI method catalogue: {len(catalogue)} methods; "
-      f"{n_faithful}/{n_scoreable} scoreable methods rank gt_signal above gt_noise")
+n_nl_recovered = int(catalogue.loc[scoreable, "nl_faithful"].map(
+    lambda v: _is_scoreable(v) and _is_fully_faithful(v)).sum())
+macros["nXaiNativeScored"] = str(n_scoreable)        # methods scored on their own output
+macros["nXaiRecoveredLinear"] = str(n_faithful)      # ...that rank gt_signal above gt_noise on every model
+macros["nXaiRecoveredNl"] = str(n_nl_recovered)      # ...and gt_signal_nl above gt_noise on every model
+macros["nXaiNotScored"] = str(len(distinct_methods) - n_scoreable)
+macros["nXaiCamProxy"] = str(n_cam_proxy)
+print(f"XAI method catalogue: {len(distinct_methods)} distinct methods ({len(catalogue)} rows); "
+      f"{n_scoreable} scored on their own output; {n_faithful} rank gt_signal above gt_noise "
+      f"on every model, {n_nl_recovered} do so for gt_signal_nl; "
+      f"{n_cam_proxy} CAM rows carry only an IG proxy and are not counted")
 
 # ---------------- R4 revision: A1 TCAV null, A2 SAE/ablation null, ----------------
 # ---------------- A3 year-robustness, A4 jackknife -------------------------------
@@ -648,14 +676,17 @@ if abl_null:
     macros["ablNullMean"] = fmt(abl_null["null_notable_count_mean"], 2)
     macros["ablNullPHi"] = fmt(abl_null["null_notable_count_p95"], 2)
     rec = abl_null["recurrence"]
-    macros["recurC"] = str(rec["C"])
-    macros["recurK"] = str(rec["k"])
-    macros["recurR"] = str(rec["R"])
-    macros["recurPBinomOne"] = _sci(rec["p_binom_one"])
-    macros["recurPUnion"] = _sci(rec["p_union"])
+    macros["ablNComponents"] = str(rec["C"])
+    macros["ablNShuffles"] = str(abl_null["n_shuffles"])
+    macros["ablThreshold"] = fmt(abl_null["notable_z_threshold"], 0)
+    # The stored recurrence p-values (p_binom_one, p_union) assume that every
+    # ablated component -- a single attention head or a whole encoder layer --
+    # is equally likely to show the largest effect. A whole-layer ablation
+    # removes all of that layer's heads, so the assumption does not hold and
+    # the p-values are not exported to the paper.
     print(f"A2 ablation null: null_notable_mean={abl_null['null_notable_count_mean']}, "
-          f"recurrence k={rec['k']}/{rec['R']} of C={rec['C']}, "
-          f"p_binom_one={rec['p_binom_one']}, p_union={rec['p_union']}")
+          f"top component recurs {rec['k']}/{rec['R']} runs of C={rec['C']} candidates "
+          f"(uniform-null p-values stored in the JSON are not used in the paper)")
 
 by_year = jload_opt("faithfulness_by_year.json")
 if by_year:
@@ -680,10 +711,390 @@ if jack:
     macros["jackMdesDeltaTreeshap"] = fmt(mdes_delta_pct, 1)
     print(f"A4 jackknife: treeshap margin delta {margin_delta_pct:.3f}%, MDES delta {mdes_delta_pct:.1f}%")
 
+# ============================================================================
+# Conference-paper outputs. Everything below is derived from the stored
+# results loaded above (no new computation on data): the compact tables used
+# by paper/main.tex and one macro per number quoted in its text, so that no
+# result is typed into the manuscript by hand.
+# ============================================================================
+import datetime as _dt
+
+
+def _camel(name):
+    return "".join(w.capitalize() for w in name.split("_"))
+
+
+def _day(d):          # 3 Feb 2015
+    return f"{d.day} {d:%b} {d.year}"
+
+
+def _p_expr(x):       # used in math mode: $\macro$
+    return "p<0.001" if x < 0.001 else f"p={x:.3f}"
+
+
+def _ci(ci, d=3):
+    return f"[{fmt(ci[0], d)},\\,{fmt(ci[1], d)}]"
+
+
+# ---- evaluation protocol: the config, the stored folds, the panel manifest ----
+cfg_text = open(os.path.join(ROOT, "config.xai.yaml"), encoding="utf-8").read()
+embargo_days = int(re.search(r"^embargo_days:\s*(\d+)", cfg_text, re.M).group(1))
+folds = sorted(int(y) for y in mr["fold"].unique())
+macros["nFolds"] = str(len(folds))
+macros["foldFirst"] = str(folds[0])
+macros["foldLast"] = str(folds[-1])
+macros["embargoDays"] = str(embargo_days)
+macros["seedCfg"] = re.search(r"^seed:\s*(\d+)", cfg_text, re.M).group(1)
+macros["returnClip"] = re.search(r"^return_clip:\s*([\d.]+)", cfg_text, re.M).group(1)
+macros["minNewsDays"] = re.search(r"^min_news_days:\s*(\d+)", cfg_text, re.M).group(1)
+macros["lookback"] = re.search(r"^lookback:\s*(\d+)", cfg_text, re.M).group(1)
+
+gta = jload_opt("gt_artifacts_summary.json")   # the planted-feature models: feature list + scoring year
+score_year = int(gta["test_year"]) if gta else folds[-1]
+macros["scoreYear"] = str(score_year)
+d_min = _dt.date.fromisoformat(man["date_min"])
+d_max = _dt.date.fromisoformat(man["date_max"])
+macros["panelStart"] = f"{d_min.day} {d_min:%B} {d_min.year}"
+macros["panelEnd"] = f"{d_max.day} {d_max:%B} {d_max.year}"
+with open(os.path.join(TAB, "tab_folds.tex"), "w") as f:
+    f.write("\\begin{tabular}{@{}llll@{}}\n\\toprule\n")
+    f.write("Fold & Training rows & Embargo & Test rows \\\\\n\\midrule\n")
+    for i, y in enumerate(folds, 1):
+        # s3_experiments.py: train = Date < (1 Jan y - embargo), test = calendar year y
+        cutoff = _dt.date(y, 1, 1) - _dt.timedelta(days=embargo_days)
+        train_end = cutoff - _dt.timedelta(days=1)
+        emb_end = _dt.date(y - 1, 12, 31)
+        f.write(f"{i} & {_day(d_min)} -- {_day(train_end)} & "
+                f"{cutoff.day}--{emb_end.day} {emb_end:%b} {emb_end.year} & {y} \\\\\n")
+    # s5*.py / s7_faithfulness.py: train = year < score_year, test = score_year, no embargo
+    f.write("\\midrule\n")
+    f.write(f"Recovery & {_day(d_min)} -- {_day(_dt.date(score_year - 1, 12, 31))} & none & {score_year} \\\\\n")
+    f.write("\\bottomrule\n\\end{tabular}\n")
+
+usel = jload_opt("universe_selection.json")
+if usel:
+    macros["nCandidates"] = str(usel["n_candidates"])
+
+# ---- planted features (results/feature_manifest.json) ----
+gtc = man["ground_truth_construction"]
+macros["gtRhoStrong"] = fmt(gtc["gt_signal"]["target_correlation"], 2)
+macros["gtRhoWeak"] = fmt(gtc["gt_signal_weak"]["target_correlation"], 2)
+macros["gtRhoNl"] = fmt(gtc["gt_signal_nl"]["nonlinear_signal_strength_param"], 2)
+macros["gtNlCorrDir"] = fmt(gtc["gt_signal_nl"]["realized_pointbiserial_corr_with_dir_next"], 2)
+macros["gtNlCorrRet"] = fmt(gtc["gt_signal_nl"]["realized_pearson_corr_with_ret_next"], 2)
+macros["gtPartialRho"] = fmt(gtc["gt_redundant_partial"]["target_corr"], 1)
+macros["gtPartialRealized"] = fmt(gtc["gt_redundant_partial"]["realized_corr_with_source"], 2)
+macros["gtSource"] = tex_escape(gtc["gt_redundant_copy"]["source_feature"])
+if gta:
+    feats_all = gta["features"]
+    n_planted = sum(1 for c in feats_all if c.startswith("gt_"))
+    n_sent = sum(1 for c in feats_all if c in set(man["sentiment_features"]))
+    macros["nFeatTotal"] = str(len(feats_all))
+    macros["nFeatPlanted"] = str(n_planted)
+    macros["nFeatSent"] = str(n_sent)
+    macros["nFeatPrice"] = str(len(feats_all) - n_planted - n_sent)
+
+# ---- substrate: sentiment ablation per model, zoo accuracy as a percentage ----
+for m_name, d in da.items():
+    macros[f"sentDelta{m_name}"] = fmt(d["mean_delta_acc"] * 100, 2)
+    macros[f"sentCIlo{m_name}"] = fmt(d["ci95_clustered"][0] * 100, 2)
+    macros[f"sentCIhi{m_name}"] = fmt(d["ci95_clustered"][1] * 100, 2)
+macros["nSentModels"] = str(len(da))
+macros["nSentCiInclZero"] = str(sum(1 for d in da.values()
+                                    if d["ci95_clustered"][0] < 0 < d["ci95_clustered"][1]))
+macros["sentDeltaMin"] = fmt(min(d["mean_delta_acc"] for d in da.values()) * 100, 2)
+macros["sentDeltaMax"] = fmt(max(d["mean_delta_acc"] for d in da.values()) * 100, 2)
+macros["modelZooMeanAccPct"] = fmt(zoo["Acc"].mean() * 100, 1)
+
+# ---- stock-level recovery of the four core methods (faithfulness_benchmark.json) ----
+DISPLAY = {"treeshap": "TreeSHAP", "kernelshap": "KernelSHAP", "lime": "LIME",
+           "permutation": "Permutation"}
+if fb:
+    core = [m for m in fb["methods"] if "mean_signal_minus_noise_margin" in m]
+    macros["nCoreMethods"] = str(len(core))
+    macros["nBootstrap"] = f"{fb['n_bootstrap']:,}".replace(",", "{,}")
+    any_partial_credit = False
+    with open(os.path.join(TAB, "tab_core_recovery.tex"), "w") as f:
+        f.write("\\begin{tabular}{@{}l rl rl rl cc@{}}\n\\toprule\n")
+        f.write(f" & \\multicolumn{{2}}{{c}}{{Linear signal ($\\rho{{=}}{macros['gtRhoStrong']}$)}} & "
+                f"\\multicolumn{{2}}{{c}}{{Sign-coded signal}} & "
+                f"\\multicolumn{{2}}{{c}}{{Weak linear signal ($\\rho{{=}}{macros['gtRhoWeak']}$)}} & "
+                f"\\multicolumn{{2}}{{c}}{{Credit share of copy}} \\\\\n")
+        f.write("\\cmidrule(lr){2-3}\\cmidrule(lr){4-5}\\cmidrule(lr){6-7}\\cmidrule(l){8-9}\n")
+        f.write("Method & Stocks & Margin [95\\% interval] & Stocks & Margin [95\\% interval] & "
+                "Stocks & Margin [95\\% interval] & Exact & Partial \\\\\n\\midrule\n")
+        for m in core:
+            k = _camel(m["method"])
+            nl, wk = m["nonlinear"], m["weak"]
+            n_all = m["n_symbols_scored"]
+            n_cred = m.get("n_symbols_credit_split", n_all)
+            n_cred_p = m.get("n_symbols_credit_split_partial", n_all)
+            partial = n_cred < n_all or n_cred_p < n_all
+            any_partial_credit = any_partial_credit or partial
+            mark = "$^{\\dagger}$" if partial else ""
+            f.write(
+                f"{DISPLAY[m['method']]} & "
+                f"{fmt(m['pct_symbols_signal_above_noise'] * 100, 1)}\\% & "
+                f"${fmt(m['mean_signal_minus_noise_margin'], 3)}\\ {_ci(m['ci95_clustered'])}$ & "
+                f"{fmt(nl['pct_symbols_signal_above_noise'] * 100, 1)}\\% & "
+                f"${fmt(nl['mean_signal_minus_noise_margin'], 3)}\\ {_ci(nl['ci95_clustered'])}$ & "
+                f"{fmt(wk['pct_symbols_signal_above_noise'] * 100, 1)}\\% & "
+                f"${fmt(wk['mean_signal_minus_noise_margin'], 3)}\\ {_ci(wk['ci95_clustered'])}$ & "
+                f"{fmt(m['mean_redundant_copy_credit_share'], 2)}{mark} & "
+                f"{fmt(m['mean_redundant_partial_credit_share'], 2)}{mark} \\\\\n")
+            macros["marginCiLo" + k] = fmt(m["ci95_clustered"][0], 3)
+            macros["marginCiHi" + k] = fmt(m["ci95_clustered"][1], 3)
+            macros["pctSymNl" + k] = fmt(nl["pct_symbols_signal_above_noise"] * 100, 1)
+            macros["pctSymWeak" + k] = fmt(wk["pct_symbols_signal_above_noise"] * 100, 1)
+            macros["pctSymWeakCiLo" + k] = fmt(wk["pct_symbols_ci95_clustered"][0] * 100, 1)
+            macros["pctSymWeakCiHi" + k] = fmt(wk["pct_symbols_ci95_clustered"][1] * 100, 1)
+            macros["marginWeak" + k] = fmt(wk["mean_signal_minus_noise_margin"], 3)
+            macros["marginWeakCiLo" + k] = fmt(wk["ci95_clustered"][0], 3)
+            macros["marginWeakCiHi" + k] = fmt(wk["ci95_clustered"][1], 3)
+            macros["creditExact" + k] = fmt(m["mean_redundant_copy_credit_share"], 2)
+            macros["creditPartial" + k] = fmt(m["mean_redundant_partial_credit_share"], 2)
+            macros["nCredit" + k] = str(n_cred)
+        f.write("\\bottomrule\n\\end{tabular}\n")
+    # recovered = the stock-resampled interval of the margin lies above zero
+    macros["nLinearRecovered"] = str(sum(1 for m in core if m["ci95_clustered"][0] > 0))
+    macros["nNlRecovered"] = str(sum(1 for m in core if m["nonlinear"]["ci95_clustered"][0] > 0))
+    macros["nWeakRecovered"] = str(sum(1 for m in core if m["weak"]["ci95_clustered"][0] > 0))
+    macros["nAllStocksMethods"] = str(sum(
+        1 for m in core if min(m["pct_symbols_signal_above_noise"],
+                               m["nonlinear"]["pct_symbols_signal_above_noise"],
+                               m["weak"]["pct_symbols_signal_above_noise"]) == 1.0))
+    paired = [pt for pt in fb.get("paired_tests_permutation_vs_shap_lime", []) if "mcnemar_p" in pt]
+    if paired:
+        discord = {tuple(pt["mcnemar_table_perm_wrong_other_right__perm_right_other_wrong"]) for pt in paired}
+        if len(discord) == 1:      # identical discordant counts against all three comparison methods
+            perm_only_wrong, other_only_wrong = discord.pop()
+            macros["mcnemarPermOnlyWrong"] = str(perm_only_wrong)
+            macros["mcnemarOtherOnlyWrong"] = str(other_only_wrong)
+        macros["mcnemarPExpr"] = _p_expr(max(pt["mcnemar_p"] for pt in paired))
+        macros["wilcoxonPExpr"] = _p_expr(max(pt["wilcoxon_signed_rank_p"] for pt in paired))
+        macros["nPairedComparisons"] = str(len(paired))
+
+# ---- stability: other scoring years, leave-stocks-out, and the second scoring of the same year ----
+if by_year:
+    macros["yearRobustFirst"] = str(by_year["years"][0])
+    macros["yearRobustLast"] = str(by_year["years"][-1])
+    macros["nYearsRobust"] = str(len(by_year["years"]))
+    for name, sp in by_year["spread"].items():
+        k = _camel(name)
+        macros["yearMarginMin" + k] = fmt(sp["margin_min"], 3)
+        macros["yearMarginMax" + k] = fmt(sp["margin_max"], 3)
+        macros["yearCopyCreditMin" + k] = fmt(sp["copy_credit_min"], 2)
+        macros["yearCopyCreditMax" + k] = fmt(sp["copy_credit_max"], 2)
+        macros["yearPctSymMin" + k] = fmt(sp["pct_symbols_correct_min"] * 100, 1)
+        macros["yearPctSymMax" + k] = fmt(sp["pct_symbols_correct_max"] * 100, 1)
+    if fb:
+        # s7b re-scores the benchmark year with a different random draw of explained rows
+        rerun = {}
+        for m in core:
+            b = by_year["by_year"].get(str(score_year), {}).get(m["method"])
+            if b and "mean_signal_minus_noise_margin" in b:
+                ref = m["mean_signal_minus_noise_margin"]
+                rerun[m["method"]] = abs(b["mean_signal_minus_noise_margin"] - ref) / ref * 100
+        for name, v in rerun.items():
+            macros["rerunDelta" + _camel(name)] = fmt(v, 1)
+        if rerun:
+            macros["rerunDeltaMax"] = fmt(max(rerun.values()), 1)
+if jack:
+    macros["jackNDrop"] = str(jack["n_drop"])
+    macros["jackNIter"] = str(jack["n_iter"])
+    macros["jackMarginDeltaMax"] = fmt(max(
+        abs(v["jackknife_mean_margin"] - v["full_margin"]) / abs(v["full_margin"]) * 100
+        for v in jack["methods"].values()), 1)
+
+# ---- agreement between rankings (xai_agreement_matrix.json) ----
+if agr and agr.get("methods_in_matrix"):
+    rh, nc = agr["mean_spearman_rho"], agr["n_common_models_per_pair"]
+    names = agr["methods_in_matrix"]
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            macros["agr" + _camel(a) + _camel(b)] = fmt(rh[a][b], 2)
+    perm_pairs = [rh["permutation"][o] for o in names if o != "permutation"]
+    other_pairs = [rh[a][b] for i, a in enumerate(names) for b in names[i + 1:]
+                   if "permutation" not in (a, b)]
+    macros["agrPermMin"] = fmt(min(perm_pairs), 2)
+    macros["agrPermMax"] = fmt(max(perm_pairs), 2)
+    macros["agrOthersMin"] = fmt(min(other_pairs), 2)
+    macros["agrOthersMax"] = fmt(max(other_pairs), 2)
+    common = [nc[a][b] for a in names for b in names if a != b]
+    macros["agrCommonMin"] = str(min(common))
+    macros["agrCommonMax"] = str(max(common))
+
+# ---- concept-based and mechanistic outputs (exploratory section) ----
+if tcav_sig:
+    scores = [c["tcav_score"] for c in tcav_sig["concepts"]]
+    macros["nTcavConcepts"] = str(len(scores))
+    macros["tcavScoreMin"] = fmt(min(scores), 2)
+    macros["tcavScoreMax"] = fmt(max(scores), 2)
+    macros["tcavNRandom"] = str(tcav_sig["n_random_cavs"])
+    macros["nTcavSignificant"] = str(sum(1 for c in tcav_sig["concepts"] if c["significant"]))
+if sae_null:
+    macros["saeObserved"] = str(sae_null["observed_interpretable"])
+    macros["saeLatents"] = str(sae_null["n_latents"])
+    macros["saeThreshold"] = fmt(sae_null["correlation_threshold"], 1)
+    macros["saeNShuffles"] = str(sae_null["n_shuffles"])
+if sens:
+    tops = sens["top_component_per_run"]
+    notable = [c for r in sens["runs"] for c in r["notable_components"]]
+    macros["sensTopFullLayerN"] = str(sum(1 for t in tops if t.endswith("_full")))
+    macros["sensNotableHeadN"] = str(sum(1 for c in notable if not c.endswith("_full")))
+    macros["sensNotablePerRunMin"] = str(min(sens["n_notable_ablation_components_across_runs"]))
+    macros["sensNotablePerRunMax"] = str(max(sens["n_notable_ablation_components_across_runs"]))
+    macros["sensNSeeds"] = str(len({r["seed"] for r in sens["runs"]}))
+    macros["sensNYears"] = str(len({r["test_year"] for r in sens["runs"]}))
+    macros["sensMinorityN"] = str(len(tops) - top_counts.most_common(1)[0][1])
+if "acdc_ablation" in mech_d:
+    macros["ablOrigNotable"] = str(mech_d["acdc_ablation"].get("n_notable", "?"))
+
+# ---- compact method table for the paper: scored on own output vs. not scored ----
+ABBR = {"DecisionTree": "DT", "RandomForest": "RF", "XGBoost": "XGB", "LightGBM": "LGBM",
+        "CatBoost": "CatB", "Logistic": "LR", "EBM": "EBM", "SVM": "SVM", "GRU": "GRU",
+        "LSTM": "LSTM", "CNN1d": "CNN", "TCN": "TCN", "Transformer": "Trf"}
+SCORED_SPEC = [   # catalogue key, name in the paper, cite key(s), model if a single fixed one
+    ("treeshap", "TreeSHAP", "lundberg2020treeshap", None),
+    ("kernelshap", "KernelSHAP", "lundberg2017shap", None),
+    ("lime", "LIME", "ribeiro2016lime", None),
+    ("permutation", "Permutation importance", "breiman2001random", None),
+    ("integrated_gradients", "Integrated Gradients", "sundararajan2017ig", None),
+    ("rise", "RISE, feature masking", "petsiuk2018rise", "XGB"),
+    ("ebm_intrinsic", "EBM term importance", "nori2019interpretml", "EBM"),
+    ("gam_aggregation", "Rank-aggregated TreeSHAP", None, "XGB"),
+    # result key "muse_brcg": s5c_concept_intrinsic.py fits a depth-3 decision tree to the
+    # XGBoost predictions; it is a tree surrogate, not an implementation of MUSE or BRCG.
+    ("muse_brcg", "Decision-tree surrogate", None, "XGB"),
+    ("lrp", "LRP", "bach2015lrp", "MLP"),
+    ("guided_backprop", "Guided backpropagation", "springenberg2015guided", "MLP"),
+    ("deconvnet", "Deconvnet", "zeiler2014deconv", "MLP"),
+    ("gnnexplainer", "GNNExplainer", "ying2019gnnexplainer", "GNN"),
+]
+UNSCORED_SPEC = [  # catalogue key, name, cite key, model, why no recovery score
+    ("anchors", "Anchors", "ribeiro2018anchors", "XGB", "rules"),
+    ("counterfactual", "Counterfactual search", "wachter2018counterfactual", "XGB", "examples"),
+    ("cem", "Contrastive explanation", "dhurandhar2018cem", "XGB", "examples"),
+    ("gradcam", "Grad-CAM", "selvaraju2017gradcam", "CNN", "time-step curve"),
+    ("gradcam_pp", "Grad-CAM++", "chattopadhay2018gradcampp", "CNN", "time-step curve"),
+    ("score_cam", "Score-CAM", "wang2020scorecam", "CNN", "time-step curve"),
+    ("tcav", "TCAV, two concepts", "kim2018tcav", "GRU", "Sec.~\\ref{sec:exploratory}"),
+    ("sae", "Sparse autoencoder", "cunningham2024sae", "Trf", "Sec.~\\ref{sec:exploratory}"),
+    # result key "acdc": a manual single-component ablation sweep, not the ACDC algorithm
+    ("acdc", "Component ablation", None, "Trf", "Sec.~\\ref{sec:exploratory}"),
+]
+spec_keys = {s[0] for s in SCORED_SPEC} | {s[0] for s in UNSCORED_SPEC}
+assert spec_keys == set(distinct_methods), (
+    "paper method table is out of sync with the catalogue: "
+    f"{sorted(spec_keys ^ set(distinct_methods))}")
+assert {s[0] for s in SCORED_SPEC} == set(paper_cat), (
+    "methods scored on their own output changed: "
+    f"{sorted({s[0] for s in SCORED_SPEC} ^ set(paper_cat))}")
+
+
+def _cite(keys):
+    return f"~\\cite{{{keys}}}" if keys else ""
+
+
+with open(os.path.join(TAB, "tab_method_recovery.tex"), "w") as f:
+    f.write("\\begin{tabular}{@{}llcc@{}}\n\\toprule\n")
+    f.write("Method & Model(s) & Linear & Sign-coded \\\\\n\\midrule\n")
+    f.write(f"\\multicolumn{{4}}{{@{{}}l}}{{\\emph{{Scored on own output "
+            f"({len(SCORED_SPEC)} methods)}}}} \\\\\n")
+    for key, name, cite, fixed_model in SCORED_SPEC:
+        pc = paper_cat[key]
+        models = ", ".join(ABBR.get(m, m) for m in pc["models"]) if pc["models"] else fixed_model
+        nl_cell = f"{pc['nl_yes']}/{pc['nl_n']}" if pc["nl_n"] else "--"
+        f.write(f"{name}{_cite(cite)} & {models} & {pc['lin_yes']}/{pc['n']} & {nl_cell} \\\\\n")
+    f.write("\\midrule\n")
+    f.write(f"\\multicolumn{{4}}{{@{{}}l}}{{\\emph{{Not scored on feature recovery "
+            f"({len(UNSCORED_SPEC)} methods)}}}} \\\\\n")
+    for key, name, cite, model, why in UNSCORED_SPEC:
+        f.write(f"{name}{_cite(cite)} & {model} & \\multicolumn{{2}}{{l}}{{{why}}} \\\\\n")
+    f.write("\\bottomrule\n\\end{tabular}\n")
+
+# ---------------- paper/NUMBERS_AUDIT.md: the source of every number in main.tex ----------------
+MACRO_SOURCES = [   # (regex on the macro name, where its value comes from)
+    (r"^(nTickers|nObs|newsCov|dateMin|dateMax|panelStart|panelEnd)$", "results/feature_manifest.json"),
+    (r"^gt", "results/feature_manifest.json (ground_truth_construction)"),
+    (r"^(nFeat|scoreYear)", "results/metrics/gt_artifacts_summary.json"),
+    (r"^(nFolds|foldFirst|foldLast)$", "results/metrics/main_results.csv (fold column)"),
+    (r"^(embargoDays|returnClip|minNewsDays|lookback|seedCfg)$", "config.xai.yaml"),
+    (r"^nCandidates$", "results/metrics/universe_selection.json"),
+    (r"^(nModelsZoo|modelZoo|majAcc|bestDirAcc)", "results/metrics/main_results.csv and the per-model *_results.csv"),
+    (r"^(sent|nSent)", "results/metrics/ablation_stats.json"),
+    (r"^(faith|pctSym|margin|credit|nCredit|nCoreMethods|nBootstrap|nLinearRecovered|nNlRecovered|"
+     r"nWeakRecovered|nAllStocksMethods|mcnemar|wilcoxon|nPairedComparisons)",
+     "results/metrics/faithfulness_benchmark.json"),
+    (r"^rerun", "results/metrics/faithfulness_by_year.json compared with faithfulness_benchmark.json"),
+    (r"^(year|nYearsRobust)", "results/metrics/faithfulness_by_year.json"),
+    (r"^jack", "results/metrics/faithfulness_jackknife.json"),
+    (r"^agr", "results/metrics/xai_agreement_matrix.json"),
+    (r"^nXai", "method catalogue built from results/metrics/xai_*.json (see xai_method_catalogue.csv)"),
+    (r"^(tcav|nTcav)", "results/metrics/xai_tcav_significance.json"),
+    (r"^sae", "results/metrics/xai_sae_null.json"),
+    (r"^(sens|nSens)", "results/metrics/xai_mechanistic_sensitivity.json"),
+    (r"^abl", "results/metrics/xai_ablation_null.json"),
+]
+# Numbers that are protocol constants of the pipeline code, not results. They
+# are typed in main.tex and listed here with the line of code they restate.
+LITERAL_SOURCES = {
+    "14": "14-day RSI window: modal/s2_build.py (rsi14)",
+    "20": "20-day windows of the moving-average gap and the volume z-score: modal/s2_build.py (ma_gap20, vol_z20)",
+    "1": "'1 January' of the test year: modal/s3_experiments.py (test_start); '1D' convolutional network",
+    "400": "XGBoost n_estimators: modal/s7_faithfulness.py (XGBClassifier)",
+    "4": "XGBoost max_depth: modal/s7_faithfulness.py (XGBClassifier)",
+    "0.03": "XGBoost learning_rate: modal/s7_faithfulness.py (XGBClassifier)",
+    "0.8": "XGBoost subsample and colsample_bytree: modal/s7_faithfulness.py (XGBClassifier)",
+    "52": "TreeSHAP rows per stock, max(50, 3000 // 57): modal/s7_faithfulness.py (per_sym_cap)",
+    "40": "KernelSHAP rows per stock: modal/s7_faithfulness.py (per_sym_cap_k)",
+    "50": "KernelSHAP background rows: modal/s7_faithfulness.py (shap.sample)",
+    "150": "KernelSHAP perturbation samples per row: modal/s7_faithfulness.py (nsamples)",
+    "10": "LIME rows per stock and permutation repeats: modal/s7_faithfulness.py (per_sym_n, n_repeats)",
+    "95": "level of the percentile intervals (2.5th to 97.5th percentile): modal/s7_faithfulness.py",
+}
+tex_path = os.path.join(PAP, "main.tex")
+if os.path.exists(tex_path):
+    tex = open(tex_path, encoding="utf-8").read()
+    body = tex[tex.index("\\maketitle"):]                                    # skip preamble and author block
+    body = re.sub(r"(?<!\\)%.*", "", body)                                   # comments
+    used = [m for m in dict.fromkeys(re.findall(r"\\([A-Za-z]+)", body)) if m in macros]
+
+    def _source(name):
+        for pat, src in MACRO_SOURCES:
+            if re.search(pat, name):
+                return src
+        raise SystemExit(f"NUMBERS_AUDIT: macro \\{name} is used in main.tex but has no documented source")
+
+    # literal numbers in running text: drop math, tables, references and the bibliography commands
+    text = re.sub(r"\\begin\{(table\*?|tabular)\}.*?\\end\{\1\}", " ", body, flags=re.S)
+    text = re.sub(r"\$[^$]*\$", " ", text)
+    text = re.sub(r"\\(label|ref|cite|input|url|bibliography|bibliographystyle|section\*?|subsection)\{[^}]*\}", " ", text)
+    text = re.sub(r"\\[A-Za-z]+", " ", text)
+    literals = list(dict.fromkeys(re.findall(r"(?<![A-Za-z\d.])\d+(?:\.\d+)?(?![\d]*pt)", text)))
+    unreviewed = [x for x in literals if x not in LITERAL_SOURCES]
+    with open(os.path.join(PAP, "NUMBERS_AUDIT.md"), "w", encoding="utf-8") as f:
+        f.write("# Where every number in the paper comes from\n\n"
+                "Generated by `make_tables.py`; do not edit by hand. The paper quotes results only\n"
+                "through the macros below, which are written to `paper/numbers.tex` from the stored\n"
+                "results. Table bodies (`paper/tables/*.tex`) are generated by the same script.\n\n"
+                "## Results (macros used in `main.tex`)\n\n| Macro | Value | Source |\n|---|---|---|\n")
+        for m in used:
+            f.write(f"| `\\{m}` | `{macros[m]}` | {_source(m)} |\n")
+        f.write("\n## Protocol constants typed in the text\n\n"
+                "These restate settings of the pipeline code; they are not results.\n\n"
+                "| Number | What it is and where it is set |\n|---|---|\n")
+        for x in literals:
+            f.write(f"| {x} | {LITERAL_SOURCES.get(x, '**UNREVIEWED: not documented**')} |\n")
+    print(f"NUMBERS_AUDIT.md: {len(used)} result macros used in main.tex, "
+          f"{len(literals)} literal numbers ({len(unreviewed)} unreviewed: {unreviewed})")
+
 # ---------------- rewrite numbers.tex with the full macro set ----------------
+# \providecommand first, so main.tex needs no placeholder list for new macros.
 with open(os.path.join(PAP, "numbers.tex"), "w") as f:
+    f.write("% Generated by make_tables.py from results/ -- do not edit by hand.\n")
     for k, v in macros.items():
-        f.write(f"\\renewcommand{{\\{k}}}{{{v}}}\n")
+        f.write(f"\\providecommand{{\\{k}}}{{}}\\renewcommand{{\\{k}}}{{{v}}}\n")
 
 print("\nWrote numbers.tex and tables. Key macros:")
 for k, v in macros.items():

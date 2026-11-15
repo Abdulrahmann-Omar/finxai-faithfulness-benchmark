@@ -1,0 +1,31 @@
+\begin{tabular}{@{}llcc@{}}
+\toprule
+Method & Model(s) & Linear & Sign-coded \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Scored on own output (13 methods)}} \\
+TreeSHAP~\cite{lundberg2020treeshap} & DT, RF, XGB, LGBM, CatB & 5/5 & 5/5 \\
+KernelSHAP~\cite{lundberg2017shap} & LR, RF, XGB, EBM, SVM & 5/5 & 5/5 \\
+LIME~\cite{ribeiro2016lime} & LR, RF, XGB, EBM, SVM & 5/5 & 5/5 \\
+Permutation importance~\cite{breiman2001random} & LR, RF, XGB, EBM, SVM & 5/5 & 5/5 \\
+Integrated Gradients~\cite{sundararajan2017ig} & GRU, LSTM, CNN, TCN, Trf & 5/5 & 5/5 \\
+RISE, feature masking~\cite{petsiuk2018rise} & XGB & 1/1 & 1/1 \\
+EBM term importance~\cite{nori2019interpretml} & EBM & 1/1 & 1/1 \\
+Rank-aggregated TreeSHAP & XGB & 1/1 & 1/1 \\
+Decision-tree surrogate & XGB & 1/1 & 1/1 \\
+LRP~\cite{bach2015lrp} & MLP & 1/1 & 1/1 \\
+Guided backpropagation~\cite{springenberg2015guided} & MLP & 1/1 & 1/1 \\
+Deconvnet~\cite{zeiler2014deconv} & MLP & 1/1 & 1/1 \\
+GNNExplainer~\cite{ying2019gnnexplainer} & GNN & 1/1 & 1/1 \\
+\midrule
+\multicolumn{4}{@{}l}{\emph{Not scored on feature recovery (9 methods)}} \\
+Anchors~\cite{ribeiro2018anchors} & XGB & \multicolumn{2}{l}{rules} \\
+Counterfactual search~\cite{wachter2018counterfactual} & XGB & \multicolumn{2}{l}{examples} \\
+Contrastive explanation~\cite{dhurandhar2018cem} & XGB & \multicolumn{2}{l}{examples} \\
+Grad-CAM~\cite{selvaraju2017gradcam} & CNN & \multicolumn{2}{l}{time-step curve} \\
+Grad-CAM++~\cite{chattopadhay2018gradcampp} & CNN & \multicolumn{2}{l}{time-step curve} \\
+Score-CAM~\cite{wang2020scorecam} & CNN & \multicolumn{2}{l}{time-step curve} \\
+TCAV, two concepts~\cite{kim2018tcav} & GRU & \multicolumn{2}{l}{Sec.~\ref{sec:exploratory}} \\
+Sparse autoencoder~\cite{cunningham2024sae} & Trf & \multicolumn{2}{l}{Sec.~\ref{sec:exploratory}} \\
+Component ablation & Trf & \multicolumn{2}{l}{Sec.~\ref{sec:exploratory}} \\
+\bottomrule
+\end{tabular}

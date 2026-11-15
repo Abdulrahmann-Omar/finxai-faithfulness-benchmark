@@ -1,6 +1,6 @@
 \begin{tabular}{@{}llll@{}}
 \toprule
-Method & Faithful (linear) & Faithful (nonlinear) & Note \\
+Method & Signal $>$ noise (linear) & Signal $>$ noise (sign-coded) & Note \\
 \midrule
 treeshap & 5/5 yes & 5/5 yes & 0.34 (avg./4 models) \\
 kernelshap & 5/5 yes & 5/5 yes & 0.44 (avg./5 models) \\
@@ -20,9 +20,9 @@ counterfactual & validity=1.00 & -- & sparsity=1.27 \\
 cem & PP size=0.13 & -- & -- \\
 tcav (high\_attention) & TCAV=1.00 & -- & CAV acc=0.88 \\
 tcav (positive\_sentiment) & TCAV=1.00 & -- & CAV acc=0.78 \\
-gradcam & yes & -- & 0.55 \\
-gradcam\_pp & yes & -- & 0.55 \\
-score\_cam & yes & -- & 0.55 \\
+gradcam & not scored natively & -- & IG pass on the same CNN: signal above noise, credit 0.55 \\
+gradcam\_pp & not scored natively & -- & IG pass on the same CNN: signal above noise, credit 0.55 \\
+score\_cam & not scored natively & -- & IG pass on the same CNN: signal above noise, credit 0.55 \\
 sae & 253/256 interp. & -- & thr.\ $|r|{>}$0.3 \\
 acdc (ablation) & 0 notable/10 & -- & z{>}2.0 \\
 \bottomrule

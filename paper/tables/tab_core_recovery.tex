@@ -1,0 +1,12 @@
+\begin{tabular}{@{}l rl rl rl cc@{}}
+\toprule
+ & \multicolumn{2}{c}{Linear signal ($\rho{=}0.15$)} & \multicolumn{2}{c}{Sign-coded signal} & \multicolumn{2}{c}{Weak linear signal ($\rho{=}0.05$)} & \multicolumn{2}{c}{Credit share of copy} \\
+\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(l){8-9}
+Method & Stocks & Margin [95\% interval] & Stocks & Margin [95\% interval] & Stocks & Margin [95\% interval] & Exact & Partial \\
+\midrule
+TreeSHAP & 100.0\% & $0.146\ [0.141,\,0.150]$ & 100.0\% & $0.194\ [0.190,\,0.199]$ & 100.0\% & $0.052\ [0.050,\,0.054]$ & 0.19 & 0.45 \\
+KernelSHAP & 100.0\% & $0.034\ [0.033,\,0.036]$ & 100.0\% & $0.046\ [0.045,\,0.048]$ & 100.0\% & $0.012\ [0.012,\,0.013]$ & 0.21 & 0.48 \\
+LIME & 100.0\% & $0.058\ [0.055,\,0.060]$ & 100.0\% & $0.067\ [0.064,\,0.071]$ & 100.0\% & $0.017\ [0.016,\,0.018]$ & 0.36 & 0.37 \\
+Permutation & 78.9\% & $0.021\ [0.016,\,0.027]$ & 89.5\% & $0.037\ [0.030,\,0.044]$ & 57.9\% & $0.002\ [-0.001,\,0.005]$ & 0.28$^{\dagger}$ & 0.12$^{\dagger}$ \\
+\bottomrule
+\end{tabular}

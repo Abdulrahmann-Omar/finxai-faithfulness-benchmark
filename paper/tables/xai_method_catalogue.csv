@@ -17,8 +17,8 @@ counterfactual,rule/example,XGBoost,validity=1.00,sparsity=1.27,--
 cem,rule/example,XGBoost,PP size=0.13,--,--
 tcav (high_attention),concept,GRU,TCAV=1.00,CAV acc=0.88,--
 tcav (positive_sentiment),concept,GRU,TCAV=1.00,CAV acc=0.78,--
-gradcam,CAM (vision-native),CNN1d only,yes,0.55,--
-gradcam_pp,CAM (vision-native),CNN1d only,yes,0.55,--
-score_cam,CAM (vision-native),CNN1d only,yes,0.55,--
+gradcam,CAM (vision-native),CNN1d only,not scored natively,"IG pass on the same CNN: signal above noise, credit 0.55",--
+gradcam_pp,CAM (vision-native),CNN1d only,not scored natively,"IG pass on the same CNN: signal above noise, credit 0.55",--
+score_cam,CAM (vision-native),CNN1d only,not scored natively,"IG pass on the same CNN: signal above noise, credit 0.55",--
 sae,mechanistic,Transformer,253/256 interp.,thr.\ $|r|{>}$0.3,--
 acdc (ablation),mechanistic,Transformer,0 notable/10,z{>}2.0,--
